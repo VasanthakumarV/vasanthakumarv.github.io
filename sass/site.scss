@@ -12,9 +12,17 @@ h2 {
 	font-size: 1.17rem;
 }
 
+h3 {
+	font-size: 1rem;
+}
+
 section {
 	display: flex;
 	justify-content: center;
+}
+
+.container {
+	width: 100%;
 }
 
 @media (min-width: 768px) {
