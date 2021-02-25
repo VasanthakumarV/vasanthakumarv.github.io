@@ -32,7 +32,9 @@ Priori is usefull because, the hypothesis _powers of 2 except 32_ is more likely
 
 Posterior is proportional to likelihood times prior, find below an image that shows how both influence the posterior in identifying the most likely hypothesis for the observed $D$.
 
+<div class="image-center">
 {{ resize_image(path="notes/pml/pml_posterior.png", width=500, height=0 op="fit_width") }}
+</div>
 
 ## Maximum a Posterior (MAP)
 
