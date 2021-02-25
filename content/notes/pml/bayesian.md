@@ -67,3 +67,19 @@ We will use uninformative priors of the form $p(h) \propto \frac{1}{s_1}\frac{1}
 Posterior is given by,
 
 $$p(l_1, l_2, s_1, s_2|D) \propto p(D_1|l_1,s_1)p(D_2|l_2,s_2)\frac{1}{s_1}\frac{1}{s_2}$$
+
+# Bayesian Machine Learning
+
+In many applications along with each unknown output $\bold{y}$ we will have features $\bold{x} \in X$ associated with it, in such cases we want to use conditional probability distribution of the form $p(\bold{y}|\bold{x},D)$, where $D = \\{(\bold{x}_n,\bold{y}_n) : n = 1:N\\}$. If the output is from a low-dimensional space, such as a set of labels $y \in \\{1,...,C\\}$ or scalars $y \in \mathbb{R}$, then we call it __discriminative model__, since it discriminates between different possbile outputs. If the output is high dimensional like images or sentences, it is called a __conditinal generative model__. 
+
+In these complex settings, the hypothesis or concept $h$ predictst the output given the input and set of real valued parameters $\theta \in \mathbb{R}^K$.
+
+$$p(\bold{y}|\bold{x},\theta) = p(\bold{y}|f(\bold{x};\theta))$$
+
+Where $f(\bold{x};\theta)$ maps the inputs to the parameters of the output distribution. To fully specify the model, we need to choose the output probability distribution and the form of $f$.
+
+## Plugin Approximation
+
+Here we fit a model to compute a point estimate $\hat{\theta}$ and then use it to make predictions. The posterior is represented using __Dirac delta function__, the point estimates of the posterior are computed using __MLE__ or __MAP__. The __sifting property__ of the dirac delta helps us arrive at the final form.
+
+$$p(\bold{y}|D) = \int p(\bold{y}|\theta) p(\theta|D) d\theta \approx \int p(\bold{y}|\theta)\delta(\theta - \hat{\theta}) d\theta = p(\bold{y}|\hat{\theta})$$
