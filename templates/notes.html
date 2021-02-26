@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-	{{ section.title }}
-</h1>
+<h1 class="title">{{ section.title }}</h1>
 <ul>
-	<li><a href="/notes/pml">Probabilistic Machine Learning</a></li>
+{% for subsection in section.subsections%}
+	{% set section = get_section(path=subsection) %}
+	<h2>{{section.title}}</h2>
+	{% for subsubsection in section.subsections %}
+		{% set section = get_section(path=subsubsection) %}
+		{% for page in section.pages %}
+			<li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>	
+		{% endfor %}
+	{% endfor %}
+{% endfor %}
 </ul>
 {% endblock content %}
