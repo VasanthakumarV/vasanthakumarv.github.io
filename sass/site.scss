@@ -26,12 +26,45 @@ section {
 	justify-content: center;
 }
 
+ul {
+	padding-left: 20px;
+}
+
 .container {
 	width: 100%;
 }
 
+.flex-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-toc {
+	border: 1px solid #BEBEBE;
+	background-color: #F6F6F6;
+	padding: 0px 8px 0px 8px;
+	margin: 0px 15px 0px 0px;
+}
+
 @media (min-width: 768px) {
 	.container {
-		width: 80%;
+		width: 90%;
+	}
+
+	.flex-container {
+		flex-direction: row;
+	}
+
+	.flex-toc {
+		display: block;
+		flex: 0.6;
+		align-self: flex-start;
+		position: -webkit-sticky;
+		position: sticky;
+		top: 5px;
+	}
+
+	.flex-body {
+		flex: 2;
 	}
 }
