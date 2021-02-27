@@ -5,13 +5,14 @@
 {% for subsection in section.subsections%}
 	{% set section = get_section(path=subsection) %}
 	<h2>{{section.title}}</h2>
-	<ul>
 	{% for subsubsection in section.subsections %}
 		{% set section = get_section(path=subsubsection) %}
+		<h3>{{ section.title }}</h3>
+		<ul>
 		{% for page in section.pages %}
 			<li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>	
 		{% endfor %}
+		</ul>
 	{% endfor %}
-	</ul>
 {% endfor %}
 {% endblock content %}
