@@ -53,3 +53,39 @@ where $\bold{a}$ are the logits, we might encounter numerical problems when comp
 $$\text{log} \sum_{c=1}^C \text{exp}(a_c) = m + \text{log} \sum_{c=1}^C \text{exp}(a_c - m)$$
 
 It is common to use $m = max_c a_c$, which ensures that the largest value being exponentiated will be zero.
+
+# Univariate Gaussian (Normal) distribution
+
+## Cumulative distribution function
+
+We represent the cumulative distribution function (cdf) of a random variable $Y$ as:
+
+$$P(y) \triangleq \text{Pr}(Y \le y)$$
+
+The capital $P$ represents cdf, the probability in an interval is as follows:
+
+$$\text{Pr}(a < Y \le b) = P(b) - P(a)$$
+
+The cdf of gaussian is defined as,
+
+$$\phi(y;\mu,\sigma^2) \triangleq \int_{-\infty}^{y}\mathcal{N}(z|\mu,\sigma^2)dz$$
+
+where $z = (y-\mu) / \sigma$
+
+## Probability density function
+
+Probability density function or pdf is the derivative of the cdf:
+
+$$p(y) \triangleq \frac{d}{dy}P(y)$$
+
+The pdf of the Gaussian is given by:
+
+$$\mathcal{N}(y|\mu,\sigma^2) \triangleq \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2\sigma^2}(y-\mu)^2}$$
+
+Using pdf to compute the mean or expected value of the distribution:
+
+$$\mathbb{E}[Y] \triangleq \int_y yp(y)dy$$
+
+Using pdf to compute the variance of the distribution:
+
+$$\mathbb{V}[Y] \triangleq \mathbb{E}[(Y - \mu)^2] = \mathbb{E}[Y^2] - \mu^2$$
