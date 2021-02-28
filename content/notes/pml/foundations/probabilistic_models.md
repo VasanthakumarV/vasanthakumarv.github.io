@@ -41,3 +41,15 @@ where $\theta_c$ is the probability that $c$ shows up, and
 $$\binom{N}{s_1..s_C} \triangleq \frac{N!}{s_1!s_2!...s_C!}$$
 
 is the __multinomial coefficient__, which is the number of ways to divide a set of size $N$ in subsets.
+
+## Log-sum-exp trick
+
+In softmax distribution, the normalized probability is given by:
+
+$$p_c = \frac{e^{a_c}}{Z(\bold{a})} = \frac{e^{a_c}}{\sum_{c^\`=1}^C e^{a_{c^\`}}}$$
+
+where $\bold{a}$ are the logits, we might encounter numerical problems when computing $Z$, like $\text{np.exp(1000)=inf}$ and also $\text{np.exp(-1000)=0}$, to avoid numerical problems, we can use the following:
+
+$$\text{log} \sum_{c=1}^C \text{exp}(a_c) = m + \text{log} \sum_{c=1}^C \text{exp}(a_c - m)$$
+
+It is common to use $m = max_c a_c$, which ensures that the largest value being exponentiated will be zero.
