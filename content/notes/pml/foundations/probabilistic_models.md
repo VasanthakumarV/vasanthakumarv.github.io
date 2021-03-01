@@ -89,3 +89,57 @@ $$\mathbb{E}[Y] \triangleq \int_y yp(y)dy$$
 Using pdf to compute the variance of the distribution:
 
 $$\mathbb{V}[Y] \triangleq \mathbb{E}[(Y - \mu)^2] = \mathbb{E}[Y^2] - \mu^2$$
+
+# Regression
+
+We have considered unconditional gaussian distribution so far, sometimes it is useful to make the parameters functions of some input variables.
+
+$$p(y|x;\theta) = \mathcal{N}(y|f_{\mu}(x;\theta), f_{\sigma}(x;\theta)^2)$$
+
+If we assume the variance to be fixed and independent of the input, it is called __homoscedastic regresion__. Furthermore it is common to assume the mean to be a linear function of the input, the resulting model is called __linear regression__:
+
+$$p(y|x;\theta) = \mathcal{N}(y|\bold{w}_{\mu}^\mathsf{T}\bold{x} + b, \sigma^2)$$
+
+## Popularity of Gaussian
+
+The Gaussian distribution is the most widely used distribution in statistics and machine learning. The two parameters (mean and variance) are easy to interpret. Central limit theorem states that the sums of independent random variables have an approximately Gaussian distribution. Makes fewer assumptions. Easy to implement, but highly effective.
+
+# Other common univariate distributions
+
+## Student t distribution
+
+Gaussian distribution is sensitive to outliers, a robust alternative to Gaussian is Student distribution. Its pdf is as follows:
+
+$$\mathcal{T}(y|\mu,\sigma^2,\gamma) \propto \left[ 1 + \frac{1}{\gamma} \left( \frac{y-\mu}{\sigma}^2 \right) \right]^{-(\frac{\gamma+1}{2})}$$
+
+where $\mu$ is the mean, $\sigma > 0$ is the scale parameter (not the standard deviation), and $\gamma > 0$ is callled the degrees of freedom (better term would be _degree of normality_, since large values of $\gamma$ make the distribution act like a Gaussian).
+
+Student distribution has heavy tails, which makes it robust to outliers.
+
+## Cauchy distribution
+
+If $\gamma = 1$, the Student distribution is known as Cauchy or Lorentz distribution. It has heavy tails compared to Gaussian. Its pdf is defined by:
+
+$$\mathcal{C}(x|\mu,\gamma) = \frac{1}{\gamma \pi} \left[ 1 + \left( \frac{x-\mu}{\gamma} \right)^2 \right]^{-1}$$
+
+## Laplace distribution
+
+Another distribution with heavy tails, also known as the double sided exponential distribution. It has the following pdf:
+
+$$\text{Lap}(y|\mu,b) \triangleq \frac{1}{2b} \text{exp} \left( - \frac{|y-\mu|}{b} \right)$$
+
+## Beta distribution
+
+Beta distribution has support over the interval $[0,1]$ and is defined as follows:
+
+$$\text{Beta}(x|a,b) = \frac{1}{B(a,b)} x^{a-1} (1-x)^{b-1}$$
+
+where $B(a,b)$ is the beta function, defined by:
+
+$$B(a,b) \triangleq \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$$
+
+where $\Gamma(a)$ is the Gamma function defined by:
+
+$$\Gamma(a) \triangleq \int_0^{\infty} x^{a-1} e^{-x} dx$$
+
+We require $a,b > 0$ to ensure the distribution is integrable. If $a = b = 1$ we get uniform distribution; if $a$ and $b$ are both less than 1, we get a bimodal distribution; if $a$ and $b$ are both greater than 1, we get unimodal distribution.
