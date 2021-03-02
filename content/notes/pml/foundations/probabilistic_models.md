@@ -143,3 +143,51 @@ where $\Gamma(a)$ is the Gamma function defined by:
 $$\Gamma(a) \triangleq \int_0^{\infty} x^{a-1} e^{-x} dx$$
 
 We require $a,b > 0$ to ensure the distribution is integrable. If $a = b = 1$ we get uniform distribution; if $a$ and $b$ are both less than 1, we get a bimodal distribution; if $a$ and $b$ are both greater than 1, we get unimodal distribution.
+
+## Gamma distribution
+
+Gamma distribution is a flexible distribution for positive real valued random variables, $x > 0$. It is defined in terms of two parameters, called the shape $a>0$ and the rate $b>0$:
+
+$$\text{Ga}(x|a,b) \triangleq \frac{b^a}{\Gamma(a)} x^{a-1} e^{-xb}$$
+
+Sometimes the distribution is parameterized in terms of the shape $a$ and the scale $s=1/b$.
+
+There are several distributions which are special cases of Gamma distribution.
+
+### Exponential distribution
+
+The distribution describes the time between events in a Poisson process (a process in which events occur continuously and independently at a constant average rate $\lambda$).
+
+$$\text{Expon}(x|\lambda) \triangleq \text{Ga}(x|a=1,b=\lambda)$$
+
+### Chi-squared distribution
+
+This is the distribution of the sum of squared Gaussian random variables.
+
+### Inverse Gamma distribution
+
+This is the distribution of $Y = 1/X$ assuming $X \sim \text{Ga}(a,b)$.
+
+# Multivariate Gausssian (Normal) distribution
+
+The multivariate normal density is defined as:
+
+$$\mathcal{N}(\bold{y}|\boldsymbol{\mu},\bold{\Sigma}) \triangleq \frac{1}{(2\pi)^{D/2} |\bold{\Sigma}|^{1/2}} \text{exp} \left[ -\frac{1}{2} (\bold{y}-\boldsymbol{\mu})^\mathsf{T} \bold{\Sigma}^{-1} (\bold{y}-\boldsymbol{\mu}) \right]$$
+
+where $\boldsymbol{\mu} = \mathbb{E}[\bold{y}] \in \mathbb{R}^D$ is the mean vector, $\bold{\Sigma} = \text{Cov}[\bold{y}]$ is the $D\ \times\ D$ covariance matrix, it is defined as:
+
+$$\text{Cov}[\bold{y}] \triangleq \mathbb{E}\left[ (\bold{y} - \mathbb{E}[\bold{y}])(\bold{y}-\mathbb{E}[\bold{y}])^\mathsf{T} \right]$$
+
+$$
+\=
+\begin{pmatrix}
+\mathbb{V}[Y_1] & \text{Cov}[Y_1,Y_2] & ... & \text{Cov}[Y_1,Y_D] \\\\
+\text{Cov}[Y_2,Y_1] & \mathbb{V}[Y_2] & ... & \text{Cov}[Y_2,Y_D] \\\\
+\text{Cov}[Y_D,Y_1] & \text{Cov}[Y_D,Y_2] & ... & \mathbb{V}[Y_D]
+\end{pmatrix}
+$$
+
+where
+$$\text{Cov}[Y_i,Y_j] \triangleq \mathbb{E}[(Y_i-\mathbb{E}[Y_i])(Y_j-\mathbb{E}[Y_j])] = \mathbb{E}[Y_iY_j] - \mathbb{E}[Y_i]\mathbb{E}[Y_j]$$
+
+and $\mathbb{V}[Y_i] = \text{Cov}[Y_i,Y_i]$
