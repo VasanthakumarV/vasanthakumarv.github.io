@@ -190,4 +190,28 @@ $$
 where
 $$\text{Cov}[Y_i,Y_j] \triangleq \mathbb{E}[(Y_i-\mathbb{E}[Y_i])(Y_j-\mathbb{E}[Y_j])] = \mathbb{E}[Y_iY_j] - \mathbb{E}[Y_i]\mathbb{E}[Y_j]$$
 
-and $\mathbb{V}[Y_i] = \text{Cov}[Y_i,Y_i]$
+$$\mathbb{V}[Y_i] = \text{Cov}[Y_i,Y_i]$$
+
+Another important result,
+
+$$\mathbb{E}[\bold{y}\bold{y}^\mathsf{T}] = \bold{\Sigma} + \boldsymbol{\mu}\boldsymbol{\mu}^\mathsf{T}$$
+
+In 2d MVN is known as __bivariate Gaussian__ distribution. Its pdf can be expressed as $\bold{y} \sim \mathcal{N}(\boldsymbol{\mu}\bold{\Sigma})$, where $\bold{y} \in \mathbb{R}^2$, $\boldsymbol{\mu} \in \mathbb{R}^2$ and
+
+$$\bold{\Sigma} = 
+\begin{pmatrix}
+\sigma_1^2 & \sigma_{12}^2 \\\\
+\sigma_{21}^2 & \sigma_2^2
+\end{pmatrix}
+\=
+\begin{pmatrix}
+\sigma_1^2 & \rho\sigma_1\sigma_2 \\\\
+\rho\sigma_1\sigma_2 & \sigma_2^2
+\end{pmatrix}
+$$
+
+where $\rho$ is the __correlation coefficient__, it is defined by:
+
+$$\text{corr}[X,Y] \triangleq \frac{\sigma_{12}^2}{\sigma_1\sigma_2}$$
+
+We can show that $-1 \le \text{corr}[X,Y] \le 1$, using _Cauchy-Schwarz inequality_ and independence of random variables.
