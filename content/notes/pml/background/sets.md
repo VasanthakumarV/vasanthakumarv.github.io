@@ -26,12 +26,42 @@ For a given constant $C$, the function output cannot change by more than $C$ if 
 
 # Jacobian
 
-Consider a function that maps a vector to another vector, $\bold{\text{f}} : \mathbb{R}^n \rightarrow \mathbb{R}^m$, the jacobian matrix of this function is $$m \cross n$ matrix of partial derivatives (we lay out the results in numerator layout):
+Consider a function that maps a vector to another vector, $\bold{f} : \mathbb{R}^n \rightarrow \mathbb{R}^m$, the jacobian matrix of this function is $m \times n$ matrix of partial derivatives (we lay out the results in numerator layout):
 
-$$\bold{\text{J}} \triangleq
+$$\bold{J} \triangleq
 \begin{pmatrix}
 \frac{\partial f_1}{\partial x_1} & \ldots & \frac{\partial f_1}{\partial x_n} \\\\
 \vdots & \ddots & \vdots \\\\
 \frac{\partial f_m}{\partial x_1} & \ldots & \frac{\partial f_m}{\partial x_n}
 \end{pmatrix}
 $$
+
+__Jacobian vector product__ is multiplying the Jacobian matrix $\bold{J} \in \mathbb{R}^{m \times n}$ by a vector $\bold{v} \in \mathbb{R}^n$. __Vector Jacobian product__ is left-multiplying the Jacobian matrix by a vector. JVP is efficient if $m \ge n$, and VJP is efficient when $m \le n$.
+
+# Hessian
+
+For a function $f : \mathbb{R}^n \rightarrow \mathbb{R}$ that is twice differentiable, we define Hessian matrix as $n \times n$ matrix of second partial derivativess:
+
+$$\bold{H} = \frac{\partial^2 f}{\partial \bold{x}^2} = \nabla^2 f =
+\begin{pmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \ldots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\\\
+ & \vdots & \\\\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \ldots & \frac{\partial^2}{\partial x_n^2}
+\end{pmatrix}
+$$
+
+# Convexity
+
+__Convex set__
+
+We say $\mathcal{s}$ is a __convex set__ if, for any $\bold{x}, \bold{x}\prime \in \mathcal{S}$, we have,
+
+$$\lambda \bold{x} + (1 - \lambda)\bold{x}\prime, \forall \lambda \in [0, 1]$$
+
+That is, if we draw a line from $\bold{x}$ to $\bold{x}\prime$, all points on the line lie inside the set.
+
+__Convex function__
+
+We say a function $f$ is convex if its __epigraph__ (the set of points above the function) defines a convex set.
+
+A function $f$ is convex iff $\bold{H} = \nabla^2f(\bold{x})$ is _positive semi definite_ for all $\bold{x} \in \text{dom}(f)$, $f$ is strictly convex if $\bold{H}$ is _positive definite_.
