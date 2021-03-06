@@ -65,3 +65,39 @@ __Convex function__
 We say a function $f$ is convex if its __epigraph__ (the set of points above the function) defines a convex set.
 
 A function $f$ is convex iff $\bold{H} = \nabla^2f(\bold{x})$ is _positive semi definite_ for all $\bold{x} \in \text{dom}(f)$, $f$ is strictly convex if $\bold{H}$ is _positive definite_.
+
+# Jensen's inequality
+
+Jensen's inequality states that for any convex function $f$, we have that
+
+$$f(\sum_{i=1}^{n} \lambda_i \bold{x}\_i) \le \sum_{i=1}^n \lambda_i f(\bold{x}_i)$$
+
+where $\lambda_i \ge 0$ and $\sum_{i=1}^n \lambda_i = 1$
+
+# Taylor series approximation
+
+Linear approximation around a point $a \in \mathbb{R}^n$
+
+$$\widehat{f}(\bold{x}) = f(\bold{a}) + \nabla f(\bold{a})^{\mathsf{T}}(\bold{x} - \bold{a})$$
+
+Quadrative approximation,
+
+$$\widehat{f}(\bold{x} = f(\bold{a}) + (\bold{x} - \bold{a})^{\mathsf{T}}\nabla^2f(\bold{a})(\bold{x} - \bold{a})$$
+
+# Bregman divergence
+
+Let $f : \Omega \rightarrow \mathbb{R}$ be a continuously differentiable, strictly convex function defined on a closed convex set $\Omega$. Bregman divergence is defined as follows:
+
+$$D_f(\bold{w}, \bold{v}) = f(\bold{w}) - f(\bold{v}) - (\bold{w} - \bold{v})^{\mathsf{T}}\nabla f(\bold{v})$$
+
+# Conjugate duality
+
+Conjugate duality is a useful way to construct linear lower bounds to non-convex functions, which we can then easily maximize.
+
+Consider an arbitrary continuous function $f(\bold{x})$, suppose we create a linear lower bound on it of the form,
+
+$$\mathcal{L}(\bold{x}, \boldsymbol{\lambda}) \triangleq \lambda^{\mathsf{T}}\bold{x} - f^*(\boldsymbol{\lambda}) \le f(\bold{x})$$
+
+where $\boldsymbol{\lambda}$ is the slope, $f^*(\boldsymbol{\lambda})$ is the intercept, which we solve for.
+
+It is interesting to see what happens if we take the conjugate of the conjugate. If $f$ is convex, then $f^{**} = f$, so $f$ and $f^*$ are called __conjugate duals__.
