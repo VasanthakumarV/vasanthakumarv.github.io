@@ -8,6 +8,38 @@ html {
 	font-size: 16px;
 }
 
+body {
+	margin: 0px;
+}
+
+.topnav {
+	//border-bottom: 1px solid black;
+	border: 1px solid #BEBEBE;
+	box-shadow: 0 0 1px 1px rgba(0, 0, 255, .1);
+}
+
+.topnav a {
+	display: block;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.17rem;
+}
+
+.topnav a:not(:first-child):not(.icon) {
+	display: none;
+}
+
+.topnav .icon {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.topnav.responsive a:not(:first-child):not(.icon) {
+	display: block;
+}
+
 h1 {
 	font-size: 1.33rem;
 }
@@ -28,6 +60,7 @@ h3 {
 section {
 	display: flex;
 	justify-content: center;
+	margin: 0px 8px 0px 8px;
 }
 
 ul {
@@ -71,5 +104,17 @@ ul {
 
 	.flex-body {
 		flex: 2;
+	}
+
+	.topnav {
+		display: flex;
+	}
+
+	.topnav a:not(:first-child):not(.icon) {
+		display: block;
+	}
+
+	.topnav .icon {
+		display: none;
 	}
 }
