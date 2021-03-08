@@ -13,7 +13,7 @@ body {
 }
 
 .topnav {
-	border: 1px solid #BEBEBE;
+	border-bottom: 1px solid #BEBEBE;
 	box-shadow: 0 0 1px 1px rgba(0, 0, 255, .1);
 }
 
@@ -83,8 +83,9 @@ ul {
 }
 
 .flex-toc {
-	border: 1px solid #BEBEBE;
-	box-shadow: 0 0 1px 1px rgba(0, 0, 255, .1);
+	border-top: 1px solid #BEBEBE;
+	border-bottom: 1px solid #BEBEBE;
+	//box-shadow: 0 0 1px 1px rgba(0, 0, 255, .1);
 	//background-color: rgba(0, 0, 200, .1);
 	padding: 0px 8px 0px 8px;
 	margin: 0px 15px 0px 0px;
@@ -100,7 +101,6 @@ ul {
 	}
 
 	.flex-toc {
-		display: block;
 		flex: 0.6;
 		align-self: flex-start;
 		position: -webkit-sticky;
@@ -122,5 +122,11 @@ ul {
 
 	.topnav .icon {
 		display: none;
+	}
+
+	.flex-toc {
+		border-right: 1px solid #BEBEBE;
+		border-top: none;
+		border-bottom: none;
 	}
 }
