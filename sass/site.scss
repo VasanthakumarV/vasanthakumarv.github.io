@@ -38,6 +38,14 @@ body {
 	display: block;
 }
 
+.topnav a:hover {
+	background-color: #F1F1F1;
+}
+
+.brand-badge {
+	border-right: 1px solid #BEBEBE;
+}
+
 h1 {
 	font-size: 1.33rem;
 }
