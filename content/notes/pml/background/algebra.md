@@ -2,7 +2,9 @@
 title = "Linear Algebra"
 +++
 
-# Vector spaces
+# Introduction
+
+## Vector spaces
 
 The span of set of vectors ${\textbf{x}_1,\textbf{x}_2,...,\textbf{x}_n}$ is the set of all the vectors that can be expressed as a linear combination of the vectors,
 
@@ -12,7 +14,7 @@ If $\\{\textbf{x}_1, ..., \textbf{x}_2\\}$ is a set of linearly independent vect
 
 A __basis__ $\mathcal{B}$ is a set of linearly independent vectors that span the whole space. There are often multiple basis to choose from. The _standard basis_ uses the coordinate vectors $\textbf{e}_1 = (1,0,\ldots,0)$, up to $\textbf{e}_n = (0,0,\ldots,1)$.
 
-# Range and nullspace of a matrix
+## Range and nullspace of a matrix
 
 The __range__ or the __column space__ of a matrix $\textbf{A} \in \mathbb{R}^{m \times n}$ is the span of the columns of $\textbf{A}$,
 
@@ -22,13 +24,13 @@ The __nullspace__ of a matrix is the set of all vectors that get mapped to the n
 
 $$\text{nullspace}(\textbf{A}) \triangleq \\{ \textbf{x} \in \mathbb{R}^n : \textbf{Ax} = 0 \\}$$
 
-# Linear projection
+## Linear projection
 
 The projection of a vector $\textbf{y} \in \mathbb{R}^m$ onto the span of $\\{ \textbf{x}_1, \ldots, \textbf{x}_n \\}$ (here we assume $\textbf{x}_i \in \mathbb{R}^m$) is the vector $\textbf{v} \in \text{span}(\\{ \textbf{x}_1, \ldots, \textbf{x}_n \\})$, such that $\textbf{v}$ is as close as possible to $\textbf{y}$, as measured by the Euclidean norm $||\textbf{v} - \textbf{y}||_2$.
 
 $$\text{Proj}(\textbf{y}; \textbf{A}) = \textbf{A}(\textbf{A}^\mathsf{T}\textbf{A})^{-1}\textbf{A}^\mathsf{T}\textbf{y}$$
 
-# Norms of vector and matrix
+## Norms of vector and matrix
 
 The norm of a vector $||\textbf{x}||$ is informally, a measure of the length of the vector.
 
@@ -38,7 +40,7 @@ __Max-norm__ $||\textbf{x}||_{\infty} = \text{max}_i|x_i|$.
 
 The induced norm of matrix $\textbf{A}$ as the maximum amount by which a linear function $f(\textbf{x}) = \textbf{Ax}$ can lengthen any unit-norm input.
 
-# Properties of a matrix
+## Properties of a matrix
 
 __Trace__
 
@@ -71,7 +73,7 @@ $$\kappa(\textbf{A}) \triangleq ||\textbf{A}||.||\textbf{A}^{-1}||$$
 
 We say $\textbf{A}$ is well-conditioned if $\kappa(\textbf{A})$ is close to 1, and ill-conditioned if it is large.
 
-# Special types of matrices
+## Special types of matrices
 
 __Diagonal matrix__
 
@@ -100,3 +102,25 @@ A set of vectors that is pairwise orthogonal and normalized is called __orthonor
 $$\textbf{U}^{\mathsf{T}}\textbf{U} = \textbf{I} = \textbf{U}\textbf{U}^\mathsf{T}$$
 
 __Gram Schmidt orthogonalization__ is a way to make any square matrix orthogonal.
+
+# Matrix multiplication
+
+## Kronecker products
+
+If $\textbf{B}$ is an $m \times n$ matrix and $\textbf{B}$ is a $p \times q$ matrix, then the __Kronecker product__ $\textbf{A} \otimes \textbf{B}$ is the $mp \times nq$ block matrix
+
+$$\textbf{A} \otimes \textbf{B} =
+\begin{bmatrix}
+a_{11}\textbf{B} \ldots a_{1n}\textbf{B} \\\\
+\vdots \ddots \vdots \\\\
+a_{m1}\textbf{B} \ldots a_{mn}\textbf{B}
+\end{bmatrix}
+$$
+
+## Einstein summation
+
+Einsum summation is a notational shortcut for working with tensors. In einsum notation, we write $L_{nc} = S_{ntk}W_{kd}V_{dc}$. We sum over $k$ and $d$ because those indices occur twice on the RHS. We sum over $t$ because the index does not occur on the LHS.
+
+# Matrix inversion
+
+ The inverse of a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$ is denoted $\textbf{A}^{-1}$, the inverse exists if and only if $\text{det}(\textbf{A})$ is not $0$. If the $\text{det}(\textbf{A}) = 0$ it is called a singular matrix.
