@@ -124,3 +124,112 @@ Einsum summation is a notational shortcut for working with tensors. In einsum no
 # Matrix inversion
 
  The inverse of a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$ is denoted $\textbf{A}^{-1}$, the inverse exists if and only if $\text{det}(\textbf{A})$ is not $0$. If the $\text{det}(\textbf{A}) = 0$ it is called a singular matrix.
+
+# Eigenvalue decomposition (EVD)
+
+Give a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$, we say that $\lambda \in \mathbb{R}$ of $\textbf{A}$ and $\textbf{u} \in \mathbb{R}^n$ is the corresponding eigenvector if,
+
+$$\textbf{A}\textbf{u} = \lambda\textbf{u},\ \textbf{u}\text{\ not\ equal\ }0$$
+
+This definition means that multiplying $\textbf{A}$ by the vector $\textbf{u}$ results in a new vector that points in the same direction as $\textbf{u}$, but scaled by a factor $\lambda$. We assume that the eigenvector is normalized to have length 1.
+
+$$(\lambda \textbf{I} - \textbf{A})\textbf{u} = \textbf{0}$$
+
+Now the equation has a non-zero solution to $\textbf{u}$ if and only if $(\lambda \textbf{I} - \textbf{A})$ has a non-empty nullspace. The $n$ solutions to this equation are the $n$ (possibly complex-valued) eigenvalues $\lambda_i$, and $\textbf{u}_i$ are the corresponding eigenvectors. It is standard to sort the eigenvectors in order of their eigenvalues, with the largest magnitude ones first.
+
+We can write all of the eigenvector equations simultaneously as
+
+$$\textbf{A}\textbf{U} = \textbf{U} \boldsymbol{\Lambda}$$
+
+Where the columns of $\textbf{U} \in \mathbb{R}^{n \times n}$ are the eigenvectors of $\textbf{A}$ and $\boldsymbol{\Lambda}$ is a diagonal matrix whose entries are the eigenvalues of $\textbf{A}$.
+
+If the eigenvectors of $\textbf{A}$ are linearly independent, then the matrix $\textbf{U}$ will be invertible, so
+
+$$\textbf{A} = \textbf{U}\boldsymbol{\Lambda}\textbf{U}^{-1}$$
+
+A matrix that can be written in this form is called diagonalizable.
+
+## Standardizing and whitening data
+
+Suppose we have a dataset $\textbf{X} \in \mathbb{R}^{N \times D}$. It is common to preprocess the data so that each column has zero mean and unit variance. This is called standardizing the data. Although standardizing forces the variance to be 1, it does not remove the correlation between the columns. To do that, we must whiten the data.
+
+## Power method
+
+We now describe a simple iterative method for computing the eigenvector corresponding to the largest eigenvalue of a real symmetric matrix; this is called the power method.
+
+Let $\textbf{A}$ be a matrix with orthonormal eigenvectors, so $\textbf{A} = \textbf{U}\boldsymbol{\Lambda}\textbf{U}^{\mathsf{T}}$. Let $\textbf{v}\_{(0)}$ be an arbitrary vector in the range of $\textbf{A}$, so $\textbf{A}\textbf{x} = \textbf{v}_{(0)}$ for some $\textbf{x}$. Hence we can write $\textbf{v}\_{(0)}$ as
+
+$$\textbf{v}_0 = \textbf{U}(\boldsymbol{\Lambda}\textbf{U}^{\mathsf{T}}\textbf{x}) = a_1 \textbf{v}_1 + \ldots + a_m\textbf{u}_m$$
+
+for some constants $a_i$. We can now repeatedly multiply $\textbf{v}$ by $\textbf{A}$ and renormalize:
+
+$$\textbf{v}\_{t} \propto \textbf{A} \textbf{v}_{t - 1}$$
+
+Since $\textbf{v}_t$ is a multiple of $\textbf{A}^t \textbf{v}_0$, we have
+
+$$\textbf{v}_t \propto a_1\lambda_1^t\textbf{u}_1 + \ldots + a_m\lambda_m^t\textbf{u}_m \rightarrow \lambda_1^ta_1\textbf{U}_1$$
+
+since $\frac{|\lambda_k|}{|\lambda_1|} < 1$ for $k > 1$ (assuming the eigenvalues are sorted in descending order). So we can see that this converges to $\textbf{u}_1$. 
+
+We can now discuss how to compute the corresponding eigenvalue $\lambda_1$. Define the Rayleigh quotient to be,
+
+$$R(\textbf{A}, \textbf{x}) \triangleq \frac{\textbf{x}^{\mathsf{T}} \textbf{A} \textbf{x}}{\textbf{x}^\mathsf{T} \textbf{x}}$$
+
+Hence,
+
+$$R(\textbf{A}, \textbf{u}_i) = \frac{\textbf{u}_i^{\mathsf{T}}\textbf{A}\textbf{u}_i}{\textbf{u}_i^{\mathsf{T}}} = \lambda_i$$
+
+Thus we can easily compute $\lambda_i$ from $\textbf{u}_i$ and $\textbf{A}$.
+
+## Deflation
+
+We now describe how to compute subsequent eignevectors and values. Since the eigenvectors are orthonormal, and the eigenvalues are real, we can project out the $\textbf{u}_1$ component from the matrix as follows,
+
+$$\textbf{A}^{(2)} = \textbf{A}^{(1)} - \lambda_1 \textbf{u}_1 \textbf{u}_1^{\mathsf{T}}$$
+
+This is called deflation. We can then apply the power method to find the largest eigenvector and value in the subspace orthogonal to $\textbf{u}_1$.
+
+# Singular value decomposition (SVD)
+
+SVD generalizes EVD to rectangular matrices.
+
+$$\textbf{A} = \textbf{U}\textbf{S}\textbf{V}^\mathsf{T} = \sigma_1
+\begin{pmatrix}
+| \\\\
+\textbf{u}_1 \\\\
+|
+\end{pmatrix}
+\begin{pmatrix}
+\- & \textbf{v}_1^{\mathsf{T}} & \-
+\end{pmatrix}
++
+\ldots
++
+\sigma_r
+\begin{pmatrix}
+| \\\\
+\textbf{u}_r \\\\
+|
+\end{pmatrix}
+\begin{pmatrix}
+\- & \textbf{v}_r^{\mathsf{T}} & \-
+\end{pmatrix}
+$$
+
+Where $\textbf{U}$ is an $m \times m$ whose columns are orthonormal (so $\textbf{U} \textbf{U}^\mathsf{T} = \textbf{I}_m$), $\textbf{V}$ is $n \times n$ matrix whose rows and columns are orthonormal (so $\textbf{V}^\mathsf{T} \textbf{V} = \textbf{V} \textbf{V}^\mathsf{T} = \textbf{I}_n$), and $\textbf{S}$ is a $m \times n$ matrix containing the $r = min(m, n)$ __singular values__ $\sigma_i \ge 0$ on the main diagonal, with 0s filling the rest of the matrix. The columns of $\textbf{U}$ are left singular vectors, and the columns of $\textbf{V}$ are right singular vectors.
+
+## Pseudo inverse
+
+The __Moore-Penrose pseudo-inverse__ of $\textbf{A}$, pseudo inverse denoted $\textbf{A}^{\dagger}$, is defined as the unique matrix that satisfies the following four properties:
+
+$$\mathbf{A} \mathbf{A}^\dagger \mathbf{A} = \mathbf{A}, \mathbf{A}^\dagger \mathbf{A} \mathbf{A}^\dagger = \mathbf{A}^\dagger, (\mathbf{A}^\dagger \mathbf{A})^\top = \mathbf{A}^\dagger \mathbf{A}, (\mathbf{A} \mathbf{A}^\dagger)^\top = \mathbf{A} \mathbf{A}^\dagger$$
+
+If $\mathbf{A}$ is square and non-singular, then $\mathbf{A}^\dagger = \mathbf{A}^{-1}$.
+
+If $m > n$ (tall, skinny) and the columns of $\mathbf{A}$ are linearly independent (so \mathbf{A} is full rank), then
+
+$$\mathbf{A}^{\dagger} = (\mathbf{A}^{\top}\mathbf{A})^{-1} \mathbf{A}^{\top}$$
+
+We can compute pseudo inverse using SVD decomposition,
+
+$$\mathbf{A}^\top = \mathbf{A}^{-1} = \mathbf{V} \mathbf{S}^{-1} \mathbf{U}^\top$$
