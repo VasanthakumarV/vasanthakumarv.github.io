@@ -226,10 +226,63 @@ $$\mathbf{A} \mathbf{A}^\dagger \mathbf{A} = \mathbf{A}, \mathbf{A}^\dagger \mat
 
 If $\mathbf{A}$ is square and non-singular, then $\mathbf{A}^\dagger = \mathbf{A}^{-1}$.
 
-If $m > n$ (tall, skinny) and the columns of $\mathbf{A}$ are linearly independent (so \mathbf{A} is full rank), then
+If $m > n$ (tall, skinny) and the columns of $\mathbf{A}$ are linearly independent (so $\mathbf{A}$ is full rank), then
 
 $$\mathbf{A}^{\dagger} = (\mathbf{A}^{\top}\mathbf{A})^{-1} \mathbf{A}^{\top}$$
 
 We can compute pseudo inverse using SVD decomposition,
 
-$$\mathbf{A}^\top = \mathbf{A}^{-1} = \mathbf{V} \mathbf{S}^{-1} \mathbf{U}^\top$$
+$$\mathbf{A}^\dagger = \mathbf{A}^{-1} = \mathbf{V} \mathbf{S}^{-1} \mathbf{U}^\top$$
+
+# Other matrix decompositions
+
+__LU factorization__
+
+We can factorize any square matrix $\mathbf{A}$ into a product of lower triangular matrix $\mathbf{L}$ and an upper triangular matrix $\mathbf{U}$.
+
+__QR decomposition__
+
+Suppose we have $\mathbf{A} \in \mathbb{R}^{m \times n}$ representing a set of linearly independent basis vectors (so $m \ge n$), and we want to find a series of orthonormal vectors $\mathbf{q}_1, \mathbf{q}_2, \ldots$ that span the successive subspaces of $\text{span}(\mathbf{a_1}), \text{span}(\mathbf{a}_1, \mathbf{a}_2), \text{etc}$. QR decomposition is commonly used to solve systems of linear equations.
+
+__Cholesky decomposition__
+
+Any symmetric positive definite matrix can be factorized as $\mathbf{A} = \mathbf{R}^\top \mathbf{R}$, where $\mathbf{R}$ is upper triangular with real, positive diagonal elements.
+
+# Solving systems of linear equations
+
+If we have $m$ equations and $n$ unknowns then $\mathbf{A}$ will be a $m \times n$ matrix, $\mathbf{b}$ will be a $m \times 1$ vector. If $m = n$ (and $\mathbf{A}$ is full rank), there is a single unique solution. If $m < n$ the system is underdetermined, so there is no unique solution. If $m > n$, the system is overdetermined, since there are more constraints than unknowns, and not all lines intersect at the same point.
+
+## Solving square systems
+
+In the case where $m = n$, we can solve for $\mathbf{x}$ by computing an LU decomposition, $\mathbf{A} = \mathbf{L}\mathbf{U}$, and then proceeding as follows:
+
+$$\begin{aligned}
+\mathbf{Ax} &= \mathbf{b} \\\\
+\mathbf{LUx} &= \mathbf{b} \\\\
+\mathbf{Ux} &= \mathbf{L}^{-1} \mathbf{b} \triangleq \mathbf{y} \\\\
+\mathbf{x} &= \mathbf{U}^{-1} \mathbf{y}
+\end{aligned}
+$$
+The crucial point is that $\mathbf{L}$ and $\mathbf{U}$ are both triangular matrices, so we can avoid taking matrix inverses, and use a method known as __backsubstituion__ instead.
+
+## Solving underconstrained systems
+
+Here we consider underconstrained setting, where $m < n$. We assume the rows are linearly independent, so $\mathbf{A}$ is full rank. When $m < n$, there are multiple possible solutions, which have the form
+
+$$\\{ \mathbf{x} : \mathbf{Ax} = \mathbf{b} \\} = \\{ \mathbf{x}_p + \mathbf{z : z} \in \text{nullspace}(\mathbf{A}) \\}$$
+
+Where $\mathbf{x}_p$ is any particular solution. It is standard to pick the particular solution with minimal $l_2$ norm.
+
+## Solving overconstrained systems
+
+If $m > n$, we have an overdetermined solution, which typically does not have an exact solution, but we will try to fidn the solution that gets as close as possible to satisfying all of the constraints specified by $\mathbf{Ax = b}$. We can do this by minimizing the following cost function, known as the __least squares objective__:
+
+$$f(\mathbf{x}) = \frac{1}{2} || \mathbf{Ax - b} ||_2^2$$
+
+Using matrix calculus, we can find its gradient,
+
+$$g(\mathbf{x}) = \frac{\partial(f(\mathbf{x}))}{\partial \mathbf{x}} = \mathbf{A^\top A x} - \mathbf{A^\top b}$$
+
+The optimum can be found by setting the gradient to 0, the corresponding $\mathbf{\hat{x}}$ is the __ordinary least squares (OLS)__ solution, which is given by,
+
+$$\mathbf{\hat{x}} = \mathbf{(A^\top A)}^{-1} \mathbf{A^\top b}$$
