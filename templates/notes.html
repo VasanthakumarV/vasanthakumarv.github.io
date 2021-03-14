@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">{{ section.title }}</h1>
+<h1 class="title">
+	{{ section.title }}
+</h1>
 {% for subsection in section.subsections%}
 	{% set section = get_section(path=subsection) %}
 	<h2>{{section.title}}</h2>

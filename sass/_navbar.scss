@@ -1,0 +1,51 @@
+.topnav {
+	border-bottom: 1px solid #BEBEBE;
+	box-shadow: 0 0 1px 1px rgba(0, 0, 255, .1);
+}
+
+.topnav a {
+	display: block;
+	padding: 12px 16px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.topnav a:not(:first-child):not(.icon) {
+	display: none;
+}
+
+.topnav .icon {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.topnav.responsive a:not(:first-child):not(.icon) {
+	display: block;
+}
+
+.topnav a:hover {
+	background-color: #F1F1F1;
+}
+
+.navbar-selected {
+	border: none;
+}
+
+@media (min-width: 768px) {
+	.navbar-selected {
+		border-bottom: 1px solid;
+	}
+
+	.topnav {
+		display: flex;
+	}
+
+	.topnav a:not(:first-child):not(.icon) {
+		display: block;
+	}
+
+	.topnav .icon {
+		display: none;
+	}
+}

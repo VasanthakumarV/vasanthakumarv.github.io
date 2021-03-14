@@ -36,9 +36,18 @@
 
 	<body>
 		<nav id="topnav" class="topnav">
-			<a href="/" class="brand-badge">Deep-Cuts</a>
-			<a href="/notes">Notes</a>
-			<a href="/questions">Q&A</a>
+			<a href="/"
+				{% if current_path == "/" %} class="navbar-selected" {% endif %}>
+				Deep-Cuts
+			</a>
+			<a href="/notes"
+				{% if current_path is starting_with("/notes") %} class="navbar-selected" {% endif %}>
+				Notes
+			</a>
+			<a href="/questions"
+				{% if current_path is starting_with("/questions") %} class="navbar-selected" {% endif %}>
+				Q&A
+			</a>
 			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
 				<i class="fa fa-bars"></i>
 			</a>
