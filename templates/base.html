@@ -20,7 +20,7 @@
     });
 		</script>
 		<script>
-		function myFunction() {
+		function snackbar() {
 			var x = document.getElementById("topnav");
 			if (x.className === "topnav") {
 				x.className += " responsive";
@@ -48,7 +48,7 @@
 				{% if current_path is starting_with("/questions") %} class="navbar-selected" {% endif %}>
 				Q&A
 			</a>
-			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+			<a href="javascript:void(0);" class="icon" onclick="snackbar()">
 				<i class="fa fa-bars"></i>
 			</a>
 		</nav>
