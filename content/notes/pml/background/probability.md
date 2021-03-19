@@ -159,3 +159,44 @@ When we have two or more dependent random variables, we can find the moments of 
 $$\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X|Y]]$$
 
 $$\mathbb{V}[X] = \mathbb{E}[\mathbb{V}[X|Y]] + \mathbb{V}[\mathbb{E}[X|Y]]$$
+
+# Covariance
+
+The covariance between two random variables $X$ and $Y$ denote the degree to which they are linearly related.
+
+$$\text{Cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X][Y]$$
+
+If $\mathbf{x}$ is a $D$ dimensional vector, its covariance is a symmetric, positive semi definite matrix:
+
+$$\text{Cov}[\mathbf{x}] \triangleq \boldsymbol{\Sigma} =
+\begin{pmatrix}
+\mathbb{V}[X_1] & \text{Cov}[X_1, X_2] & \ldots & \text{Cov}[X_1, X_D] \\\\
+\text{Cov}[X_2, X_1] & \mathbb{V}[X_2] & \ldots & \text{Cov}[X_2, X_D] \\\\
+\vdots & \vdots  & \ddots & \vdots \\\\
+\text{Cov}[X_D, X_1] & \text{Cov}[X_D, X_2] & \ldots & \mathbb{V}[X_D] \\\\
+\end{pmatrix}
+$$
+
+from which we get an important result
+
+$$\mathbb{E}[\mathbf{xx^\top}] = \boldsymbol{\Sigma} + \boldsymbol{\mu\mu^\top}$$
+
+# Correlation
+
+Covariances can be between negative and positive infinity. Sometimes it is more convenient to work with a normalized measure, with finite lower and upper bound. The (Pearson) correlation coefficient between $X$ and $Y$ is defined as
+
+$$\text{corr}(X, Y) \triangleq \frac{\text{Cov}[X, Y]}{\sqrt{\mathbb{V}[X] \mathbb{V}[Y]}}$$
+
+The $\text{corr}[X, Y] = 1$ iff there is a linear relationship between $X$ and $Y$, intuitively one might expect the correlation coefficient to be related to the slope of the regression line.
+
+__Uncorrelated does not imply independent__
+
+Independent implies uncorrelated; however, the converse is not true.
+
+__Correlation does not imply causation__
+
+Spurious correlation can be caused due to hidden factors.
+
+# Simpson's paradox
+
+Simpson's paradox states that a statistical trend or relationship that appears in several different groups of data can disappear or reverse sign when these groups are combined.
