@@ -200,3 +200,35 @@ Spurious correlation can be caused due to hidden factors.
 # Simpson's paradox
 
 Simpson's paradox states that a statistical trend or relationship that appears in several different groups of data can disappear or reverse sign when these groups are combined.
+
+# Transformation of random variables
+
+Suppose $\mathbf{x} = p()$ is some random variable and $\mathbf{y} = f(\mathbf{x})$ is some deterministic transformation of it. In this section, we discuss how to compute $p(\mathbf{y})$.
+
+__Discrete case__
+
+If $X$ is a discrete random variable, we can derive the pmf of $Y$ by simply summing the probability mass of all the $x$'s such that $f(x) = y$.
+
+__Continuous case__
+
+If $X$ is invertible we work with cdf's instead. If $f$ is invertible, we can derive the pdf of $y$. If $f$ is not invertible, we can use numerical integration, or a Monte Carlo approximation.
+
+## Moments of linear transformation
+
+Suppose $f$ is an affine function, so $\mathbf{y = Ax + b}$. In this case the mean and covariance of $\mathbf{y}$ is as follows:
+
+$$\mathbb{E}[\mathbf{y}] = \mathbf{A\boldsymbol{\mu} + b}$$
+
+$$\text{Cov}[\mathbf{y}] = \mathbf{A \boldsymbol{\Sigma} A^\top}$$
+
+# Convolutional theorem
+
+Convolution operation consists of flipping and dragging $y$ over $x$, multiplying elementwise, and adding up the results.
+
+$$p = p_1 \circledast p_2$$
+
+where $\circledast$ operator represents convolution operation.
+
+# Central limit theorem
+
+Consider $N$ random variables with pdf's (not necessarily Gaussian) $p_n(x)$, each with mean $\mu$ and variance $\sigma^2$. We assume each variable is iid. Let $S_N = \sum_{n=1}^{N} X_n$ be the sum of the rv's. As $N$ increases, the distribution of the sum approaches standard normal, where $\overline{X} = S_N / N$ is the sample mean.
