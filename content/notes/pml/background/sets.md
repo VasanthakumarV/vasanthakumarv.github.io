@@ -80,9 +80,9 @@ Linear approximation around a point $a \in \mathbb{R}^n$
 
 $$\widehat{f}(\bold{x}) = f(\bold{a}) + \nabla f(\bold{a})^{\mathsf{T}}(\bold{x} - \bold{a})$$
 
-Quadrative approximation,
+Quadratic approximation,
 
-$$\widehat{f}(\bold{x} = f(\bold{a}) + (\bold{x} - \bold{a})^{\mathsf{T}}\nabla^2f(\bold{a})(\bold{x} - \bold{a})$$
+$$\widehat{f}(\bold{x}) = f(\bold{a}) + \nabla f(\mathbf{a})^{\top}(\mathbf{x - a}) + (\bold{x} - \bold{a})^{\mathsf{T}}\nabla^2f(\bold{a})(\bold{x} - \bold{a})$$
 
 # Bregman divergence
 
