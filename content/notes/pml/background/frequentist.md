@@ -54,3 +54,16 @@ An estimator is a decision procedure that specifies what action to take given so
 
 The sampling distribution of an estimator is the distribution of the results we would see if we applied the estimator multiple times to different datasets sampled from some distribution; in the context of parameter estimation, it is the distribution $\hat{\theta}$, viewed as a random variable that depends on the random sample $\mathcal{D}$.
 
+## Bootstrap approximation
+
+In cases where estimator is a complex function of the data, we can approximate its sampling distribution using a Monte Carlo technique known as the boostrap.
+
+The idea is simple. If we knew the true parameters $\bm{\theta}^\*$, we could generate many fake datasets, each of size $N$, from the true distribution. We could then compute our estimator from each sample and use the empirical distribution as our estimate of the sampling distribution. Since $\bm{\theta}^\*$ is unknown, the idea of __parametric bootstrap__ is to generate each sampled dataset using $\hat{\bm{\theta}}$ instead. This is a plug-in approximation to the sampling distribution.
+
+## Confidence intervals
+
+In frequentist statistics, we use the variability induced by the sampling distribution as a way to estimate uncertainty of a parameter estimate. More precisely, we define a $100(1 - \alpha)$% confidence interval for a parameter estimate $\theta$ as any interval $I(\tilde{\mathcal{D}}) = (\mathcal{l(\widetilde{D})}, \mathcal{u(\widetilde{D})})$ derived from a hypothetical dataset $\widetilde{\mathcal{D}}$ such that
+
+$$\text{Pr}(\theta \in I(\widetilde{\mathcal{D}})|\widetilde{\mathcal{D}} \approx \theta) = 1 - \alpha$$
+
+It is common to set $\alpha = 0.05$, which yields 95% CI. This means that, if we repeatedly sampled data, and compute $I(\widetilde{\mathcal{D}})$ for each dataset, then 95% of such intervals contain the true parameter $\theta$.
