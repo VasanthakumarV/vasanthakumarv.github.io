@@ -1,5 +1,6 @@
 +++
 title = "Sets, functions and relations"
+weight = 1
 +++
 
 # Sets

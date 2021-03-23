@@ -1,5 +1,6 @@
 +++
 title = "Frequentist statistics"
+weight = 4
 +++
 
 # Introduction
@@ -67,3 +68,25 @@ In frequentist statistics, we use the variability induced by the sampling distri
 $$\text{Pr}(\theta \in I(\widetilde{\mathcal{D}})|\widetilde{\mathcal{D}} \approx \theta) = 1 - \alpha$$
 
 It is common to set $\alpha = 0.05$, which yields 95% CI. This means that, if we repeatedly sampled data, and compute $I(\widetilde{\mathcal{D}})$ for each dataset, then 95% of such intervals contain the true parameter $\theta$.
+
+# Bias and variance
+
+An estimator is a procedure applied to data which returns an estimand. Let $\hat{\bm{\theta}}()$ be the estimator, and $\hat{\bm{\theta}}(\mathcal{D})$ be  the estimand. In frequentist statistics, we treat the data as a random variable, drawn from some true but unknown distribution, $p^*(\mathcal{D})$; this induces a distribution over the estimand, $p^\*({\hat{\bm{\theta}}}(\mathcal{D}))$, known as the sampling distribution. In this section, we discuss two key properties of this distribution, its bias and variance.
+
+## Bias of an estimator
+
+The bias of an estimator is defined as
+
+$$\text{bias}(\hat{\theta}(.)) \triangleq \mathbb{E}[\hat{\theta}(\mathcal{D})] - \theta^*$$
+
+If the bias is zero, the estimator is called unbiased.
+
+## Variance of an estimator
+
+Being unbiased is not enough, for e.g., suppose we want to estimate the mean of a Gaussian from $\mathcal{D} = \{ x_1, \ldots, x_N \}$. The estimator that just looks at the first data point is an unbiased estimator, but will generally be further from $\theta^*$ than the empirical mean $\overline{x}$. So the variance of an estimator is also important.
+
+__The Cramer-Rao lower bound__
+
+How low can the variance go? A famous result called the Cramer-Rao lower bound, provides a lower bound on the variance of any unbiased estimator.
+
+$$\mathbb{V}[\hat{\theta}] = \frac{1}{N F(\theta^*)}$$

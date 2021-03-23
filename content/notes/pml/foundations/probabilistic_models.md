@@ -1,5 +1,6 @@
 +++
 title = "Probabilistic Models"
+weight = 2
 +++
 
 Here we concentrate on the output probability distribution $p(y|\theta)$, we will go through the building blocks used to construct probabilistic models.

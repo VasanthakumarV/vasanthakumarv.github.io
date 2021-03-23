@@ -1,5 +1,6 @@
 +++
 title = "Linear Algebra"
+weight = 2
 +++
 
 # Introduction

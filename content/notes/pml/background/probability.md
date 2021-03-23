@@ -1,5 +1,6 @@
 +++
 title = "Probability"
+weight = 3
 +++
 
 # Introduction

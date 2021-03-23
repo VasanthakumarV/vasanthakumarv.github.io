@@ -1,6 +1,6 @@
 +++
 title = "Probabilistic Inference"
-date = 2020-02-23
+weight = 1
 +++
 
 # Bayesian Inference
