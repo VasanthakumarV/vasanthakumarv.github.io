@@ -90,3 +90,16 @@ __The Cramer-Rao lower bound__
 How low can the variance go? A famous result called the Cramer-Rao lower bound, provides a lower bound on the variance of any unbiased estimator.
 
 $$\mathbb{V}[\hat{\theta}] = \frac{1}{N F(\theta^*)}$$
+
+## The bias-variance tradeoff
+
+ There is a fundamental tradeoff that needs to be made when picking a method for parameter estimation, assuming our goal is to minimize mean squared error of our estimate $\hat{\theta}$.
+
+$$
+\begin{aligned}
+\mathbb{E}[\hat{\theta} - \theta^\*] &= \mathbb{E}\[ [(\hat{\theta} - \overline{\theta}) + (\overline{\theta} - \theta^*)]^2 \] \\\\
+&= \mathbb{V}[\hat{\theta}] + \text{bias}^2(\hat{\theta})
+\end{aligned}
+$$
+
+What it means is that it might be wise to use a biased estimator, so long as it reduces our variance by more than the square of the bias, assuming our goal is to minimize squared error.
