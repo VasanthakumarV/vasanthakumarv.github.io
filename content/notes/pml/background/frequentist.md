@@ -103,3 +103,59 @@ $$
 $$
 
 What it means is that it might be wise to use a biased estimator, so long as it reduces our variance by more than the square of the bias, assuming our goal is to minimize squared error.
+
+## Jacknife
+
+The jacknife is an approach to estimate the variability of an estimator based on resampling the data. Unlike bootstrap it cannot be used to approximate the full sampling distribution, but it can estimate the bias and variance of many well-behaved estimators.
+
+The approach is based on computing $N$ estimates, by leaving out one data point at a time, i.e, we compute $\bm{\hat{\theta}}\_n = \pi (\mathcal{D}_{-n})$, where $\mathcal{D}\_{-n}$ is the full dataset omitting the $n$'th point. The mean of these estimates is $\overline{\bm{\theta}} = \frac{1}{N} \sum\_{n=1}^{N} \hat{\bm{\theta}}\_n$
+
+We can now estimate the bias using
+
+$$\hat{\text{bias}}(\hat{\bm{\theta}}) = (N - 1)(\overline{\bm{\theta}} - \hat{\bm{\theta}})$$
+
+We can also estimate the variance as follows:
+
+$$\mathbb{V}[\hat{\bm{\theta}}] = \frac{N - 1}{N} \sum_{n=1}^{N} (\hat{\bm{\theta}}_n - \overline{\bm{\theta}})^2$$
+
+# Hypothesis testing
+
+Suppose we have two hypotheses, known as null hypothesis $H_0$ and an alternative hypothesis $H_1$, and we want to choose the one we think is correct on the basis of a dataset $\mathcal{D}$.
+
+## Null hypothesis significance testing (NHST)
+
+The decision rule is designed on __type I error rate__ of (the probability of accidentally rejecting the null hypothesis) $\alpha$. The error rate $\alpha$ is called the significance of the test. The type II error rate is the probability we accidentally accept the null when the alternative is true.
+
+### t-test
+
+Suppose we have two sets of paired samples $y_i^1$ and $y_i^2$ for $i = 1:N$. For example, $y_i^1$ might be the blood pressure of person $i$ before taking a drug, and $y_i^2$ might be the blood pressure of the same person after taking the drug. Let $x_i = y_i^1 - y_i^2$. If is often reasonable to assume that $x_i \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu$ is the unknown effect of the drug on blood pressure.
+
+Suppose we want to test the point null hypothesis $H_0 : \mu = 0$ (i.e., the drug has no effect) given samples $\mathbf{x} = (x_1, \ldots, x_N)$. Let $\overline{x} = \frac{1}{N} \sum\_{i=1}^{N}x_i$ be the test statistic. One can show that the sampling distribution of $\overline{x}$ under the null hypothesis is given by
+
+$$p(\overline{x}|\mu) = \mathcal{T}(\overline{x} | \mu, s^2/N, N-1)$$
+
+To derive a hypothesis test, we will use the following decision rule: accept $H_0$ iff $\overline{x} \le x^\*$, where $x^*$ is chosen so that $p(\overline{x} \ge x^\* | \mu) = 1 - \alpha$, where $\alpha = 0.05$ is the significance level. This procedure is called a (one-sample) t-test.
+
+### $\mathcal{X}^2$ test
+
+Suppose we have two sets of unpaired samples, $\mathcal{X} = \\{ \mathbf{x}_1, \ldots, \mathbf{x}_N \\}$ sampled from $P$ and $\mathcal{X}\prime = \\{ \hat{\mathbf{x}}_1, \dots, \hat{\mathbf{x}}_M \\}$ sampled from $Q$, and we want to test the hypothesis $H_0 : P = Q$. This is called a two-sample test.
+
+To test this hypothesis, we need some kind of summary statistic, in the context of contingency tables, it is common to use chi-squared statistic, which is a function of the difference between the observed counts, $O_{ij}$, and the counts we would expect if the row and column variables were independent $E_{ij}$.
+
+$$\mathcal{x}^2(\mathcal{D}) \triangleq \sum_{i=1}^{I} \sum_{j=1}^{J} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+
+where $I$ is the number of rows and $J$ is the number of columns.
+
+One can show that the chi-squared statistic of a contingency table $\widetilde{\mathcal{D}}$ sampled from the null distribution has a chi-squared distribution,
+
+$$\mathcal{X}^2(\widetilde{\mathcal{D}}) | H_0 \sim \mathcal{X_v}^2(.)$$
+
+where $\mathcal{v} = (I - 1)(J - 1)$ is the number of degrees of freedom. The critical value $c^*$ to reject the null hypothesis at level $\alpha = 0.95$ is given by solving
+
+$$\alpha = \text{Pr}( \mathcal{X}^2(\widetilde{\mathcal{D}}) > c^*|\widetilde{\mathcal{D}} \sim H_0 )$$
+
+If $\mathcal{X}^2(D) < c^*$, we do not reject the null hypothesis.
+
+### p-values
+
+p-value is defined as the probability, under the null hypothesis, of observing a test statistic that is large or larger than the actually observed. IF we only accept hypotheses where p-value is less than $\alpha = 0.05$, then 95% of the time we will correctly reject the null hypothesis. However, this does not mean that the alternative hypothesis $H_1$ is true with probability 0.95.
