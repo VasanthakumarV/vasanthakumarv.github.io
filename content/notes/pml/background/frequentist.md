@@ -159,3 +159,39 @@ If $\mathcal{X}^2(D) < c^*$, we do not reject the null hypothesis.
 ### p-values
 
 p-value is defined as the probability, under the null hypothesis, of observing a test statistic that is large or larger than the actually observed. IF we only accept hypotheses where p-value is less than $\alpha = 0.05$, then 95% of the time we will correctly reject the null hypothesis. However, this does not mean that the alternative hypothesis $H_1$ is true with probability 0.95.
+
+# Pathologies of frequentist statistics
+
+## Confidence intervals
+
+A 95% frequentist confidence interval for a parameter $\theta$ is defined as any interval $I(\widetilde{\mathcal{D}})$ such that $\text{Pr}(\theta \in I(\widetilde{\mathcal{D}}) | \widetilde{\mathcal{D}} \ approx \theta)$. This does not mean that the parameter is 95% likely to live inside this interval given the observed data. That quantity - which is usually what we want to compute - is instead fiven by the Bayesian credible interval $p(\theta \in I | \mathcal{D})$.
+
+In frequentist approach, $\theta$ is treated as an unknown fixed constant, and the data is treated as random. In the Bayesian approach, we treat the data as fixed (since it is known) and the parameter as random (since it is unknown).
+
+## p-values confuse deduction with induction
+
+A p-value is often interpreted as the likelihood of the data under the null hypothesis, so small values are interpreted to mean that $H_0$ is unlikely, and therefore that $H_1$ is likely. The reasoning is roughly as follows:
+
+> If $H_0$ is true, then this test statistic would probably not occur. This statistic did occur. Therefore $H_0$ is probably false.
+
+However, this invalid reasoning. To see why, consider the following example:
+
+> If a person is an American, then he is probably not a member of Congress. This person is a member of Congress. Therefore he is probably not an American.
+
+This is obviously fallacious reasoning. By contrast, the following logical argument is valid reasoning:
+
+> If a person is a Martian, then he is not a member of Congress. This person is a member of Congress. Therefore he is not a Martian.
+
+The difference between these two cases is that the Martian example is using __deduction__, that is, reasoning forward from logical definitions to their consequences. By contrast the American example concerns __induction__, that is, reasoning backwards from observed evidence to probable (but not necessarily true) causes using statistical regularities not logical definitions.
+
+To perform induction, we need to use probabilistic inference. In particular to compute the probability of the null hypothesis, we should use Bayes rule.
+
+In the American Congress example, $\mathcal{D}$ is the observation that the person is a member of Congress. The null hypothesis $H_0$ is that the person is American, and the alternative hypothesis $H_1$ is that the person is not American. We assume $p(\mathcal{D}|H_0)$ is low, since most Americans are not members of Congress. However $p(\mathcal{D}|H_1}$ is 0, so $p(H_0|\mathcal{D}) = 1.0$ as intuition suggests. However, NHST ignores $p(\mathcal{D}|H_1)$ as well as the prior $p(H_0)$, so it gives the wrong results.
+
+## p-values overstate evidence against the null hypothesis
+
+In general there can be huge difference between p-values and $p(H_0|\mathcal{D})$. We should distrust claims of statistical significance if they violate our prior knowledge.
+
+## p-values depend on the stopping rule
+
+Another problem with p-values is that their computation depends on decisions you make about when to stop collecting data, even if these decisions don't change the data you actually observed.
