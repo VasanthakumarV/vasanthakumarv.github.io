@@ -216,3 +216,30 @@ where $\rho$ is the __correlation coefficient__, it is defined by:
 $$\text{corr}[X,Y] \triangleq \frac{\sigma_{12}^2}{\sigma_1\sigma_2}$$
 
 We can show that $-1 \le \text{corr}[X,Y] \le 1$, using _Cauchy-Schwarz inequality_ and independence of random variables.
+
+## Marginals and conditionals of MVN
+
+Consider two vectors of random variables $\mathbf{y}_1$ and $\mathbf{y}_2$, where $\mathbf{y}_2$ are the variables of interest, and $\mathbf{y}_1$ are called nuisance variables. The marginal distribution of $\mathbf{y}_2$ can be computed by integrating out $\mathbf{y}_1$ as follows:
+
+$$p(\mathbf{y}\_2) = \int \mathcal{N} (\mathbf{y} | \bm{\mu, \Sigma}) d\mathbf{y}\_1 = \mathcal{N}( \mathbf{y}\_2 | \bm{\mu}\_2, \bm{\Sigma}\_{22} )$$
+
+Now suppose we observe the value of $\mathbf{y}\_2$, and we want to predict the value of $\mathbf{y}_1$ conditional on this observation. That is, we want to transform the prior distribution $p(\mathbf{y}_1)$, which represents our beliefs about the values of $\mathbf{y}_1$ before we have seen any obervations, into the posterior distribution $p(\mathbf{y}_1 | \mathbf{y}_2)$, which represents our beliefs about the values of $\mathbf{y}_1$ after (posterior to) seeing $\mathbf{y}_2$.
+
+$$p(\mathbf{y}\_1 | \mathbf{y}\_2) = \mathcal{N}( \mathbf{y}_1 | \bm{\mu}\_1 + \bm{\Sigma}\_{12}\bm{\Sigma}\_{22}^{-1}(\mathbf{y}\_2 - \bm{\mu}\_2), \bm{\Sigma}\_{11} - \bm{\Sigma}\_{12}\bm{\Sigma}\_{22}^{-1}\bm{\Sigma}\_{21} )$$
+
+Note that the posterior mean is a linear function of $\mathbf{y}_2$, but the posterior covariance is independent of $\mathbf{y}_2$.
+
+# Linear Gaussian systems
+
+Let $\mathbf{z} \in \mathbb{R}^D$ be the vector of unknown values, $\mathbf{y} \in \mathbb{R}^K$ be its noisy observation, we assume these variables are related by the following joint distribution:
+
+$$p(\mathbf{z}) = \mathcal{N}(\mathbf{z} | \bm{\mu_z, \Sigma_z})$$
+$$p(\mathbf{y | z}) = \mathcal{N}(\mathbf{y} | \mathbf{Wz + b, \Sigma_y})$$
+
+The corresponding joint distribution $p(\mathbf{z}, \mathbf{y}) = p(\mathbf{z})p(\mathbf{y | z})$, is a $D + K$ dimensional Gaussian.
+
+By conditioning on $\mathbf{y}$, we can compute the posterior $p(\mathbf{z|y})$ using Bayes' rule for Gaussians, which is as follows:
+
+$$p(\mathbf{z|y}) = \frac{p(\mathbf{y|z}) p(\mathbf{z})}{p(\mathbf{y})} = \mathcal{N}(\mathbf{z}| \bm{\mu}\_{z|y}, \bm{\Sigma}_{z|y})$$
+
+# Mixture models
