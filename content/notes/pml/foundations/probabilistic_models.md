@@ -243,3 +243,25 @@ By conditioning on $\mathbf{y}$, we can compute the posterior $p(\mathbf{z|y})$ 
 $$p(\mathbf{z|y}) = \frac{p(\mathbf{y|z}) p(\mathbf{z})}{p(\mathbf{y})} = \mathcal{N}(\mathbf{z}| \bm{\mu}\_{z|y}, \bm{\Sigma}_{z|y})$$
 
 # Mixture models
+
+One way to create more complex probability model is to take a convex combination of simple distributions. This is called mixture models. This has the form:
+
+$$p(\mathbf{y} | \bm{\theta}) = \sum\_{k=1}^{K} \pi\_k p\_k (\mathbf{y})$$
+
+## Gaussian mixture models
+
+A __Gaussian mixture model__ or __GMM__, is defined as follows:
+
+$$p(\mathbf{y}) = \sum\_{k=1}^{K} \pi\_k \mathcal{N}( \mathbf{y} | \bm{\mu}_k, \bm{\Sigma}_k )$$
+
+GMMs are often used for unsupervised clustering of real-valued data samples $\mathbf{y}_n \in \mathbb{R}^D$. This works in two stages. First we fit the model e.g., by computing the MLE $\hat{\bm{\theta}} = \text{argmax}\ \text{log}\ p(\mathcal{D}|\bm{\theta})$, where $\mathcal{D} = \\{\mathbf{y}_n : n = 1 : N\\}$. Then we associate each data point $\mathbf{y}_n$ with discrete latent or hidden variable $z_n \in \\{ 1, \ldots, K \\}$ which specifies the identity of the mixture component or cluster which was used to generate $\mathbf{y}_n$. These latent identities are unknown, but we can compute a posterior over them using Bayes rule:
+
+$$r\_{nk} \triangleq p(z\_n = k|\mathbf{x}_n, \bm{\theta}) = \frac{p(z\_n = k | \bm{\theta}) p(\mathbf{x}\_n | z\_n = k, \bm{\theta})}{\sum\_{k^{\prime}=1}^{K} p(z\_n = k^{\prime}|\bm{\theta}) p(\mathbf{x}\_n | z\_n = k^{\prime}, \bm{\theta})}$$
+
+The quantity $r_{nk}$ is called the __responsibility__ of cluster $k$ for data point $n$. Given the responsibilities, we can compute the most probable cluster assignment. This is known as __hard clustering__. (If we use the responsibilities to fractionally assign each data point to different clusters, it is called __soft clustering__).
+
+## Gaussian scale mixtures
+
+A __Gaussian scale mixtures__ __GSM__ is like an "infinite" mixture of Gaussians, each with a different scale (variance). More precisely, let $x = \epsilon z$, where $z \sim \mathcal{N}(0, \sigma_0^2)$ and $\epsilon \sim p(\epsilon)$. We can think of this as multiplicative noise being applied to the Gaussian rv $z$. We have $x | \epsilon \sim \mathcal{N}(0, \epsilon^2\sigma_0^2)$. Marginalizing out the scale $\epsilon$ gives:
+
+$$p(x) = \int \mathcal{N} (x | 0, \sigma_0^2 \epsilon^2) p(\epsilon^2) d\epsilon$$
