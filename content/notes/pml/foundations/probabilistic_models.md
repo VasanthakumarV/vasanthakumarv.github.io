@@ -265,3 +265,23 @@ The quantity $r_{nk}$ is called the __responsibility__ of cluster $k$ for data p
 A __Gaussian scale mixtures__ __GSM__ is like an "infinite" mixture of Gaussians, each with a different scale (variance). More precisely, let $x = \epsilon z$, where $z \sim \mathcal{N}(0, \sigma_0^2)$ and $\epsilon \sim p(\epsilon)$. We can think of this as multiplicative noise being applied to the Gaussian rv $z$. We have $x | \epsilon \sim \mathcal{N}(0, \epsilon^2\sigma_0^2)$. Marginalizing out the scale $\epsilon$ gives:
 
 $$p(x) = \int \mathcal{N} (x | 0, \sigma_0^2 \epsilon^2) p(\epsilon^2) d\epsilon$$
+
+# Probabilistic graphical models
+
+Joint distributions over sets of many random variables can be defined, with the key assumption that some variables are conditionally independent. We will represent our CI assumption using graphs.
+
+A __probabilistic graphical model__ or __PGM__ is a joint probability distribution that uses a graph structure to encode conditional assumptions. When the graph is directed acyclic graph, the model is sometimes called a Bayesian network, although there is nothing inherently Bayesian about such models.
+
+The basic idea in PGMs is that each node in the graph represents a random variable, and each edge represents a direct dependency. More precisely, each lack of edge represents a conditional independency.
+
+$$Y\_i \perp \mathbf{Y}\_{\text{pred}(i) \backslash \text{pa}(i)} | \mathbf{Y}\_{\text{pa}(i)}$$
+
+where $\text{pa}(i)$ are the parents of node $i$, and $\text{pred}(i)$ are the predecessors of node $i$ in the ordering. (This is called the ordered Markov property). Consequently we represent the joint distribution as follows:
+
+$$p(\mathbf{Y}\_{1:V}) = \prod\_{i=1}^{V} p(Y\_i | \mathbf{Y}\_{\text{pa}(i)})$$
+
+where $V$ is the number of nodes in the graph.
+
+## Inference
+
+A PGM defines a joint probabiity distribution. We can therefore use the rules of marginalization and conditioning to compute $p(\mathbf{Y}_i | \mathbf{Y}_j = y_j)$ for any sets of variables $i$ and $j$.
