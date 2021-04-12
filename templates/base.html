@@ -44,6 +44,10 @@
 				{% if current_path is starting_with("/notes") %} class="navbar-selected" {% endif %}>
 				Notes
 			</a>
+			<a href="/algorithms"
+				{% if current_path is starting_with("/algorithms") %} class="navbar-selected" {% endif %}>
+				Algorithms
+			</a>
 			<a href="/questions"
 				{% if current_path is starting_with("/questions") %} class="navbar-selected" {% endif %}>
 				Q&A

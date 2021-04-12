@@ -2,8 +2,17 @@
 
 @import "navbar";
 
-* {
+html {
 	font-family: "Computer Modern Serif";
+}
+
+pre {
+	font-family: monospace;
+	padding: 16px;
+}
+
+code {
+	font-family: monospace;
 }
 
 html {

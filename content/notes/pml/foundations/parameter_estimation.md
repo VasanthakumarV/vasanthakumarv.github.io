@@ -56,3 +56,23 @@ $$l\_{ll}(\widetilde{y}, \eta) = - \text{log}\ p(\widetilde{y}, \eta) = \text{lo
 Like log loss, hinge loss is another convex upper bound function:
 
 $$l\_{hinge}(\widetilde{y}, \eta) = \text{max}(0, 1 - \widetilde{y}\eta) \triangleq (1 - \widetilde{y}\eta)\_{+}$$
+
+# Regularization
+
+A fundamental problem with MLE and ERM, is that it will try to pick parameters that minimize loss on the training set, but this may not result in a model that has low loss on future data. This is called __overfitting__.
+
+The main solution to overfitting is to use __regularization__, which means to add penalty term to NLL, thus we optimize an objective of the form
+
+$$\mathcal{L}(\bm{\theta}; \lambda) = \left[ \frac{1}{N} \sum\_{n=1}^{N} l(\mathbf{y}\_n, \bm{\theta}\_n; \mathbf{x}\_n) \right] + \lambda C(\bm{\theta})$$
+
+## Early stopping
+
+A very simple form of regularization, which is very effective in practice (especially for complex models), is known as __early stopping__. If we detect signs of overfitting (by monitoring the performance on validation set), we can stop the optimization process, to prevent the model memorizing too much information about the training set.
+
+## Using more data
+
+As the amount of data increases, the chance of overfitting (for a model of fixed complexity) decreases (assuming the data contains informative examples). __Learning curve__ is a plot made between error and training set size.
+
+# The method of moments
+
+
