@@ -73,6 +73,10 @@ A very simple form of regularization, which is very effective in practice (espec
 
 As the amount of data increases, the chance of overfitting (for a model of fixed complexity) decreases (assuming the data contains informative examples). __Learning curve__ is a plot made between error and training set size.
 
-# The method of moments
+# Online (recursive) estimation
 
+If the entire dataset $\mathcal{D}$ is available before training starts, we say that we are doing __batch learning__. However, in some cases, the data arrives sequentially, so $\mathcal{D} = \\{ \mathbf{y}_1, \mathbf{y}_2, \ldots \\}$ in an unbounded stream. In this case, we want to perform __online learning__.
 
+Let $\hat{\bm{\theta}}\_{t-1}$ be our estimate (e.g., MLE) given $\mathcal{D}\_{1:t-1}$. To ensure our learning algorithm takes constant time per update, we need to find a learning rate of the form
+
+$$\bm{\theta} = f(\hat{\bm{\theta}}\_{t-1}, \mathbf{y}\_t)$$
