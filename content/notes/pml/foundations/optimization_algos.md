@@ -55,3 +55,31 @@ In some optimization problems, we can partition the objective into a part that o
 $$\mathcal{L}(\bm{\theta}) = \mathcal{L}\_s(\bm{\theta}) + \mathcal{L}\_r(\bm{\theta})$$
 
 where $\mathcal{L}\_s$ is usually the training set loss, and $\mathcal{L}\_r$ is a regularizer. This composite structure can be exploited by various algorithms.
+
+# First-order methods
+
+We consider optimization methods that leverage first order derivative of the objective function, i.e., they compute which direction point downhill, but they ignore curvature information. All of these algorithms require that the user specify a starting point $\bm{\theta}\_0$. Then at each iteration $t$, they perform an update of the following form:
+
+$$\bm{\theta}\_{t + 1} = \bm{\theta}\_t + \eta\_{t}\mathbf{d}\_t$$
+
+where $\eta\_{t}$ is known as the step size or learning rate, and $\mathbf{d}\_t$ is a descent direction, such as the negative of the gradient, given by $\mathbf{g}\_t = \nabla\_{\bm{\theta}} \mathcal{L}(\bm{\theta}) | \_{\bm{\theta}\_t}$
+
+## Step size (learning rate)
+
+In machine learning, the sequence of step sizes $\\{ \eta\_t \\}$ is called the __learning rate schedule__.
+
+### Constant step size
+
+The simplest method is constant step size. However, if it is too large, the method may fail to converge, and if it is too small, the method will converge but very slowly.
+
+### Line search
+
+The optimal step size can be found by finding the value that maximally decreases the objective along the chosen direction by solving the 1d minimization problem
+
+$$\eta\_t = \underset{\eta \gt 0}{\text{argmin}}\ \phi\_t(\eta) = \underset{\eta \gt 0}{\text{argmin}}\ \mathcal{L}(\bm{\theta}\_t + \eta \mathbf{d}\_t)$$
+
+This is known as line search, since we are searching along the line defined by $\mathbf{d}\_t$
+
+### Convergence rates
+
+We want to find optimization algorithms that converge quickly to a local optimum. For certain convex problems with bounded Lipschitz constant, one can show that gradient descent converges at a linear rate.
