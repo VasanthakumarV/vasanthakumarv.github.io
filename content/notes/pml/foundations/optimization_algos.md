@@ -83,3 +83,11 @@ This is known as line search, since we are searching along the line defined by $
 ### Convergence rates
 
 We want to find optimization algorithms that converge quickly to a local optimum. For certain convex problems with bounded Lipschitz constant, one can show that gradient descent converges at a linear rate.
+
+# Momentum methods
+
+Gradient descent can move very slowly along flat regions of the loss landscape, momentum methods can offer a solution for this.
+
+## Momentum
+
+

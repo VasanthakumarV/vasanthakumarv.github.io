@@ -132,3 +132,39 @@ fn main() {
     dbg!(&answer);
 }
 ```
+
+# Array of products
+
+Write a function that takes in a non-empty array of integers and returns an array of the same length, where each element in the output array is equal to the product of every other number in the input array.
+
+```rust
+fn array_of_prods<const N: usize>(array: [isize; N]) -> [isize; N] {
+    let mut prods = [1; N];
+
+    let _ = array
+        .iter()
+        .enumerate()
+        .fold(1, |mut left_running, (i, value)| {
+            prods[i] = left_running;
+            left_running *= value;
+            left_running
+        });
+
+    let _ = array
+        .iter()
+        .enumerate()
+        .rev()
+        .fold(1, |mut right_running, (i, value)| {
+            prods[i] *= right_running;
+            right_running *= value;
+            right_running
+        });
+
+    prods
+}
+
+fn main() {
+    let answer = array_of_prods([5, 1, 4, 2]);
+    dbg!(&answer);
+}
+```
