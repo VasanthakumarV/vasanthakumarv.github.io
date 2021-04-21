@@ -197,3 +197,47 @@ fn main() {
     dbg!(&answer);
 }
 ```
+
+# Merge overlapping intervals
+
+Write a function that takes in a non-empty array of arbitrary intervals, merges any overlapping intervals, and returns the new intervals in no particular order.
+
+Each interval interval is an array of two integers, with interval[0] as the start of the interval and interval[1] as the end of the interval.
+
+Note that back-to-back intervals aren't considered to be overlapping. For example, [1, 5] and [6, 7] aren't overlapping; however, [1, 6] and [6, 7] are indeed overlapping.
+
+Also note that the start of any particular interval will always be less than or equal to the end of that interval. 
+
+```rust
+fn merge_overlapping<const N: usize, const M: usize>(
+    mut intervals: [[usize; M]; N],
+) -> Vec<[usize; M]> {
+    intervals.sort_by_key(|k| k[0]);
+    
+    let mut current = intervals[0];
+
+    let mut output =
+        intervals
+            .iter()
+            .skip(1)
+            .fold(Vec::with_capacity(intervals.len()), |mut output, next| {
+                if current[1] >= next[0] {
+                    current[1] = std::cmp::max(current[1], next[1]);
+                } else {
+                    output.push(current);
+                    current = *next;
+                }
+
+                output
+            });
+    output.push(current);
+
+    output
+}
+
+fn main() {
+    let input = [[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]];
+    let output = merge_overlapping(input);
+    dbg!(&output);
+}
+```
