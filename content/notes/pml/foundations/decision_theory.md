@@ -20,3 +20,32 @@ $$R(a|x) \triangleq \mathbb{E}\_{p(h|x)} [l(h, a)] = \sum\_{h \in \mathcal{H}} l
 The __optimal policy__ (also called the __Bayes estimator__) specifies what action to take for each possible observation so as to minimize risk:
 
 $$\pi^* (\mathbf{x}) = \underset{a \in \mathcal{A}}{\text{argmin}}\ \mathbb{E}\_{p(h|\mathbf{x})} [l(h, a)]$$
+
+# Classification problems
+
+In this section, we use Bayesian decision theory to decide optimal class label to predict given an observed input $x \in \mathcal{X}$.
+
+## Zero-one loss
+
+Suppose the states of nature correspond to class labels, os $\mathcal{H} = \mathcal{Y} = \\{ 1, \ldots, C \\}$. Furthermore, suppose the actions also correspond to class labels, os $\mathcal{A} = \mathcal{Y}$. In this setting, a very commonly used loss function is the zero-one loss.
+
+Hence the action that minimizes the expected loss is to choose the most probable label:
+
+$$\pi(\mathbf{x}) = \underset{y \in \mathcal{Y}}{\text{argmax}}\ p(y|\mathbf{x})$$
+
+This corresponds to the mode of the posterior distribution, also known as the maximum a posteriori or MAP estimate.
+
+## Reject option
+
+In some cases, we may be able to say "I don't know" instead of returning an answer that we don't really trust, this is particulary important in risk averse domains.
+
+$$
+l(h, a) = 
+\begin{cases}
+0 & if\ h = a\ and\ a \in \\{ 1, \ldots, C \\} \\\\
+\lambda\_r & if\ a = 0 \\\\
+\lambda\_e & otherwise
+\end{cases}
+$$
+
+where $\lambda\_r$ is the cost of reject action, and $\lambda\_e$ is the cost of classification error.
