@@ -49,3 +49,17 @@ l(h, a) =
 $$
 
 where $\lambda\_r$ is the cost of reject action, and $\lambda\_e$ is the cost of classification error.
+
+# ROC curves
+
+We showed that we can pick the optimal lable in binary classification by thresholding the probability using a value derived from the relative cost of a false positive and false negative. Instead of picking a single threshold, we can instead consider using a set of different thresholds, and comparing the resulting performance.
+
+## Class confusion matrices
+
+For any fixed threshold $\tau$, we can compute the empirical number of false positives (FP), false negatives (FN), true positives (TP), and true negatives (TN). We can store these results in a $2 \times 2$ class confusion matrix $C$, where $C\_{ij}$ is the number of times an item with true class label $i$ was (mis)classified as having lable $j$. We can now plot TPR vs FPR as an implicit function of $\tau$. This is called a __receiver operation characteristic__ or __ROC__ curve.
+
+The quality of the ROC curve is often summarized as a single number using the __area under the curve__ or __AUC__ score, higher AUC scores are better. Another summary statistic that is used is the __equal error rate__ or __EER__ as called the __cross-over rate__, defined as the value which satisfies FPR = FNR. Since FNR = 1-TPR, we can compute EER by drawing a line from top left to the bottom right and seeing where it intersects the ROC curve, lower EER scores are better.
+
+## Class imbalance
+
+In some problems, there is severe class imbalance. For example, the set of negatives is usually much larger than the set of positives. The usefulness of the ROC curve may be reduced in such cases, since a large change in the absolute number of false positives will not change the false positive rate very much, since FPR is divided by FP + TN. Thus all action happens in the extreme left part of the curve. In such cases, we may choose other ways of summarizing the class confusion matrix, such as precision-recall curves.
