@@ -241,3 +241,35 @@ fn main() {
     dbg!(&output);
 }
 ```
+# Maximum non-adjacent sum
+
+Write a function that takes in an array of positive integers and returns the maximum sum of non-adjacent elements in the array.
+
+If the input array is empty, the function should return 0.
+
+```rust
+#![feature(destructuring_assignment)]
+
+fn max_sum_no_adj<const N: usize>(array: [usize; N]) -> usize {
+    if array.is_empty() {
+        return 0;
+    } else if array.len() == 1 {
+        return array[0];
+    }
+
+    let mut second = array[0];
+    let mut first = array[0].max(array[1]);
+
+    for item in array.iter().skip(2) {
+        (first, second) = (first.max(second + item), first);
+    }
+
+    first
+}
+
+fn main() {
+    let input = [75, 105, 120, 75, 90, 135];
+    let output = max_sum_no_adj(input);
+    dbg!(&output);
+}
+```
