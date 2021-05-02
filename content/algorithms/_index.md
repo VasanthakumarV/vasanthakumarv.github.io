@@ -273,3 +273,32 @@ fn main() {
     dbg!(&output);
 }
 ```
+
+# Number of ways to make change
+
+Given an array of distinct positive integers representing coin denominations and a single non-negative integer n representing a target amount of money, write a function that returns the number of ways to make change for that target amount using the given coin denominations.
+
+Note that an unlimited amount of coins is at your disposal.
+
+```rust
+fn ways_to_make_change<const N: usize>(n: usize, denoms: [usize; N]) -> usize {
+    let mut ways = vec![0; n + 1];
+
+    ways[0] = 1;
+
+    denoms.iter().for_each(|denom| {
+        (1..=n).for_each(|amount| {
+            if *denom <= amount {
+                ways[amount] += ways[amount - denom];
+            }
+        });
+    });
+
+    ways[n]
+}
+
+fn main() {
+    let output = ways_to_make_change(6, [1, 5]);
+    dbg!(&output);
+}
+```
