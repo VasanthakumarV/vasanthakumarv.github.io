@@ -4,18 +4,17 @@
 @import "navbar";
 
 html {
-	font-family: "Computer Modern Serif";
+	font-family: "Computer Modern Sans";
 	background: $background-color;
 	color: $text-color;
 }
 
 pre {
-	font-family: monospace;
 	padding: 16px;
 }
 
 code {
-	font-family: monospace;
+	font-family: "Computer Modern Typewriter";
 }
 
 html {
@@ -32,7 +31,7 @@ a {
 }
 
 a:hover {
-	background-color: $hover-color;
+	background-color: $hover-bg-color;
 }
 
 .katex {
@@ -50,10 +49,12 @@ h1 {
 }
 
 h2 {
+	color: $heading-color;
 	font-size: 1.17rem;
 }
 
 h3 {
+	color: $heading-color;
 	font-size: 1rem;
 }
 

@@ -1,8 +1,8 @@
 @import "variables";
 
 .topnav {
+	background: $nav-bg-color;
 	border-bottom: 1px solid $border-color;
-	box-shadow: 0 0 1px 1px $box-color;
 }
 
 .topnav a {
@@ -27,7 +27,7 @@
 }
 
 .topnav a:hover {
-	background-color: $hover-color;
+	background-color: $hover-bg-color;
 }
 
 .navbar-selected {
