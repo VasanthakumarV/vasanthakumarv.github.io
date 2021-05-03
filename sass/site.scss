@@ -1,9 +1,12 @@
 @charset "utf-8";
 
+@import "variables";
 @import "navbar";
 
 html {
 	font-family: "Computer Modern Serif";
+	background: $background-color;
+	color: $text-color;
 }
 
 pre {
@@ -25,11 +28,11 @@ body {
 
 a {
 	text-decoration: inherit;
-	color: darkblue;
+	color: $link-color;
 }
 
 a:hover {
-	background-color: #F1F1F1;
+	background-color: $hover-color;
 }
 
 .katex {
@@ -37,11 +40,12 @@ a:hover {
 }
 
 .title {
-	border-bottom: 1px solid rgba(34,36,38,.15);
+	border-bottom: 1px solid $border-color;
 	margin-bottom: 0px;
 }
 
 h1 {
+	color: $heading-color;
 	font-size: 1.33rem;
 }
 
@@ -78,7 +82,7 @@ ul {
 }
 
 .flex-toc {
-	border-bottom: 1px solid rgba(34,36,38,.15);
+	border-bottom: 1px solid $border-color;
 	padding: 0px 8px 0px 8px;
 	margin: 0px 15px 0px 0px;
 }
@@ -113,7 +117,7 @@ ul {
 	}
 
 	.flex-toc {
-		border-right: 1px solid rgba(34,36,38,.15);
+		border-right: 1px solid $border-color;
 		border-top: none;
 		border-bottom: none;
 	}

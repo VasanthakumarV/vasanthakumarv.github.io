@@ -2,19 +2,19 @@
 
 {% block content %}
 <h1 class="title">
-	{{ section.title }}
+  {{ section.title }}
 </h1>
 {% for subsection in section.subsections%}
-	{% set section = get_section(path=subsection) %}
-	<h2>{{section.title}}</h2>
-	{% for subsubsection in section.subsections %}
-		{% set section = get_section(path=subsubsection) %}
-		<h3>{{ section.title }}</h3>
-		<ul>
-		{% for page in section.pages %}
-			<li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>	
-		{% endfor %}
-		</ul>
-	{% endfor %}
+  {% set section = get_section(path=subsection) %}
+  <h2>{{section.title}}</h2>
+  {% for subsubsection in section.subsections %}
+    {% set section = get_section(path=subsubsection) %}
+    <h3>{{ section.title }}</h3>
+    <ul>
+    {% for page in section.pages %}
+      <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>  
+    {% endfor %}
+    </ul>
+  {% endfor %}
 {% endfor %}
 {% endblock content %}

@@ -63,3 +63,14 @@ The quality of the ROC curve is often summarized as a single number using the __
 ## Class imbalance
 
 In some problems, there is severe class imbalance. For example, the set of negatives is usually much larger than the set of positives. The usefulness of the ROC curve may be reduced in such cases, since a large change in the absolute number of false positives will not change the false positive rate very much, since FPR is divided by FP + TN. Thus all action happens in the extreme left part of the curve. In such cases, we may choose other ways of summarizing the class confusion matrix, such as precision-recall curves.
+
+# Precision-recall curves
+
+In some problems, the notion of a "negative" is not well-defined. In these kinds of situations, we may choose to use a __precision-recall curve__ to summarize the performance of the system.
+
+The key idea is to replace FPR with __precision__. __Recall__ is same as TPR. If $\widehat{y}\_n \in \\{ 0, 1 \\}$ is the predicted label, and $y\_n \in \\{ 0, 1 \\}$ is the true label, we can estimate precision and recall using
+
+$$\mathcal{P}(\tau) =  \frac{\sum\_n y\_n \widehat{y}\_n}{\sum\_n \widehat{y}\_n}$$
+$$\mathcal{R}(\tau) =  \frac{\sum\_n y\_n \widehat{y}\_n}{\sum\_n y\_n}$$
+
+We can now plot precision vs recall as we vary the threshold $\tau$. Hugging the top right is the best we can do.
