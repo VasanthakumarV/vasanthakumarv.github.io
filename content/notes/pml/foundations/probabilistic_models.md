@@ -1,5 +1,5 @@
 +++
-title = "Probabilistic Models"
+title = "Probabilistic models"
 weight = 2
 +++
 

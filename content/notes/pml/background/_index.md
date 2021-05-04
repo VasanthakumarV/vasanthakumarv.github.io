@@ -1,4 +1,4 @@
 +++
-title = "Mathematical Background"
+title = "Mathematical background"
 sort_by = "weight"
 +++

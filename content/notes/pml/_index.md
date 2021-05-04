@@ -1,3 +1,3 @@
 +++
-title = "Probabilistic Machine Learning"
+title = "Probabilistic machine learning"
 +++

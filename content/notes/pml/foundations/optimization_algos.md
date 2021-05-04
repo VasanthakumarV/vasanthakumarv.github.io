@@ -1,5 +1,5 @@
 +++
-title = "Optimization Algorithms"
+title = "Optimization algorithms"
 weight = 5
 +++
 

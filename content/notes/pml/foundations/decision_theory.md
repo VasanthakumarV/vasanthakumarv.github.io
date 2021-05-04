@@ -1,5 +1,5 @@
 +++
-title = "Bayesian Decision Theory"
+title = "Bayesian decision theory"
 weight = 4
 +++
 
@@ -74,3 +74,23 @@ $$\mathcal{P}(\tau) =  \frac{\sum\_n y\_n \widehat{y}\_n}{\sum\_n \widehat{y}\_n
 $$\mathcal{R}(\tau) =  \frac{\sum\_n y\_n \widehat{y}\_n}{\sum\_n y\_n}$$
 
 We can now plot precision vs recall as we vary the threshold $\tau$. Hugging the top right is the best we can do.
+
+## F-scores
+
+For a fixed threshold, corresponding to a single point on the PR curve, we can compute a single precision and recall value, which will be denoted by $\mathcal{P}$ and $\mathcal{R}$. These are often combined into a single statistic called the $F\_{\beta}$, which weights recall as $\beta > 0$ more important than precision.
+
+$$\frac{1}{F\_\beta} = \frac{1}{1 + \beta^2} \frac{1}{\mathcal{P}} + \frac{\beta^2}{1 + \beta^2} \frac{1}{\mathcal{R}}$$
+
+or equivalently
+
+$$F\_\beta \triangleq (1 + \beta^2) \frac{\mathcal{P . R}}{\beta^2\mathcal{P + R}}$$
+
+If we set $\beta = 1$, we get the harmonic mean of precision and recall:
+
+$$F\_1 = 2 \frac{\mathcal{P . R}}{\mathcal{P + R}}$$
+
+Using $F\_1$ score weights precision and recall equally. However, if recall is more important, we may use $\beta = 2$, and if precision is more important, we may use $\beta = 0.5$.
+
+# Regression problems
+
+

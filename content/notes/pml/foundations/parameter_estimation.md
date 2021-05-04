@@ -1,5 +1,5 @@
 +++
-title = "Parameter Estimation"
+title = "Parameter estimation"
 weight = 3
 +++
 

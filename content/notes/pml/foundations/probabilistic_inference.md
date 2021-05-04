@@ -1,5 +1,5 @@
 +++
-title = "Probabilistic Inference"
+title = "Probabilistic inference"
 weight = 1
 +++
 
