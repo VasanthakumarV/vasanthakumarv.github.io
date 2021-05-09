@@ -93,4 +93,29 @@ Using $F\_1$ score weights precision and recall equally. However, if recall is m
 
 # Regression problems
 
+So far, we have considered the case where there are a finite number of actions $A$ and states of nature $H$. In this section, we consider the case where the set of actions and states are both equal to the real line.
 
+## L2 loss
+
+Also called __squared error__ or __quadratic loss__, which is defined as follows:
+
+$$l\_2 (h, a) = (h - a)^2$$
+
+## L1 loss
+
+The $l\_2$ loss penalizes deviations from the truth quadratically, and thus is sensitive to outliers. A more robust alternative is the absolute or $l\_1$ loss
+
+$$l\_1(h, a) = |h - a|$$
+
+## Huber loss
+
+Another robust loss function is the __Huber loss__, defined as follows:
+
+$$l\_{\delta}(h, a) = 
+\begin{cases}
+r^2/2 & if |r| \leq \delta \\\\
+\delta|r| - \delta^2/2 & if |r| \gt \delta
+\end{cases}
+$$
+
+where $r = h - a$. This is equivalent to $l\_2$ for errors that are smaller than $\delta$, and is equivalent to $l\_1$ for larger errors.
