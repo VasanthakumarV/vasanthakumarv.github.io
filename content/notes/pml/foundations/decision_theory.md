@@ -1,6 +1,6 @@
 +++
 title = "Bayesian decision theory"
-weight = 4
+weight = 5
 +++
 
 # Introduction
@@ -119,3 +119,41 @@ r^2/2 & if |r| \leq \delta \\\\
 $$
 
 where $r = h - a$. This is equivalent to $l\_2$ for errors that are smaller than $\delta$, and is equivalent to $l\_1$ for larger errors.
+
+# Probabilistic prediction problems
+
+In this section, we assume the set of possible actions is to pick a __probability distribution__ over some value of interest. That is, we want to perform __probabilistic prediction__ or __probabilistic forecasting__ rather than predicting a specific value. More precisely, we assume the true "state of nature" is a distribution, $h = p(Y | x)$, the action is another distribution, $a = q(Y | x)$, and we want to pick $q$ to minimize $\mathbb{E}[l(p, q)]$ for a given $x$.
+
+## KL, cross-entropy and log-loss
+
+A common form of loss functions for comparing two distributions is the __Kullback Leibler divergence__ or __KL divergence__, which is defined as follows:
+
+$$\mathbb{KL}(p || q) \triangleq \sum\_{y \in \mathcal{Y}} p(y) \text{log} \frac{p(y)}{q(y)}$$
+
+We can expand the KL as folows:
+
+$$
+\begin{aligned}
+\mathbb{KL}(p || q) & = \sum\_{y \in \mathcal{Y}} p(y)\ log\ p(y) - \sum\_{y \in \mathcal{Y}} p(y)\ \text{log}\ q(y) \\\\
+\mathbb{H}(p) & \triangleq - \sum\_y p(y)\ \text{log}\ p(y) \\\\
+\mathbb{H}(p, q) & \triangleq - \sum\_y p(y)\ \text{log}\ q(y)
+\end{aligned}
+$$
+
+$\mathbb{H}(p)$ is known as the __entropy__. This is a measure of uncertainty or variance of $p$, it is maximal if $p$ is uniform, and is 0 if $p$ is a degenerate or deterministic delta function. The $\mathbb{H}(p, q)$ is known as the __cross-entropy__.
+
+Now consider a special case in which the true state of nature is a degenerate distribution, which puts all its mass on a single outcome, say $c$, i.e., $h = p(Y|x) = \mathbb{I}(Y = c)$.
+
+$$\mathbb{H}(\delta(Y = c), q) = - \sum\_{y \in \mathcal{Y}} \delta(y = c)\ \text{log}\ q(y) = -\text{log}\ q(c)$$
+
+This is known as the __log loss__ of the predictive distribution $q$ when given given target label $c$.
+
+## Brier score
+
+$$l(p, q) = \triangleq \frac{1}{C} \sum\_{c=1}^{C} (q(y = c | x) - p(y =c | x))^2$$
+
+This is just the squared error of the predictive distribution compared to the true distribution, when viewed as vectors. Since it is based on squared error, the Brier score is less sensitive to extremely rare or extremely common classes.
+
+# A/B testing
+
+

@@ -1,6 +1,6 @@
 +++
 title = "Optimization algorithms"
-weight = 5
+weight = 6
 +++
 
 # Introduction
