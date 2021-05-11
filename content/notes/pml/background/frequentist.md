@@ -164,7 +164,7 @@ p-value is defined as the probability, under the null hypothesis, of observing a
 
 ## Confidence intervals
 
-A 95% frequentist confidence interval for a parameter $\theta$ is defined as any interval $I(\widetilde{\mathcal{D}})$ such that $\text{Pr}(\theta \in I(\widetilde{\mathcal{D}}) | \widetilde{\mathcal{D}} \ approx \theta)$. This does not mean that the parameter is 95% likely to live inside this interval given the observed data. That quantity - which is usually what we want to compute - is instead fiven by the Bayesian credible interval $p(\theta \in I | \mathcal{D})$.
+A 95% frequentist confidence interval for a parameter $\theta$ is defined as any interval $I(\widetilde{\mathcal{D}})$ such that $\text{Pr}(\theta \in I(\widetilde{\mathcal{D}}) | \widetilde{\mathcal{D}} \ approx \theta)$. This does not mean that the parameter is 95% likely to live inside this interval given the observed data. That quantity - which is usually what we want to compute - is instead given by the Bayesian credible interval $p(\theta \in I | \mathcal{D})$.
 
 In frequentist approach, $\theta$ is treated as an unknown fixed constant, and the data is treated as random. In the Bayesian approach, we treat the data as fixed (since it is known) and the parameter as random (since it is unknown).
 
