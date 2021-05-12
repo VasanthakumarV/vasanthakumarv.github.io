@@ -152,6 +152,28 @@ where
 
 $$B(\bm{\alpha}) = \frac{ \prod\_{k=1}^{K} \Gamma( \alpha\_k ) }{ \Gamma( \sum\_k \alpha\_k ) }$$
 
+## The Gaussian-Gaussian model
+
+In this section, we derive the posterior for the parameters of a Gaussian distribution. For simplicity, we assume the variance is known.
+
+### Univariate case
+
+If $\sigma^2$ is a known constant, the likelihood for $\mu$ has the form
+
+$$p(\mathcal{D} | \mu) \propto \text{exp\ } \left( - \frac{1}{2\sigma^2} \sum\_{n=1}^{N} (y\_n - \mu)^2 \right)$$
+
+One can show that the conjugate prior is another Gaussian, $\mathcal{N}(\breve{\mu}, \breve{\tau}^2)$. Applying Bayes' rule for Gaussians, we find that the corresponding posterior is given by
+
+$$
+\begin{aligned}
+p(\mu | \mathcal{D}, \sigma^2) & = \mathcal{N}(\mu, \widehat{m}, \widehat{\tau}^2) \\\\
+\widehat{\tau}^2 & = \frac{1}{ \frac{N}{\sigma^2} + \frac{1}{\breve{\tau}^2} } = \frac{\sigma^2 \breve{\tau}^2}{N \breve{\tau}^2 + \sigma^2} \\\\
+\widehat{m} & = \widehat{\tau}^2 \left( \frac{\breve{m}}{\breve{\tau}^2} + \frac{N \bar{y}}{\sigma^2} \right) = \frac{ \sigma^2 }{ N\breve{\tau}^2 + \sigma^2 }\breve{m} + \frac{N \breve{\tau}^2}{ N\breve{\tau}^2 + \sigma^2 }\bar{y}
+\end{aligned}
+$$
+
+where $\bar{y} \triangleq \frac{1}{N} \sum\_{n = 1}^{N} y\_n$ is the empirical mean.
+
 # Credible intervals
 
 A posterior distribution is a high dimensional object that is hard to visualize and work with. A common way to summarize such a distribution is to compute a point estimate, such as the posterior mean or mode, and then to compute a __credible interval__, which quantifies the uncertainty associated with that estimate.
