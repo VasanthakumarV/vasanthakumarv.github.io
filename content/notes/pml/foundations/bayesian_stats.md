@@ -90,3 +90,45 @@ One solution to this is to compute a MAP estimate, and plug that in. Here we dis
 The posterior predictive is given by the following, known as the (compound) beta-binomial distribution:
 
 $$Bb(x | M, \widehat{\alpha}, \widehat{\beta}) \triangleq \binom{M}{x} \frac{B(x + \widehat{\alpha}, M - x + \widehat{\beta})}{B(\widehat{\alpha}, \widehat{\beta})}$$
+
+#### Marginal likelihood
+
+The __marginal likelihood__ or __evidence__ for a model $\mathcal{M}$ is defined as
+
+$$p(\mathcal{D | M}) = \int p(\bm{\theta} | \mathcal{M}) p(\mathcal{D} | \bm{\theta}, \mathcal{M}) d\bm{\theta}$$
+
+When performing inference for the parameters of a specific model, we can ignore this term, since it is constant wrt $\bm{\theta}$. However, this quantity plays a vital role when choosing between different models, it is also usefull for estimating the hyperparameters from data (an approach known as empirical Bayes).
+
+# ---------------
+
+# Credible intervals
+
+A posterior distribution is a high dimensional object that is hard to visualize and work with. A common way to summarize such a distribution is to compute a point estimate, such as the posterior mean or mode, and then to compute a __credible interval__, which quantifies the uncertainty associated with that estimate.
+
+__Central interval__ has $(1 - \alpha)/2$ mass in each tail. A problem with central intervals is that there might be points outside the central interval which have higher probability than the points that are inside. This motivates an alternative quantity known as the __highest posterior density__ or $HPD$ region which is a set of points which have a probability above some threshold.
+
+# Computational issues
+
+Given a likelihood $p(\mathcal{D} | \bm{\theta})$ and a prior $p(\bm{\theta} | \phi)$ with (fixed) hyperparameters $\phi$, we can compute the posterior $p(\bm{\theta} | \mathcal{D}, \phi)$ using Bayes' rule. However, actually performing this computation is usually intractable, expect for simple special cases, such as conjugate models, or models where all the latent variables come from a small finite set of possible values. We therefore need to approximate the posterior.
+
+## Grid approximation
+
+The simplest approach to approximate posterior inference is to partition the space of possible values for the unknowns into a finite set of possibilities, call them $\bm{\theta\_1, \ldots, \theta\_K}$ and then approximate the posterior by brute-force enumeration.
+
+## Quadratic (Laplace) approximation
+
+This method uses an optimization procedure to find the MAP estimate, and then approximates the curvature of the posterior at that point based on the Hessian.
+
+## Variational approximation
+
+__Variational inference (VI)__ is another optimization-based approach to posterior inference, but which has much more modeling flexibility (and thus can give a much more accurate approximation). 
+
+VI attempts to approximate an intractable probability distribution, such as $p(\bm{\theta} | \mathcal{D}, \phi)$, with one that is tractable $q(\bm{\theta})$.
+
+$$q^* = \text{argmin\ } D(q, p)$$
+
+where $Q$ is some tractable family of distributions. If we define $D$ to be the KL divergence, then we can derive a lower bound to the log marginal likelihood; this quantity is known as the __evidence lower bound__ or __ELBO__.
+
+## Markov Chain Monte Carlo (MCMC) approximation
+
+Although VI is fast, optimization-based method, it can give a biased approximation ot the posterior, since it is restricted to a specfic function form $q \in Q$. A more flexible approach is to use a non-parametric approximation in terms of a set of samples. This is called a __Monte Carlo approximation__ to the posterior. The key issue is how to create the posterior samples $\bm{\theta}^s \sim p(\bm{\theta} | \mathcal{D}, \phi)$ efficiently, without having to evaluate the normalization constant. A common approach to this problem is known as __Markov chain Monte Carlo__ or __MCMC__. If we augment this algorithm with gradient-based information, derived from $\nabla \text{log\ } p(\bm{\theta}, \mathcal{D} | \phi)$, we can significantly speed up the method; this is called __Hamiltonian Monte Carlo__ or __HMC__.
