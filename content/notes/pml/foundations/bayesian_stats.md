@@ -91,7 +91,7 @@ The posterior predictive is given by the following, known as the (compound) beta
 
 $$Bb(x | M, \widehat{\alpha}, \widehat{\beta}) \triangleq \binom{M}{x} \frac{B(x + \widehat{\alpha}, M - x + \widehat{\beta})}{B(\widehat{\alpha}, \widehat{\beta})}$$
 
-#### Marginal likelihood
+### Marginal likelihood
 
 The __marginal likelihood__ or __evidence__ for a model $\mathcal{M}$ is defined as
 
@@ -99,7 +99,58 @@ $$p(\mathcal{D | M}) = \int p(\bm{\theta} | \mathcal{M}) p(\mathcal{D} | \bm{\th
 
 When performing inference for the parameters of a specific model, we can ignore this term, since it is constant wrt $\bm{\theta}$. However, this quantity plays a vital role when choosing between different models, it is also usefull for estimating the hyperparameters from data (an approach known as empirical Bayes).
 
-# ---------------
+## The Dirichlet-multinomial model
+
+In this section we generalize to $K$-ary variables.
+
+### Likelihood
+
+Let $Y \sim \text{Cat}(\bm{\theta})$ be a discrete random variable drawn from a categorical distribution. The likelihood has the form
+
+$$p(\mathcal{D} | \bm{\theta}) = \prod\_{c = 1}^{C} \theta\_c^{N\_c}$$
+
+### Prior
+
+The conjugate prior for a categorical distribution is the __Dirichlet distribution__, which is a multivariate generalization of the beta distribution.
+
+The pdf of the Dirichlet is defined as follows:
+
+$$\text{Dir}(\bm{\theta} | \breve{\bm{\alpha}}) \triangleq \frac{1}{B(\breve{\bm{\alpha}})} \prod\_{k = 1}^{K} \theta\_{k}^{\breve{\alpha} - 1} \mathbb{I}(\bm{\theta} \in S\_K)$$
+
+where $B(\breve{\bm{\alpha}})$ is the multivariate beta function,
+
+$$B(\breve{\bm{\alpha}}) \triangleq \frac{ \prod\_{k=1}^{K} \Gamma (\breve{\alpha}\_k) }{ \Gamma( \sum\_{k=1}^{K} \breve{\alpha}\_k )}$$
+
+### Posterior
+
+We can combine the multinomial likelihood and Dirichlet prior to compute the posterior, as follows:
+
+$$
+\begin{aligned}
+p(\bm{\theta} | \mathcal{D}) & \propto p(\mathcal{D}|\bm{\theta})\text{Dir}(\bm{\theta} | \breve{\bm{\alpha}}) \\\\
+& = \left[ \prod\_k \theta\_k^{N\_k} \right] \left[ \prod\_k \theta\_k^{\breve{\alpha}\_{k} - 1} \right] \\\\
+& = \text{Dir} (\bm{\theta} | \breve{\alpha}\_1 + N\_1, \ldots, + \breve{\alpha}\_K + N\_K) \\\\
+& = \text{Dir} (\bm{\theta} | \widehat{\bm{\alpha}})
+\end{aligned}
+$$
+
+where $\widehat{\alpha}\_k$ are the parameters of the posterior. So we can see that the posterior can be computed by adding the empirical counts to the prior counts. 
+
+### Posterior predictive
+
+The posterior prediction distribution is given by
+
+$$p(y = k | \mathcal{D}) = \frac{ \tilde{\alpha}\_k }{ \sum\_{k^\prime} \widehat{\alpha}\_{k^\prime} }$$
+
+### Marginal likelihood
+
+The marginal likelihood for the Dirichlet-categorical model is given by
+
+$$p(\mathcal{D}) = \frac{ B(\mathbf{N} + \bm{\alpha}) }{ B(\bm{\alpha}) }$$
+
+where
+
+$$B(\bm{\alpha}) = \frac{ \prod\_{k=1}^{K} \Gamma( \alpha\_k ) }{ \Gamma( \sum\_k \alpha\_k ) }$$
 
 # Credible intervals
 
