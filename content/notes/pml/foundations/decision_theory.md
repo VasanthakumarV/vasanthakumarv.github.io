@@ -156,4 +156,40 @@ This is just the squared error of the predictive distribution compared to the tr
 
 # A/B testing
 
+Suppose you are trying to decide which version of a product is likely to sell more, or which version of a drug is likely to work better. Let us call the versions you are choosing between A and B, sometimes version A is called the __treatment__, and version B is called the __control__. To simplify the notation, we will refer to picking version A as choosing action 1, and picking version B as choosing action 0. We will call the resulting outcome from each action that you want to maximize the __reward__.
 
+A very common approach to such problems is to use an __A/B test__, in which you try both actions out for a while, by randomly assigning a different action to different subsets of the publication, and then you measure the results and pick the winner. This is sometimes called a "__test and roll__" problem, since you test which method is best, and then roll it out for the rest of the population.
+
+A key problem in A/B testing is to come up with a decision rule, or policy, for deciding which action is best, after obtaining potentially noisy results during the test phase. Another problem is to choose how many people to assign to the treat, $n\_1$, and how many to the control, $n\_0$.
+
+## A Bayesian approach
+
+We assume the $i$'th reward for action $j$ is given by $Y\_{ij} \sim \mathcal{N} (\mu\_j, \sigma\_j^2)$ for $i = 1:n\_j$ nad $j = 0:1$, where $j=1$ corresponds to the treatment (action !) and $j = 0$ corresponds to the control (action B). For simplicity we assume $\sigma^2$ are known. For the unknown $\mu\_j$ parameters (expected reward), we will use Gausian priors, $\mu\_j \sim \mathcal{N}(m\_j, \tau\_j^2)$. If we assign $n\_1$ people to the treatment and $n\_0$ to the control, then the expected reward in the testing phase is given by
+
+$$\mathbb{E}[R\_{test}] = n\_0m\_0 + n\_1m\_1$$
+
+The expected reward in the roll phase depends on the decision rule $\pi(\mathbf{y}\_1, \mathbf{y}\_0)$, which specifies which action to deploy, where $\mathbf{y}\_j = (y\_{1j}, \dots, y\_{n\_j, j})$ is the data from action $j$. We derive the opimal policy below, and then discuss some of its properties.
+
+### Optimal policy
+
+The optimal policy is to choose the action with the greater expected posterior mean reward. Applying Bayes' rule for Gaussians, we find that the corresponding posterior is given by
+
+$$p(\mu\_j | \mathbf{y}\_j, n\_j) = \mathcal{N}(\mu\_j | \widehat{m}\_j, \widehat{\tau}\_j^2)$$
+
+The optimal policy is given is
+
+$$\pi^*(\mathbf{y}\_1, \mathbf{y}\_0) = 
+\begin{cases}
+1 & \text{if\ } \mathbb{E}[\mu\_1 | \mathbf{y}\_1] \geq \mathbb{E}[\mu\_0 | \mathbf{y}\_0] \\\\
+0 & \text{if\ } \mathbb{E}[\mu\_1 | \mathbf{y}\_1] \lt \mathbb{E}[\mu\_0 | \mathbf{y}\_0]
+\end{cases}$$
+
+## Expected reward
+
+If the total population size is $N$, and we cannot reuse people from the testing phase, the expected reward from the roll stage is
+
+$$\mathbb{E}[R\_{roll}] = (N - n\_1 - n\_0) \left( m\_1 + e\Phi(\frac{e}{v}) + v \phi (\frac{e}{v}) \right)$$
+
+where $\phi$ is the Gaussian pdf, $\Phi$ is the Gaussian cdf, $e = m\_0 - m\_1$ and
+
+$$v = \sqrt{ \frac{\tau\_1^4}{\tau\_1^2 + \sigma\_1^2 / n\_1}  + \frac{\tau\_0^4}{ \tau\_0^2 + \sigma\_0^2 / n\_0 }}$$
