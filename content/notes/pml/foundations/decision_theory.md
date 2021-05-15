@@ -193,3 +193,37 @@ $$\mathbb{E}[R\_{roll}] = (N - n\_1 - n\_0) \left( m\_1 + e\Phi(\frac{e}{v}) + v
 where $\phi$ is the Gaussian pdf, $\Phi$ is the Gaussian cdf, $e = m\_0 - m\_1$ and
 
 $$v = \sqrt{ \frac{\tau\_1^4}{\tau\_1^2 + \sigma\_1^2 / n\_1}  + \frac{\tau\_0^4}{ \tau\_0^2 + \sigma\_0^2 / n\_0 }}$$
+
+# Bandit problems
+
+In A/B testing the decision maker tries two different actions a fixed number of times and then pciks the best action. We can obviously generalize this beyond two actions. More importantly, we can generalize this beyond a one-stage decision problem. In particular, suppose we allow the decision maker to try an action $a\_t$, observe the reward $r\_t$, and then decide what to do at time step $t + 1$, rather than waiting until $n\_1 + n\_0$ experiments are finished. This immediate feedback allows for adaptive policies that can result in much higher expected reward (lower regret). We have converted a one-stage decision problem into a __sequential decision problem__. There are many kinds of sequential decision problems, but here we consider the simplest kind, known as a __bandit problem__.
+
+In a bandit problem, there is an agent (decision maker) which gets to see some __state of nature__, which it uses to choose an __action__ from some __policy__, and then it finally receives a __reward__ sampled from the environment. In the finite horizon formulation, the goal is to maximize the expected cumulative reward.
+
+## Contextual bandits
+
+In the basic bandit problem, the state of nature $s\_t$ is fixed, meaning that the world does not change. However, the agent's internal model of the world does change, as it learns about which actions have highest reward. If we allow the state of the environment $s\_t$ to vary randomly over time, the model is known as __contextual bandit__, which is more flexible model.
+
+## Markov decision processes
+
+We can consider a generalization of the contextual bandit model, in which the next state $s\_{t+1}$ depends on $s\_t$ and the agent's action $a\_t$; this is called a __Markov decision process__ or __MDP__. This defines a __controlled Markov chain__.
+
+$$p(s\_{0:T} | a\_{0:T-1}) = p(s\_0) \prod\_{t=1}^{T} p(s\_t | s\_{t-1}, a\_{t-1})$$
+
+where $p(s\_t | s\_{t-1}, a\_{t-1})$ is known as the __state transition model__.
+
+## Exploration-exploitation tradeoff
+
+The fundamental difficulty in solving bandit problems is known as the __exploration--exploitation tradeoff__. This refers to the fact that the agent needs to try new state/action combinations (this is known as exploration) in order to learn the reward function $R(s, a)$ before it can exploit its knowledge by picking the predicted the predicted best action for each state.
+
+
+
+# Bayesian hypothesis testing
+
+Suppose we have two hypotheses or models, commonly called the __null hypothesis__, $M\_0$, and the __alternative hypothesis__, $M\_1$, and we want to know which one is more likely to be true. This is called __hypothesis testing__.
+
+If we use 0-1 loss, the optimal decision is to pick the alternate hypothesis iff $p(M\_1 | \mathcal{D}) / p(M\_0 | \mathcal{D}) \gt 1$. If we use uniform prior, the decision rule becomes: select $M\_1$ iff $p(\mathcal{D} | M\_1) / p(\mathcal{D} | M\_0) \gt 1$. This quantity, which is the ratio of marginal likelihoods of the two models, is known as __Bayes factor__:
+
+$$B\_{1,0} \triangleq \frac{ p(\mathcal{D} | M\_1) }{ p(\mathcal{D} | M\_0) }$$
+
+This is the likelihood ratio, except we integrate out the parameters, which allows us to compare models of different complexity, due to the Bayesian Occam's razor effect.
