@@ -1,0 +1,40 @@
+@import "variables";
+
+.accordion {
+  background-color: $nav-bg-color;
+  color: $link-color;
+	font-weight: bold;
+  cursor: pointer;
+  padding: 16px;
+	width: 100%;
+  border: 1px solid $border-color;
+	text-align: left;
+}
+
+.active, .accordion:hover {
+  background-color: $hover-bg-color; 
+}
+
+.panel {
+  padding: 0 16px;
+  display: none;
+	border: 1px solid $border-color;
+  overflow: hidden;
+}
+
+.panel a {
+  display: block;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: $link-color;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
