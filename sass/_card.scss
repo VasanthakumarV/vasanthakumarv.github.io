@@ -1,0 +1,21 @@
+@import "variables";
+
+.cards {
+	display: flex;
+	flex-direction: column;
+}
+
+.card {
+	background-color: $nav-bg-color;
+	padding: 0 16px;
+	margin-bottom: 16px;
+	border: 1px solid $border-color;
+}
+
+.card a {
+	font-size: 0.82rem;
+	float: inline-end;
+	margin: 15px 2px;
+	padding: 1px 4px;
+	border: 1px solid $link-color;
+}

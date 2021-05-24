@@ -11,14 +11,15 @@
 	text-align: left;
 }
 
-.active, .accordion:hover {
+.accordion:hover {
   background-color: $hover-bg-color; 
 }
 
 .panel {
   padding: 0 16px;
   display: none;
-	border: 1px solid $border-color;
+  border: 1px solid $border-color;
+  border-top: 0;
   overflow: hidden;
 }
 

@@ -37,6 +37,7 @@
         }
       }
 
+      window.addEventListener("load", setupAccordian);
       function setupAccordian() {
         document.querySelectorAll(".accordion").forEach(function(acc) {
           acc.addEventListener("click", function() {
@@ -56,7 +57,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
   </head>
 
-  <body onload="setupAccordian()">
+  <body>
     <nav id="topnav" class="topnav">
       <a href="/"
         {% if current_path == "/" %} class="navbar-selected" {% endif %}>
@@ -70,9 +71,9 @@
         {% if current_path is starting_with("/algorithms") %} class="navbar-selected" {% endif %}>
         Algorithms
       </a>
-      <a href="/questions"
-        {% if current_path is starting_with("/questions") %} class="navbar-selected" {% endif %}>
-        Q&A
+      <a href="/projects"
+        {% if current_path is starting_with("/projects") %} class="navbar-selected" {% endif %}>
+        Projects
       </a>
       <a href="javascript:void(0);" class="icon" onclick="snackbar()">
         ☰
