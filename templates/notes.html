@@ -7,19 +7,21 @@
 
   <br>
 
-  {% for subsection in section.subsections%}
-    {% set section = get_section(path=subsection) %}
-    <button class="accordion">{{section.title}}</button>
-    <div class="panel">
-      {% for subsubsection in section.subsections %}
-        {% set section = get_section(path=subsubsection) %}
-        <h3>{{ section.title }}</h3>
-        <ul>
-        {% for page in section.pages %}
-          <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>  
+  <div class="accordians">
+    {% for subsection in section.subsections %}
+      {% set section = get_section(path=subsection) %}
+      <button class="accordion">{{section.title}}</button>
+      <div class="panel">
+        {% for subsubsection in section.subsections %}
+          {% set section = get_section(path=subsubsection) %}
+          <h3>{{ section.title }}</h3>
+          <ul>
+          {% for page in section.pages %}
+            <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>  
+          {% endfor %}
+          </ul>
         {% endfor %}
-        </ul>
-      {% endfor %}
-    </div>
-  {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content %}

@@ -8,19 +8,14 @@
 <br>
 
 <div class="cards">
-  <div class="card">
-    <a href="google.com">git-repo</a>
-    <a href="google.com">live-demo</a>
-    <h3>Heading-place</h3>
-    <p>Placeholder content with gibberish with no meaning.</p>
-  </div>
-  <div class="card">
-    <h3>Heading-place</h3>
-    <p>Placeholder content with gibberish with no meaning.</p>
-  </div>
-  <div class="card">
-    <h3>Heading-place</h3>
-    <p>Placeholder content with gibberish with no meaning.</p>
-  </div>
+  {% for page in section.pages %}
+    <div class="card">
+      {% for link in page.extra.links %}
+        <a href={{ link.link }} target="_blank" class="label">{{ link.label }}</a>
+      {% endfor %}
+      <h3>{{page.title}}</h3>
+      {{ page.content | safe }}
+    </div>
+  {% endfor %}
 </div>
 {% endblock content %}

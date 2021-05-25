@@ -1,5 +1,10 @@
 @import "variables";
 
+.accordians {
+  margin: auto;
+  max-width: 70vw;
+}
+
 .accordion {
   background-color: $nav-bg-color;
   color: $link-color;
