@@ -39,7 +39,12 @@
 
       window.addEventListener("load", setupAccordian);
       function setupAccordian() {
-        document.querySelectorAll(".accordion").forEach(function(acc) {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
           acc.addEventListener("click", function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;

@@ -1,12 +1,14 @@
 +++
-title = "D3-examples"
+title = "D3-Examples"
 weight = 2
 
 [extra]
 links = [
-	{ label = "google", link = "google.com" },
-	{ label = "yahoo", link = "google.com" },
+	{ label = "github-link", link = "https://github.com/VasanthakumarV/d3-examples" },
+	{ label = "live-demo", link = "https://vasanthakumarv.github.io/d3-examples/" },
 ]
 +++
 
-Einops placeholder description.
+A showcase repository for hosting examples from [D3 for the impatient](https://github.com/janert/d3-for-the-impatient) book.
+
+The application is built using [seed](https://github.com/seed-rs/seed), a rust web front-end framework.

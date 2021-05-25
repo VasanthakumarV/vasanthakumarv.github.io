@@ -13,7 +13,7 @@
       {% for link in page.extra.links %}
         <a href={{ link.link }} target="_blank" class="label">{{ link.label }}</a>
       {% endfor %}
-      <h3>{{page.title}}</h3>
+      <h2>{{page.title}}</h2>
       {{ page.content | safe }}
     </div>
   {% endfor %}

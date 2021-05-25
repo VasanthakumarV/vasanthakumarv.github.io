@@ -2,7 +2,7 @@
 
 .accordians {
   margin: auto;
-  max-width: 70vw;
+  width: 90vw;
 }
 
 .accordion {
@@ -21,6 +21,7 @@
 }
 
 .panel {
+  background-color: $code-bg-color;
   padding: 0 16px;
   display: none;
   border: 1px solid $border-color;
@@ -44,3 +45,8 @@
   content: "\2212";
 }
 
+@media (min-width: 768px) {
+  .accordians {
+    width: 60vw;
+  }
+}
