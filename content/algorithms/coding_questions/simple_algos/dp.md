@@ -64,3 +64,36 @@ fn main() {
     dbg!(&output);
 }
 ```
+
+# Minimum number of coins for change
+
+Given an array of positive integers representing coin denominations and a single non-negative integer n representing a target amount of money, write a function that returns the smallest number of coins needed to make change for (to sum up to) that target amount using the given coin denominations.
+
+Note that you have access to an unlimited amount of coins. In other words, if the denominations are [1, 5, 10], you have access to an unlimited amount of 1s, 5s, and 10s.
+
+If it's impossible to make change for the target amount, return -1. 
+
+```rust
+fn min_num_of_coins<const N: usize>(n: usize, denoms: [usize; N]) -> isize {
+    let mut num_coins = vec![isize::MAX; n + 1];
+    num_coins[0] = 0;
+
+    denoms.iter().for_each(|denom| {
+        (0..=n).for_each(|amount| {
+            if *denom <= amount {
+                num_coins[amount] = std::cmp::min(num_coins[amount], num_coins[amount - denom] + 1);
+            }
+        });
+    });
+
+    if num_coins[n] != isize::MAX {
+        return num_coins[n];
+    }
+    -1
+}
+
+fn main() {
+    let output = min_num_of_coins(7, [1, 5, 10]);
+    dbg!(&output);
+}
+```
