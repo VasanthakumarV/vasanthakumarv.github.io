@@ -84,10 +84,40 @@ This is known as line search, since we are searching along the line defined by $
 
 We want to find optimization algorithms that converge quickly to a local optimum. For certain convex problems with bounded Lipschitz constant, one can show that gradient descent converges at a linear rate.
 
-# Momentum methods
+## Momentum methods
 
 Gradient descent can move very slowly along flat regions of the loss landscape, momentum methods can offer a solution for this.
 
-## Momentum
+### Momentum
 
+__Heavy ball__ or __momentum__ method moves faster along directions that were previously good, and slow along directions where gradient has suddenly changed.
 
+$$
+\begin{aligned}
+\mathbf{m}\_t &= \beta \mathbf{m}\_{t-1} + \mathbf{g}\_{t-1} \\\\
+\bm{\theta}\_t &= \bm{\theta}\_{t-1} - \eta\_t \mathbf{m}\_t
+\end{aligned}
+$$
+
+### Nesterov momentum
+
+One problem with the standard momentum method is that it may not slow down enough at the bottom of a valley, caussing oscillation. The __Nesterov accelerated gradient__ method includes an extrapolation step, as follows:
+
+$$
+\begin{aligned}
+\bm{\widetilde{\theta}}\_{t+1} & = \bm{\theta}\_t + \beta\_t (\bm{\theta}\_t - \bm{\theta}\_{t-1}) \\\\
+\bm{\theta}\_{t+1} & = \bm{\widetilde{\theta}}\_{t+1} - \eta\_t \nabla\ \mathcal{L}(\bm{\widetilde{\theta}}\_{t+1})
+\end{aligned}
+$$
+
+# Second-order methods
+
+Optimization algorithms that only use the gradients are cheap to compute, but they do not model the curvature of the space, and hence they can be slow to converge. __Second-order__ optimization methods incorporate curvature in various ways (e.g., via the Hessian), which may yield faster convergence.
+
+# Stochastic gradient descent
+
+The goal of __stochastic optimization__ is to minimize the average value of:
+
+$$\mathcal{L}(\bm{\theta}) = \mathbb{E}\_{q(\mathbf{z})} [ \mathcal{L}(\bm{\theta}, \mathbf{z}) ]$$
+
+where $\mathbf{z}$ is a random input to the objective, this could be a "noise" term, coming from the environment, or it could be a training example drawn randomly from the training set.
