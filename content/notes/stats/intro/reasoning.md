@@ -28,3 +28,13 @@ To calculate the probability of beliefs, we need to establish how many times mor
 $$P(H) = \frac{ O(H) }{ 1 + O(H) }$$
 
 Where $O(H)$ is the odds.
+
+## Combining probabilities
+
+Calculating the probability of two events occuring together using product rule
+
+$$P(A, B) = P(A) \times P(B)$$
+
+Sum rule for combining probabilities, to solve for overcounting in non-mutually exclusive events, sum rule uses the product rule
+
+$$P(A\ OR\ B) = P(A) + P(B) - P(A, B)$$
