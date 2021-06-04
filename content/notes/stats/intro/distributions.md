@@ -17,4 +17,12 @@ Binomial distribution is used to calculate the probability of a certain number o
 
 Probability Mass Function (pmf) for binomial distribution:
 
-$$B(k; n, p) = \binom{n}{k} \times p^k \times (1 - p)^{n - k}$$
+$$\text{B}(k; n, p) = \binom{n}{k} \times p^k \times (1 - p)^{n - k}$$
+
+# Beta distribution
+
+Beta distribution is used to estimate the probability of an event for which we have already observed a number of trials and the number of successful outcomes. For example, we would use it to estimate the probability of heads, when so far we have observed 100 tosses of a coin and 40 of those were heads.
+
+Probability density function of beta distribution:
+
+$$\text{Beta}(p, \alpha, \beta) = \frac{ p^{\alpha - 1} \times (1 - p)^{\beta-1} }{ \text{beta}(\alpha, \beta) }$$
