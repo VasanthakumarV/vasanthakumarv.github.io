@@ -1,9 +1,9 @@
 +++
-title = "Multiplication $Ax$ using Columns of $A$"
+title = "Multiplication"
 weight = 1
 +++
 
-# Introduction
+# Matrix-Vector multiplication 
 
 Mutiplication $Ax$ using columns of $A$,
 
@@ -49,3 +49,16 @@ $$\mathbf{A} = \mathbf{CR}$$
 $\mathbf{C}$ is the basis of $\mathbf{A}$, and $\mathbf{R}$ is the __row-reduced echelon form of $\mathbf{A}$__
 
 The big factorization for data science is the "SVD" of $A$, where the first factor $C$ has $r$ orthogonal columns and the second factor $R$ has  $r$ orthogonal rows.
+
+# Matrix-Matrix multiplication 
+
+Two ways to arrive at matrix-matrix multiplication,
+
+- Using inner products between rows and columns from $A$ and $B$ respectively
+- Using the outer product of the columns of $A$ with the rows of $B$, and adding together all the outer products (rank one matrices)
+
+Both involve $mnp$ multiplications.
+
+## Insights from Column times Row
+
+Outer product helps us look for the important part of matrix $A$, we do not usually want the biggest number in $A$, what we want is the largest piece of $A$. __And those pieces are the rank one matrices__.
