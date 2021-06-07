@@ -1,5 +1,5 @@
 +++
-title = "Multiplication"
+title = "Multiplication and Subspaces"
 weight = 1
 +++
 
@@ -62,3 +62,19 @@ Both involve $mnp$ multiplications.
 ## Insights from Column times Row
 
 Outer product helps us look for the important part of matrix $A$, we do not usually want the biggest number in $A$, what we want is the largest piece of $A$. __And those pieces are the rank one matrices__.
+
+# Four subspaces 
+
+Every $m \times n$ matrix leads to four subspaces - two subspaces of $\mathbb{R}^m$ and two more of $\mathbb{R}^n$.
+
+- The __column space__ contains all combinations of the columns of $A$
+- The __row space__ contains all combinations of the columns of $A^\text{T}$
+- The __nullspace__ contains all solutions $x$ to $Ax = 0$ 
+- The __left nullspace__ contains all solutions $y$ to $A^\text{T}y = 0$
+
+__$r$ independent equations $Ax = 0$ have $n - r$ independent solutions__
+
+- Dimension of row space, $r$
+- Dimension of nullspace, $n - r$
+- Dimension of column space, $r$
+- Dimension of nullspace of $A^\text{T}$, $m - r$
