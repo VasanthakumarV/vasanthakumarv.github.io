@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Probabilistic models
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#bernoulli-and-binomial-distributions">Bernoulli and Binomial distributions</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#categorical-and-multinomial-distributions">Categorical and Multinomial distributions</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#log-sum-exp-trick">Log-sum-exp trick</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#univariate-gaussian-normal-distribution">Univariate Gaussian (Normal) distribution</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#cumulative-distribution-function">Cumulative distribution function</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#probability-density-function">Probability density function</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#regression">Regression</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#popularity-of-gaussian">Popularity of Gaussian</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#other-common-univariate-distributions">Other common univariate distributions</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#student-t-distribution">Student t distribution</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#cauchy-distribution">Cauchy distribution</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#laplace-distribution">Laplace distribution</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#beta-distribution">Beta distribution</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#gamma-distribution">Gamma distribution</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#multivariate-gausssian-normal-distribution">Multivariate Gausssian (Normal) distribution</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#marginals-and-conditionals-of-mvn">Marginals and conditionals of MVN</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#linear-gaussian-systems">Linear Gaussian systems</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#mixture-models">Mixture models</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#gaussian-mixture-models">Gaussian mixture models</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#gaussian-scale-mixtures">Gaussian scale mixtures</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#probabilistic-graphical-models">Probabilistic graphical models</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/probabilistic-models/#inference">Inference</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <p>Here we concentrate on the output probability distribution $p(y|\theta)$, we will go through the building blocks used to construct probabilistic models.</p>
+<h1 id="bernoulli-and-binomial-distributions">Bernoulli and Binomial distributions</h1>
+<p><strong>Bernoulli distribution</strong> is used to model binary events.</p>
+<p>$$\text{Ber}(y|\theta) \triangleq \theta^y(1 - \theta)^{1-y} = 
+\begin{cases}
+1 - \theta &amp; \text{if } y = 0 \\
+\theta &amp; \text{if } y = 1
+\end{cases}$$</p>
+<p>where $0 \le \theta \le 1$ is the probability that $y = 1$.</p>
+<p>On tossing a coin $N$ times, if $s$ denotes the number of heads, the distribution of $s$ is given by the binomial distribution:</p>
+<p>$$\text{Bin}(s|N,\theta) \triangleq \binom{N}{s} \theta^s (1-\theta)^{N-s}$$</p>
+<p>where,</p>
+<p>$$\binom{N}{s} \triangleq \frac{N!}{(N-s)!s!}$$</p>
+<p>is the <strong>binomial coefficient</strong>.</p>
+<h1 id="categorical-and-multinomial-distributions">Categorical and Multinomial distributions</h1>
+<p>In <strong>categorical distribution</strong> the parameters are constrained so that $0 \le \theta_c \le 1$ and they sum up to 1. $\bold{y}$ is a <em>one-hot vector</em>, the distribution is given by:</p>
+<p>$$\text{Cat}(\bold{y}|\mu) \triangleq \prod_{c=1}^{C} \theta_c^{y_c}$$</p>
+<p>On rolling a C-sided dice $N$ times, $\bold{s}$ denotes the number of times each face showed up, the <strong>multinomial distribution</strong> is given by:</p>
+<p>$$\text{Mu}(\bold{s}|N,\bold{\mu}) \triangleq \binom{N}{s_1...s_C} \prod_{c=1}^{C} \theta_c^{s_c}$$</p>
+<p>where $\theta_c$ is the probability that $c$ shows up, and</p>
+<p>$$\binom{N}{s_1..s_C} \triangleq \frac{N!}{s_1!s_2!...s_C!}$$</p>
+<p>is the <strong>multinomial coefficient</strong>, which is the number of ways to divide a set of size $N$ in subsets.</p>
+<h2 id="log-sum-exp-trick">Log-sum-exp trick</h2>
+<p>In softmax distribution, the normalized probability is given by:</p>
+<p>$$p_c = \frac{e^{a_c}}{Z(\bold{a})} = \frac{e^{a_c}}{\sum_{c^`=1}^C e^{a_{c^`}}}$$</p>
+<p>where $\bold{a}$ are the logits, we might encounter numerical problems when computing $Z$, like $\text{np.exp(1000)=inf}$ and also $\text{np.exp(-1000)=0}$, to avoid numerical problems, we can use the following:</p>
+<p>$$\text{log} \sum_{c=1}^C \text{exp}(a_c) = m + \text{log} \sum_{c=1}^C \text{exp}(a_c - m)$$</p>
+<p>It is common to use $m = max_c a_c$, which ensures that the largest value being exponentiated will be zero.</p>
+<h1 id="univariate-gaussian-normal-distribution">Univariate Gaussian (Normal) distribution</h1>
+<h2 id="cumulative-distribution-function">Cumulative distribution function</h2>
+<p>We represent the cumulative distribution function (cdf) of a random variable $Y$ as:</p>
+<p>$$P(y) \triangleq \text{Pr}(Y \le y)$$</p>
+<p>The capital $P$ represents cdf, the probability in an interval is as follows:</p>
+<p>$$\text{Pr}(a &lt; Y \le b) = P(b) - P(a)$$</p>
+<p>The cdf of gaussian is defined as,</p>
+<p>$$\phi(y;\mu,\sigma^2) \triangleq \int_{-\infty}^{y}\mathcal{N}(z|\mu,\sigma^2)dz$$</p>
+<p>where $z = (y-\mu) / \sigma$</p>
+<h2 id="probability-density-function">Probability density function</h2>
+<p>Probability density function or pdf is the derivative of the cdf:</p>
+<p>$$p(y) \triangleq \frac{d}{dy}P(y)$$</p>
+<p>The pdf of the Gaussian is given by:</p>
+<p>$$\mathcal{N}(y|\mu,\sigma^2) \triangleq \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2\sigma^2}(y-\mu)^2}$$</p>
+<p>Using pdf to compute the mean or expected value of the distribution:</p>
+<p>$$\mathbb{E}[Y] \triangleq \int_y yp(y)dy$$</p>
+<p>Using pdf to compute the variance of the distribution:</p>
+<p>$$\mathbb{V}[Y] \triangleq \mathbb{E}[(Y - \mu)^2] = \mathbb{E}[Y^2] - \mu^2$$</p>
+<h1 id="regression">Regression</h1>
+<p>We have considered unconditional gaussian distribution so far, sometimes it is useful to make the parameters functions of some input variables.</p>
+<p>$$p(y|x;\theta) = \mathcal{N}(y|f_{\mu}(x;\theta), f_{\sigma}(x;\theta)^2)$$</p>
+<p>If we assume the variance to be fixed and independent of the input, it is called <strong>homoscedastic regresion</strong>. Furthermore it is common to assume the mean to be a linear function of the input, the resulting model is called <strong>linear regression</strong>:</p>
+<p>$$p(y|x;\theta) = \mathcal{N}(y|\bold{w}_{\mu}^\mathsf{T}\bold{x} + b, \sigma^2)$$</p>
+<h2 id="popularity-of-gaussian">Popularity of Gaussian</h2>
+<p>The Gaussian distribution is the most widely used distribution in statistics and machine learning. The two parameters (mean and variance) are easy to interpret. Central limit theorem states that the sums of independent random variables have an approximately Gaussian distribution. Makes fewer assumptions. Easy to implement, but highly effective.</p>
+<h1 id="other-common-univariate-distributions">Other common univariate distributions</h1>
+<h2 id="student-t-distribution">Student t distribution</h2>
+<p>Gaussian distribution is sensitive to outliers, a robust alternative to Gaussian is Student distribution. Its pdf is as follows:</p>
+<p>$$\mathcal{T}(y|\mu,\sigma^2,\gamma) \propto \left[ 1 + \frac{1}{\gamma} \left( \frac{y-\mu}{\sigma}^2 \right) \right]^{-(\frac{\gamma+1}{2})}$$</p>
+<p>where $\mu$ is the mean, $\sigma &gt; 0$ is the scale parameter (not the standard deviation), and $\gamma &gt; 0$ is callled the degrees of freedom (better term would be <em>degree of normality</em>, since large values of $\gamma$ make the distribution act like a Gaussian).</p>
+<p>Student distribution has heavy tails, which makes it robust to outliers.</p>
+<h2 id="cauchy-distribution">Cauchy distribution</h2>
+<p>If $\gamma = 1$, the Student distribution is known as Cauchy or Lorentz distribution. It has heavy tails compared to Gaussian. Its pdf is defined by:</p>
+<p>$$\mathcal{C}(x|\mu,\gamma) = \frac{1}{\gamma \pi} \left[ 1 + \left( \frac{x-\mu}{\gamma} \right)^2 \right]^{-1}$$</p>
+<h2 id="laplace-distribution">Laplace distribution</h2>
+<p>Another distribution with heavy tails, also known as the double sided exponential distribution. It has the following pdf:</p>
+<p>$$\text{Lap}(y|\mu,b) \triangleq \frac{1}{2b} \text{exp} \left( - \frac{|y-\mu|}{b} \right)$$</p>
+<h2 id="beta-distribution">Beta distribution</h2>
+<p>Beta distribution has support over the interval $[0,1]$ and is defined as follows:</p>
+<p>$$\text{Beta}(x|a,b) = \frac{1}{B(a,b)} x^{a-1} (1-x)^{b-1}$$</p>
+<p>where $B(a,b)$ is the beta function, defined by:</p>
+<p>$$B(a,b) \triangleq \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$$</p>
+<p>where $\Gamma(a)$ is the Gamma function defined by:</p>
+<p>$$\Gamma(a) \triangleq \int_0^{\infty} x^{a-1} e^{-x} dx$$</p>
+<p>We require $a,b &gt; 0$ to ensure the distribution is integrable. If $a = b = 1$ we get uniform distribution; if $a$ and $b$ are both less than 1, we get a bimodal distribution; if $a$ and $b$ are both greater than 1, we get unimodal distribution.</p>
+<h2 id="gamma-distribution">Gamma distribution</h2>
+<p>Gamma distribution is a flexible distribution for positive real valued random variables, $x &gt; 0$. It is defined in terms of two parameters, called the shape $a&gt;0$ and the rate $b&gt;0$:</p>
+<p>$$\text{Ga}(x|a,b) \triangleq \frac{b^a}{\Gamma(a)} x^{a-1} e^{-xb}$$</p>
+<p>Sometimes the distribution is parameterized in terms of the shape $a$ and the scale $s=1/b$.</p>
+<p>There are several distributions which are special cases of Gamma distribution.</p>
+<h3 id="exponential-distribution">Exponential distribution</h3>
+<p>The distribution describes the time between events in a Poisson process (a process in which events occur continuously and independently at a constant average rate $\lambda$).</p>
+<p>$$\text{Expon}(x|\lambda) \triangleq \text{Ga}(x|a=1,b=\lambda)$$</p>
+<h3 id="chi-squared-distribution">Chi-squared distribution</h3>
+<p>This is the distribution of the sum of squared Gaussian random variables.</p>
+<h3 id="inverse-gamma-distribution">Inverse Gamma distribution</h3>
+<p>This is the distribution of $Y = 1/X$ assuming $X \sim \text{Ga}(a,b)$.</p>
+<h1 id="multivariate-gausssian-normal-distribution">Multivariate Gausssian (Normal) distribution</h1>
+<p>The multivariate normal density is defined as:</p>
+<p>$$\mathcal{N}(\bold{y}|\boldsymbol{\mu},\bold{\Sigma}) \triangleq \frac{1}{(2\pi)^{D/2} |\bold{\Sigma}|^{1/2}} \text{exp} \left[ -\frac{1}{2} (\bold{y}-\boldsymbol{\mu})^\mathsf{T} \bold{\Sigma}^{-1} (\bold{y}-\boldsymbol{\mu}) \right]$$</p>
+<p>where $\boldsymbol{\mu} = \mathbb{E}[\bold{y}] \in \mathbb{R}^D$ is the mean vector, $\bold{\Sigma} = \text{Cov}[\bold{y}]$ is the $D\ \times\ D$ covariance matrix, it is defined as:</p>
+<p>$$\text{Cov}[\bold{y}] \triangleq \mathbb{E}\left[ (\bold{y} - \mathbb{E}[\bold{y}])(\bold{y}-\mathbb{E}[\bold{y}])^\mathsf{T} \right]$$</p>
+<p>$$
+=
+\begin{pmatrix}
+\mathbb{V}[Y_1] &amp; \text{Cov}[Y_1,Y_2] &amp; ... &amp; \text{Cov}[Y_1,Y_D] \\
+\text{Cov}[Y_2,Y_1] &amp; \mathbb{V}[Y_2] &amp; ... &amp; \text{Cov}[Y_2,Y_D] \\
+\text{Cov}[Y_D,Y_1] &amp; \text{Cov}[Y_D,Y_2] &amp; ... &amp; \mathbb{V}[Y_D]
+\end{pmatrix}
+$$</p>
+<p>where
+$$\text{Cov}[Y_i,Y_j] \triangleq \mathbb{E}[(Y_i-\mathbb{E}[Y_i])(Y_j-\mathbb{E}[Y_j])] = \mathbb{E}[Y_iY_j] - \mathbb{E}[Y_i]\mathbb{E}[Y_j]$$</p>
+<p>$$\mathbb{V}[Y_i] = \text{Cov}[Y_i,Y_i]$$</p>
+<p>Another important result,</p>
+<p>$$\mathbb{E}[\bold{y}\bold{y}^\mathsf{T}] = \bold{\Sigma} + \boldsymbol{\mu}\boldsymbol{\mu}^\mathsf{T}$$</p>
+<p>In 2d MVN is known as <strong>bivariate Gaussian</strong> distribution. Its pdf can be expressed as $\bold{y} \sim \mathcal{N}(\boldsymbol{\mu}\bold{\Sigma})$, where $\bold{y} \in \mathbb{R}^2$, $\boldsymbol{\mu} \in \mathbb{R}^2$ and</p>
+<p>$$\bold{\Sigma} = 
+\begin{pmatrix}
+\sigma_1^2 &amp; \sigma_{12}^2 \\
+\sigma_{21}^2 &amp; \sigma_2^2
+\end{pmatrix}
+=
+\begin{pmatrix}
+\sigma_1^2 &amp; \rho\sigma_1\sigma_2 \\
+\rho\sigma_1\sigma_2 &amp; \sigma_2^2
+\end{pmatrix}
+$$</p>
+<p>where $\rho$ is the <strong>correlation coefficient</strong>, it is defined by:</p>
+<p>$$\text{corr}[X,Y] \triangleq \frac{\sigma_{12}^2}{\sigma_1\sigma_2}$$</p>
+<p>We can show that $-1 \le \text{corr}[X,Y] \le 1$, using <em>Cauchy-Schwarz inequality</em> and independence of random variables.</p>
+<h2 id="marginals-and-conditionals-of-mvn">Marginals and conditionals of MVN</h2>
+<p>Consider two vectors of random variables $\mathbf{y}_1$ and $\mathbf{y}_2$, where $\mathbf{y}_2$ are the variables of interest, and $\mathbf{y}_1$ are called nuisance variables. The marginal distribution of $\mathbf{y}_2$ can be computed by integrating out $\mathbf{y}_1$ as follows:</p>
+<p>$$p(\mathbf{y}_2) = \int \mathcal{N} (\mathbf{y} | \bm{\mu, \Sigma}) d\mathbf{y}_1 = \mathcal{N}( \mathbf{y}_2 | \bm{\mu}_2, \bm{\Sigma}_{22} )$$</p>
+<p>Now suppose we observe the value of $\mathbf{y}_2$, and we want to predict the value of $\mathbf{y}_1$ conditional on this observation. That is, we want to transform the prior distribution $p(\mathbf{y}_1)$, which represents our beliefs about the values of $\mathbf{y}_1$ before we have seen any obervations, into the posterior distribution $p(\mathbf{y}_1 | \mathbf{y}_2)$, which represents our beliefs about the values of $\mathbf{y}_1$ after (posterior to) seeing $\mathbf{y}_2$.</p>
+<p>$$p(\mathbf{y}_1 | \mathbf{y}_2) = \mathcal{N}( \mathbf{y}_1 | \bm{\mu}_1 + \bm{\Sigma}_{12}\bm{\Sigma}_{22}^{-1}(\mathbf{y}_2 - \bm{\mu}_2), \bm{\Sigma}_{11} - \bm{\Sigma}_{12}\bm{\Sigma}_{22}^{-1}\bm{\Sigma}_{21} )$$</p>
+<p>Note that the posterior mean is a linear function of $\mathbf{y}_2$, but the posterior covariance is independent of $\mathbf{y}_2$.</p>
+<h1 id="linear-gaussian-systems">Linear Gaussian systems</h1>
+<p>Let $\mathbf{z} \in \mathbb{R}^D$ be the vector of unknown values, $\mathbf{y} \in \mathbb{R}^K$ be its noisy observation, we assume these variables are related by the following joint distribution:</p>
+<p>$$p(\mathbf{z}) = \mathcal{N}(\mathbf{z} | \bm{\mu_z, \Sigma_z})$$
+$$p(\mathbf{y | z}) = \mathcal{N}(\mathbf{y} | \mathbf{Wz + b, \Sigma_y})$$</p>
+<p>The corresponding joint distribution $p(\mathbf{z}, \mathbf{y}) = p(\mathbf{z})p(\mathbf{y | z})$, is a $D + K$ dimensional Gaussian.</p>
+<p>By conditioning on $\mathbf{y}$, we can compute the posterior $p(\mathbf{z|y})$ using Bayes' rule for Gaussians, which is as follows:</p>
+<p>$$p(\mathbf{z|y}) = \frac{p(\mathbf{y|z}) p(\mathbf{z})}{p(\mathbf{y})} = \mathcal{N}(\mathbf{z}| \bm{\mu}_{z|y}, \bm{\Sigma}_{z|y})$$</p>
+<h1 id="mixture-models">Mixture models</h1>
+<p>One way to create more complex probability model is to take a convex combination of simple distributions. This is called mixture models. This has the form:</p>
+<p>$$p(\mathbf{y} | \bm{\theta}) = \sum_{k=1}^{K} \pi_k p_k (\mathbf{y})$$</p>
+<h2 id="gaussian-mixture-models">Gaussian mixture models</h2>
+<p>A <strong>Gaussian mixture model</strong> or <strong>GMM</strong>, is defined as follows:</p>
+<p>$$p(\mathbf{y}) = \sum_{k=1}^{K} \pi_k \mathcal{N}( \mathbf{y} | \bm{\mu}_k, \bm{\Sigma}_k )$$</p>
+<p>GMMs are often used for unsupervised clustering of real-valued data samples $\mathbf{y}_n \in \mathbb{R}^D$. This works in two stages. First we fit the model e.g., by computing the MLE $\hat{\bm{\theta}} = \text{argmax}\ \text{log}\ p(\mathcal{D}|\bm{\theta})$, where $\mathcal{D} = \{\mathbf{y}_n : n = 1 : N\}$. Then we associate each data point $\mathbf{y}_n$ with discrete latent or hidden variable $z_n \in \{ 1, \ldots, K \}$ which specifies the identity of the mixture component or cluster which was used to generate $\mathbf{y}_n$. These latent identities are unknown, but we can compute a posterior over them using Bayes rule:</p>
+<p>$$r_{nk} \triangleq p(z_n = k|\mathbf{x}_n, \bm{\theta}) = \frac{p(z_n = k | \bm{\theta}) p(\mathbf{x}_n | z_n = k, \bm{\theta})}{\sum_{k^{\prime}=1}^{K} p(z_n = k^{\prime}|\bm{\theta}) p(\mathbf{x}_n | z_n = k^{\prime}, \bm{\theta})}$$</p>
+<p>The quantity $r_{nk}$ is called the <strong>responsibility</strong> of cluster $k$ for data point $n$. Given the responsibilities, we can compute the most probable cluster assignment. This is known as <strong>hard clustering</strong>. (If we use the responsibilities to fractionally assign each data point to different clusters, it is called <strong>soft clustering</strong>).</p>
+<h2 id="gaussian-scale-mixtures">Gaussian scale mixtures</h2>
+<p>A <strong>Gaussian scale mixtures</strong> <strong>GSM</strong> is like an &quot;infinite&quot; mixture of Gaussians, each with a different scale (variance). More precisely, let $x = \epsilon z$, where $z \sim \mathcal{N}(0, \sigma_0^2)$ and $\epsilon \sim p(\epsilon)$. We can think of this as multiplicative noise being applied to the Gaussian rv $z$. We have $x | \epsilon \sim \mathcal{N}(0, \epsilon^2\sigma_0^2)$. Marginalizing out the scale $\epsilon$ gives:</p>
+<p>$$p(x) = \int \mathcal{N} (x | 0, \sigma_0^2 \epsilon^2) p(\epsilon^2) d\epsilon$$</p>
+<h1 id="probabilistic-graphical-models">Probabilistic graphical models</h1>
+<p>Joint distributions over sets of many random variables can be defined, with the key assumption that some variables are conditionally independent. We will represent our CI assumption using graphs.</p>
+<p>A <strong>probabilistic graphical model</strong> or <strong>PGM</strong> is a joint probability distribution that uses a graph structure to encode conditional assumptions. When the graph is directed acyclic graph, the model is sometimes called a Bayesian network, although there is nothing inherently Bayesian about such models.</p>
+<p>The basic idea in PGMs is that each node in the graph represents a random variable, and each edge represents a direct dependency. More precisely, each lack of edge represents a conditional independency.</p>
+<p>$$Y_i \perp \mathbf{Y}_{\text{pred}(i) \backslash \text{pa}(i)} | \mathbf{Y}_{\text{pa}(i)}$$</p>
+<p>where $\text{pa}(i)$ are the parents of node $i$, and $\text{pred}(i)$ are the predecessors of node $i$ in the ordering. (This is called the ordered Markov property). Consequently we represent the joint distribution as follows:</p>
+<p>$$p(\mathbf{Y}_{1:V}) = \prod_{i=1}^{V} p(Y_i | \mathbf{Y}_{\text{pa}(i)})$$</p>
+<p>where $V$ is the number of nodes in the graph.</p>
+<h2 id="inference">Inference</h2>
+<p>A PGM defines a joint probabiity distribution. We can therefore use the rules of marginalization and conditioning to compute $p(\mathbf{Y}_i | \mathbf{Y}_j = y_j)$ for any sets of variables $i$ and $j$.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

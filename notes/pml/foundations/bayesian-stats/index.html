@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Bayesian statistics
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#introduction">Introduction</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#conjugate-priors">Conjugate priors</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#the-beta-binomial-model">The beta-binomial model</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#the-dirichlet-multinomial-model">The Dirichlet-multinomial model</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#the-gaussian-gaussian-model">The Gaussian-Gaussian model</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#credible-intervals">Credible intervals</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#computational-issues">Computational issues</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#grid-approximation">Grid approximation</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#quadratic-laplace-approximation">Quadratic (Laplace) approximation</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#variational-approximation">Variational approximation</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/bayesian-stats/#markov-chain-monte-carlo-mcmc-approximation">Markov Chain Monte Carlo (MCMC) approximation</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introduction">Introduction</h1>
+<p>So far, we have discussed several ways to estimate parameters from data, however, these approaches ignore any uncertainty in the estimates, which can be important. In this section we will use <strong>posterior distribution</strong> to represent our uncertainty, this is the approach adopted in the field of Bayesian statistics. To compute the posterior, we start with a <strong>prior</strong> distribution $p(\bm{\theta})$, which reflects what we know before seeing the data. We then define a <strong>likelihood function</strong> $p(\mathcal{D}|\bm{\theta})$, which reflects the data we expect to see for each setting of the parameters.</p>
+<p>$$p(\bm{\theta} | \mathcal{D}) = \frac{p(\bm{\theta})p(\mathcal{D}|\bm{\theta})}{(\mathcal{D})} = \frac{p(\bm{\theta})p(\mathcal{D}|\bm{\theta})}{\int p(\bm{\theta}^\prime)p(\mathcal{D}|\bm{\theta}^\prime)d\bm{\theta}^\prime}$$</p>
+<p>The denominator $p(\mathcal{D})$ is called the <strong>marginal likelihood</strong>, this is ignored when we just want to infer the relative probabilities of $\bm{\theta}$ values.</p>
+<p>Once we computed the posterior over the parameters, we can compute the <strong>posterior predictive distribution</strong> over outputs given inputs by <strong>marginalizing out</strong> the unknown parameters.</p>
+<p>$$p(\mathbf{y|x}, \mathcal{D}) = \int p(\mathbf{y|x,\bm{\theta}})p(\bm{\theta}|\mathcal{D})d\bm{\theta}$$</p>
+<h1 id="conjugate-priors">Conjugate priors</h1>
+<p>In this section we consider a set of prior and likelihood paris for which we can compute the posterior in closed form. In particular, we will use priors that are &quot;conjugate&quot; to the likelihood, we say that a prior is a conjugate prior for a likelihood function if the posterior is in the same parameterized family as the prior.</p>
+<h2 id="the-beta-binomial-model">The beta-binomial model</h2>
+<p>We toss a coin $N$ times, and we want to infer the probability of heads.</p>
+<h3 id="binomial-likelihood">Binomial likelihood</h3>
+<p>We consider Binomial likelihood model, in which we perform $N$ trials and observe $y$ number of heads. The likelihood has the following form:</p>
+<p>$$p(\mathcal{D} | \theta) = \binom{N}{y} \theta^y (1 - \theta)^{N - y}$$</p>
+<p>The scaling factor $\binom{N}{y}$ is independent of $\theta$, so we can ignore it.</p>
+<h3 id="prior">Prior</h3>
+<p>To simplify the computations, we will assume that the prior is a conjugate prior of the likelihood function, this means that the posterior is in the same parameterized family as the prior.</p>
+<p>To ensure this property when using Binomial likelihood, we should use a prior of the following form:</p>
+<p>$$p(\theta) \propto \theta^{\breve{\alpha} - 1} (1 - \theta)^{\breve{\beta} - 1} = \text{Beta}(\theta | \breve{\theta}, \breve{\beta})$$</p>
+<h3 id="posterior">Posterior</h3>
+<p>If we multiply the Binomial likelihood with the beta prior we get a beta posterior:</p>
+<p>$$
+\begin{aligned}
+p(\theta | \mathcal{D}) &amp; = \theta^{N_1}(1 - \theta)^{N_0} \theta^{\breve{\alpha} - 1}(1 - \theta)^{\breve{\beta} - 1} \\
+&amp; \propto \text{Beta}(\theta | \breve{\alpha} + N_1, \breve{\beta} + N_0) \\
+&amp; = \text{Beta} (\theta | \widehat{\alpha}, \widehat{\beta})
+\end{aligned}
+$$</p>
+<p>where $\widehat{\alpha}$ and $\widehat{\beta}$ are the parameters of the posterior, the parameters of the prior are the hyper-parameters.</p>
+<h4 id="posterior-mode-map-estimate">Posterior mode (MAP estimate)</h4>
+<p>The most probable value of $\theta$ is given by the MAP estimate</p>
+<p>$$\widehat{\theta} = \underset{\theta}{\text{arg\ max\ log\ }} p(\theta | \mathcal{D})$$</p>
+<p>One can show that this is given by</p>
+<p>$$\widehat{\theta}_{\text{map}} = \frac{\breve{\alpha} + N_1 - 1}{\breve{\alpha} + N_1 -1 + \breve{\beta} + N_0 - 1}$$</p>
+<h4 id="posterior-mean">Posterior mean</h4>
+<p>The posterior mode can be a poor summary of the posterior, since it corresponds to a single point. The posterior mean is a more robust estimate, since it integrates over the whole space.</p>
+<p>If $p(\theta | \mathcal{D}) = \text{Beta}(\theta | \widehat{\alpha}, \widehat{\beta})$, then the posterior mean is given by</p>
+<p>$$\bar{\theta} \triangleq \mathbb{E}[\theta | \mathcal{D}] = \frac{\widehat{\alpha}}{\widehat{\beta} + \widehat{\alpha}}$$</p>
+<h4 id="posterior-variance">Posterior variance</h4>
+<p>To capture some notion of uncertainty in our estimate, a common approach is to compute the standard error of our estimate, which is just the posterior standard deviation:</p>
+<p>$$\text{se}(\theta) = \sqrt{\mathbb{V}[\theta|\mathcal{D}]}$$</p>
+<p>In the case of the Bernoullli model, we we showed that the posterior is a beta distribution, the variance of the beta posterior is given by</p>
+<p>$$\mathbb{V}[\theta | \mathcal{D}] = \frac{\widehat{\alpha}\widehat{\beta}}{ (\widehat{\alpha} +\widehat{\beta})^2 (\widehat{\alpha} + \widehat{\beta} + 1) }$$</p>
+<h4 id="posterior-predictive">Posterior predictive</h4>
+<p>Suppose we want to predict future observations. A very common approach is to first compute an estimate of the parameters based on training data, $\widehat{\bm{\theta}}(\mathcal{D})$, and then plug that parameter back into the model and use $p(y|\widehat{\bm{\theta}})$ to predict the future, this is called a <strong>plug-in approximation</strong>. However, this can result in overfitting.</p>
+<p>One solution to this is to compute a MAP estimate, and plug that in. Here we discuss a fully Bayesian solution, in which we marginalize out $\theta$.</p>
+<p>The posterior predictive is given by the following, known as the (compound) beta-binomial distribution:</p>
+<p>$$Bb(x | M, \widehat{\alpha}, \widehat{\beta}) \triangleq \binom{M}{x} \frac{B(x + \widehat{\alpha}, M - x + \widehat{\beta})}{B(\widehat{\alpha}, \widehat{\beta})}$$</p>
+<h3 id="marginal-likelihood">Marginal likelihood</h3>
+<p>The <strong>marginal likelihood</strong> or <strong>evidence</strong> for a model $\mathcal{M}$ is defined as</p>
+<p>$$p(\mathcal{D | M}) = \int p(\bm{\theta} | \mathcal{M}) p(\mathcal{D} | \bm{\theta}, \mathcal{M}) d\bm{\theta}$$</p>
+<p>When performing inference for the parameters of a specific model, we can ignore this term, since it is constant wrt $\bm{\theta}$. However, this quantity plays a vital role when choosing between different models, it is also usefull for estimating the hyperparameters from data (an approach known as empirical Bayes).</p>
+<h2 id="the-dirichlet-multinomial-model">The Dirichlet-multinomial model</h2>
+<p>In this section we generalize to $K$-ary variables.</p>
+<h3 id="likelihood">Likelihood</h3>
+<p>Let $Y \sim \text{Cat}(\bm{\theta})$ be a discrete random variable drawn from a categorical distribution. The likelihood has the form</p>
+<p>$$p(\mathcal{D} | \bm{\theta}) = \prod_{c = 1}^{C} \theta_c^{N_c}$$</p>
+<h3 id="prior-1">Prior</h3>
+<p>The conjugate prior for a categorical distribution is the <strong>Dirichlet distribution</strong>, which is a multivariate generalization of the beta distribution.</p>
+<p>The pdf of the Dirichlet is defined as follows:</p>
+<p>$$\text{Dir}(\bm{\theta} | \breve{\bm{\alpha}}) \triangleq \frac{1}{B(\breve{\bm{\alpha}})} \prod_{k = 1}^{K} \theta_{k}^{\breve{\alpha} - 1} \mathbb{I}(\bm{\theta} \in S_K)$$</p>
+<p>where $B(\breve{\bm{\alpha}})$ is the multivariate beta function,</p>
+<p>$$B(\breve{\bm{\alpha}}) \triangleq \frac{ \prod_{k=1}^{K} \Gamma (\breve{\alpha}_k) }{ \Gamma( \sum_{k=1}^{K} \breve{\alpha}_k )}$$</p>
+<h3 id="posterior-1">Posterior</h3>
+<p>We can combine the multinomial likelihood and Dirichlet prior to compute the posterior, as follows:</p>
+<p>$$
+\begin{aligned}
+p(\bm{\theta} | \mathcal{D}) &amp; \propto p(\mathcal{D}|\bm{\theta})\text{Dir}(\bm{\theta} | \breve{\bm{\alpha}}) \\
+&amp; = \left[ \prod_k \theta_k^{N_k} \right] \left[ \prod_k \theta_k^{\breve{\alpha}_{k} - 1} \right] \\
+&amp; = \text{Dir} (\bm{\theta} | \breve{\alpha}_1 + N_1, \ldots, + \breve{\alpha}_K + N_K) \\
+&amp; = \text{Dir} (\bm{\theta} | \widehat{\bm{\alpha}})
+\end{aligned}
+$$</p>
+<p>where $\widehat{\alpha}_k$ are the parameters of the posterior. So we can see that the posterior can be computed by adding the empirical counts to the prior counts. </p>
+<h3 id="posterior-predictive-1">Posterior predictive</h3>
+<p>The posterior prediction distribution is given by</p>
+<p>$$p(y = k | \mathcal{D}) = \frac{ \tilde{\alpha}_k }{ \sum_{k^\prime} \widehat{\alpha}_{k^\prime} }$$</p>
+<h3 id="marginal-likelihood-1">Marginal likelihood</h3>
+<p>The marginal likelihood for the Dirichlet-categorical model is given by</p>
+<p>$$p(\mathcal{D}) = \frac{ B(\mathbf{N} + \bm{\alpha}) }{ B(\bm{\alpha}) }$$</p>
+<p>where</p>
+<p>$$B(\bm{\alpha}) = \frac{ \prod_{k=1}^{K} \Gamma( \alpha_k ) }{ \Gamma( \sum_k \alpha_k ) }$$</p>
+<h2 id="the-gaussian-gaussian-model">The Gaussian-Gaussian model</h2>
+<p>In this section, we derive the posterior for the parameters of a Gaussian distribution. For simplicity, we assume the variance is known.</p>
+<h3 id="univariate-case">Univariate case</h3>
+<p>If $\sigma^2$ is a known constant, the likelihood for $\mu$ has the form</p>
+<p>$$p(\mathcal{D} | \mu) \propto \text{exp\ } \left( - \frac{1}{2\sigma^2} \sum_{n=1}^{N} (y_n - \mu)^2 \right)$$</p>
+<p>One can show that the conjugate prior is another Gaussian, $\mathcal{N}(\breve{\mu}, \breve{\tau}^2)$. Applying Bayes' rule for Gaussians, we find that the corresponding posterior is given by</p>
+<p>$$
+\begin{aligned}
+p(\mu | \mathcal{D}, \sigma^2) &amp; = \mathcal{N}(\mu, \widehat{m}, \widehat{\tau}^2) \\
+\widehat{\tau}^2 &amp; = \frac{1}{ \frac{N}{\sigma^2} + \frac{1}{\breve{\tau}^2} } = \frac{\sigma^2 \breve{\tau}^2}{N \breve{\tau}^2 + \sigma^2} \\
+\widehat{m} &amp; = \widehat{\tau}^2 \left( \frac{\breve{m}}{\breve{\tau}^2} + \frac{N \bar{y}}{\sigma^2} \right) = \frac{ \sigma^2 }{ N\breve{\tau}^2 + \sigma^2 }\breve{m} + \frac{N \breve{\tau}^2}{ N\breve{\tau}^2 + \sigma^2 }\bar{y}
+\end{aligned}
+$$</p>
+<p>where $\bar{y} \triangleq \frac{1}{N} \sum_{n = 1}^{N} y_n$ is the empirical mean.</p>
+<h1 id="credible-intervals">Credible intervals</h1>
+<p>A posterior distribution is a high dimensional object that is hard to visualize and work with. A common way to summarize such a distribution is to compute a point estimate, such as the posterior mean or mode, and then to compute a <strong>credible interval</strong>, which quantifies the uncertainty associated with that estimate.</p>
+<p><strong>Central interval</strong> has $(1 - \alpha)/2$ mass in each tail. A problem with central intervals is that there might be points outside the central interval which have higher probability than the points that are inside. This motivates an alternative quantity known as the <strong>highest posterior density</strong> or $HPD$ region which is a set of points which have a probability above some threshold.</p>
+<h1 id="computational-issues">Computational issues</h1>
+<p>Given a likelihood $p(\mathcal{D} | \bm{\theta})$ and a prior $p(\bm{\theta} | \phi)$ with (fixed) hyperparameters $\phi$, we can compute the posterior $p(\bm{\theta} | \mathcal{D}, \phi)$ using Bayes' rule. However, actually performing this computation is usually intractable, expect for simple special cases, such as conjugate models, or models where all the latent variables come from a small finite set of possible values. We therefore need to approximate the posterior.</p>
+<h2 id="grid-approximation">Grid approximation</h2>
+<p>The simplest approach to approximate posterior inference is to partition the space of possible values for the unknowns into a finite set of possibilities, call them $\bm{\theta_1, \ldots, \theta_K}$ and then approximate the posterior by brute-force enumeration.</p>
+<h2 id="quadratic-laplace-approximation">Quadratic (Laplace) approximation</h2>
+<p>This method uses an optimization procedure to find the MAP estimate, and then approximates the curvature of the posterior at that point based on the Hessian.</p>
+<h2 id="variational-approximation">Variational approximation</h2>
+<p><strong>Variational inference (VI)</strong> is another optimization-based approach to posterior inference, but which has much more modeling flexibility (and thus can give a much more accurate approximation). </p>
+<p>VI attempts to approximate an intractable probability distribution, such as $p(\bm{\theta} | \mathcal{D}, \phi)$, with one that is tractable $q(\bm{\theta})$.</p>
+<p>$$q^* = \text{argmin\ } D(q, p)$$</p>
+<p>where $Q$ is some tractable family of distributions. If we define $D$ to be the KL divergence, then we can derive a lower bound to the log marginal likelihood; this quantity is known as the <strong>evidence lower bound</strong> or <strong>ELBO</strong>.</p>
+<h2 id="markov-chain-monte-carlo-mcmc-approximation">Markov Chain Monte Carlo (MCMC) approximation</h2>
+<p>Although VI is fast, optimization-based method, it can give a biased approximation ot the posterior, since it is restricted to a specfic function form $q \in Q$. A more flexible approach is to use a non-parametric approximation in terms of a set of samples. This is called a <strong>Monte Carlo approximation</strong> to the posterior. The key issue is how to create the posterior samples $\bm{\theta}^s \sim p(\bm{\theta} | \mathcal{D}, \phi)$ efficiently, without having to evaluate the normalization constant. A common approach to this problem is known as <strong>Markov chain Monte Carlo</strong> or <strong>MCMC</strong>. If we augment this algorithm with gradient-based information, derived from $\nabla \text{log\ } p(\bm{\theta}, \mathcal{D} | \phi)$, we can significantly speed up the method; this is called <strong>Hamiltonian Monte Carlo</strong> or <strong>HMC</strong>.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

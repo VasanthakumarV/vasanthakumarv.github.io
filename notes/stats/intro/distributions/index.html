@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Probability distributions
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/distributions/#introdution">Introdution</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/distributions/#binomial-distribution">Binomial distribution</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/distributions/#beta-distribution">Beta distribution</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introdution">Introdution</h1>
+<p>Probability distributions are a way of describing all possible events and probability of each one happening. Probability distributions are useful for asking questions about ranges of possible values.</p>
+<h1 id="binomial-distribution">Binomial distribution</h1>
+<p>Binomial distribution is used to calculate the probability of a certain number of successful outcones, and it involves three parameters:</p>
+<ul>
+<li>The number of outcomes we care about $k$</li>
+<li>The total number of trials $n$</li>
+<li>The probability of the event happening $p$</li>
+</ul>
+<p>Probability Mass Function (pmf) for binomial distribution:</p>
+<p>$$\text{B}(k; n, p) = \binom{n}{k} \times p^k \times (1 - p)^{n - k}$$</p>
+<h1 id="beta-distribution">Beta distribution</h1>
+<p>Beta distribution is used to estimate the probability of an event for which we have already observed a number of trials and the number of successful outcomes. For example, we would use it to estimate the probability of heads, when so far we have observed 100 tosses of a coin and 40 of those were heads.</p>
+<p>Probability density function of beta distribution:</p>
+<p>$$\text{Beta}(p, \alpha, \beta) = \frac{ p^{\alpha - 1} \times (1 - p)^{\beta-1} }{ \text{beta}(\alpha, \beta) }$$</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Eigenvalues and Eigenvectors
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/algebra/highlights/eigen/#eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/algebra/highlights/eigen/#symmetric-positive-definite-matrices">Symmetric positive definite matrices</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/algebra/highlights/eigen/#positive-definite-matrices">Positive definite matrices</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="eigenvalues-and-eigenvectors">Eigenvalues and Eigenvectors</h1>
+<p>The eigenvectors of $A$ do not change direction when you multiply them by $A$. The output $Ax$ is on the same line as the input vector $x$.</p>
+<p>$$Ax = \lambda x$$</p>
+<p>Multiply again by $A$, to see that <strong>$x$ is also an eigenvector of $A^2$</strong>:</p>
+<p>$$A^k x = \lambda^k x$$</p>
+<ul>
+<li>Sum of eigenvalues will be the trace of $A$</li>
+<li>Product of eigenvalues will be the determinant of $A$</li>
+<li>Symmetric matrices will have real eigenvalues</li>
+</ul>
+<p><strong>The eigenvalues of any triangular matrix is its main diagonal elements.</strong></p>
+<h1 id="symmetric-positive-definite-matrices">Symmetric positive definite matrices</h1>
+<ul>
+<li>All $n$ eigenvalues $\lambda$ of a symmetric matrix $S$ are real numbers</li>
+<li>The $n$ eigenvectors $q$ can be chosen orthogonal (perpendicular to each other)</li>
+</ul>
+<p><strong>Spectral theorem: Every real symmetric matrix has the form $S = Q \Lambda Q^\text{T}.$</strong></p>
+<h1 id="positive-definite-matrices">Positive definite matrices</h1>
+<p><strong>A positive definite matrix has all positive eigenvalues</strong>.</p>
+<p>If $\lambda \geq 0$ but not $\lambda \gt 0$ then it is <strong>positive semidefinite</strong>.</p>
+<p><strong>Elimation factors every positive definite $S$ into $A^\text{T}A$ (A is upper triangular)</strong></p>
+<p>This is Cholesky factorization $S = A^{\text{T}}A$ with $\sqrt{\text{pivots}}$ on the main diagonal of $A$.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

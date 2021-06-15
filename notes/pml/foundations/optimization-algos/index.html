@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Optimization algorithms
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#introduction">Introduction</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#local-vs-global-optimization">Local vs global optimization</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#constrained-vs-unconstrained-optimization">Constrained vs unconstrained optimization</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#convex-vs-nonconvex-optimization">Convex vs nonconvex optimization</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#smooth-vs-non-smooth-optimization">Smooth vs non smooth optimization</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#first-order-methods">First-order methods</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#step-size-learning-rate">Step size (learning rate)</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#momentum-methods">Momentum methods</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#second-order-methods">Second-order methods</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/optimization-algos/#stochastic-gradient-descent">Stochastic gradient descent</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introduction">Introduction</h1>
+<p>The core problem in machine learning is parameter estimation, this requires solving an <strong>optimization problem</strong>, where we try to find the values for a set of variables $\bm{\theta} \in \Theta$, that minimizes a scalar-valued loss function or cost function $\mathcal{L} : \Theta \rightarrow \mathbb{R}$</p>
+<p>We will assume that the parameter space is given by $\Theta \subseteq \mathbb{R}^D$, where $D$ is the number of variables being optimized over. Thus we are focusing on <strong>continuous optimization</strong>, rather than <strong>discrete optimization</strong>.</p>
+<p>If we want to maximize a score function or reward function $R(\bm{\theta})$, we can equivalently minimize $-R$. We will use the term <strong>objective function</strong> to refer generically to a function we want to maximize or minimize. An algorithm that can find an optimum of an objective function is called a <strong>solver</strong>.</p>
+<h2 id="local-vs-global-optimization">Local vs global optimization</h2>
+<p>Finding global optima for the objective function is intractable. In such cases, we will just try to find a local optimum. For continuous problems, this is defined to be a point $\bm{\theta}^*$ which has lower (or equal) cost than nearby points.</p>
+<p>A local minimum could be surrounded by other local minima with the same objective value; this is known as a <strong>flat local minimum</strong>. A point is said to be <strong>strict local minimum</strong> if its cost is strictly lower than those of neighboring points.</p>
+<p>If an algorithm is guaranteed to converge to a stationary point from any starting point, it is called <strong>globally convergent</strong>. However this does not mean that it will converge to global optimum, it just means it will converge to some stationary point.</p>
+<h3 id="optimality-conditions-for-local-vs-global-optima">Optimality conditions for local vs global optima</h3>
+<p>For continuous, twice differentiable functions, we can precisely characterize the points which correspond to local minima. Let $g(\bm{\theta}) = \nabla \mathcal{L}(\bm{\theta})$ be the gradient vector, and $H(\bm{\theta}) = \nabla^2 \mathcal{L}(\bm{\theta})$ be the hessian matrix. Consider a point $\bm{\theta}^* \in \mathbb{R}^D$, and let $g^*$ be the gradient at that point, and $H^*$ be the corresponding Hessian. One can show that the following conditions characterize every local minimum:</p>
+<ul>
+<li>Necessary condition: If $\bm{\theta}^*$ is a local minimum, then we must have $g^* = 0$ (i.e., $\bm{\theta}^*$ must be a stationary point), and $H^*$ must be positive semi-definite</li>
+<li>Sufficient condition: If $g^* = 0$ and $H^*$ is positive definite, then $\bm{\theta}^*$ is a local optimum</li>
+</ul>
+<h2 id="constrained-vs-unconstrained-optimization">Constrained vs unconstrained optimization</h2>
+<p>In <strong>unconstrained optimization</strong>, we define the optimization task as finding any value in the parameter space $\Theta$ that minimizes the loss. However, we often have a set of <strong>constraints</strong> on the allowable values. It is standard to partition the set of constraints $\mathcal{C}$ into <strong>inequality constraints</strong>, $g_j(\bm{\theta}) \leq 0$ for $j \in \mathcal{I}$ and <strong>equality constraints</strong>, $h_k (\bm{\theta}) = 0$ for $k \in \mathcal{E}$. For example, we can represent a sum-to-one constraint as a nequality constraint $h(\bm{\theta}) = (1 - \sum_{i=1}^{D} \theta_i) = 0$, and we can represent a non-negativity constraint on the parameters by using $D$ inequality constraints of the form $g_i(\bm{\theta}) = -\theta_i \leq 0$.</p>
+<p>We define <strong>feasible set</strong> as the subset of parameter space that satisfies the constraints:</p>
+<p>$$\mathcal{C} = \{ \bm{\theta} : g_j(\bm{\theta}) \leq 0 : j \in \mathcal{I}, h_k(\bm{\theta}) = 0 : k \in \mathcal{E} \} \subseteq \mathbb{R}^D$$</p>
+<p>Out <strong>constrained optimization</strong> problem now becomes</p>
+<p>$$\bm{\theta}^* \in \underset{\bm{\theta}\ \in\ \mathcal{C}}{\text{argmin}}\ \mathcal{L}(\bm{\theta})$$</p>
+<p>If $\mathcal{C} = \mathbb{R}^D$, it is called <strong>unconstrained optimization</strong>.</p>
+<p>A common strategy for solving constrained problems is to create penalty terms that measure how much we violate each constraint. We then add these terms to the objective and solve an unconstrained optimization problem. The <strong>Lagrangian</strong> is a special case of such a combined objective.</p>
+<h2 id="convex-vs-nonconvex-optimization">Convex vs nonconvex optimization</h2>
+<p>In convex optimization, we require the objective to be a convex function defined over a convex set. In such problems, every local minimum is also the global minimum. If $\mathcal{L}$ is a strictly convex function, then the optimal solution is unique. Furthermore, we can usually devise methods to efficiently find such minima. Thus many models are designed so that their training objectives are convex.</p>
+<h2 id="smooth-vs-non-smooth-optimization">Smooth vs non smooth optimization</h2>
+<p>In smooth optimization, the objective and constraints are continuously differentiable functions, whereas in nonsmooth optimization, there are aat least some points where the gradient of the objective function or the constraints is not well-defined.</p>
+<p>In some optimization problems, we can partition the objective into a part that only contains smooth terms, and a part that contains the nonsmooth terms:</p>
+<p>$$\mathcal{L}(\bm{\theta}) = \mathcal{L}_s(\bm{\theta}) + \mathcal{L}_r(\bm{\theta})$$</p>
+<p>where $\mathcal{L}_s$ is usually the training set loss, and $\mathcal{L}_r$ is a regularizer. This composite structure can be exploited by various algorithms.</p>
+<h1 id="first-order-methods">First-order methods</h1>
+<p>We consider optimization methods that leverage first order derivative of the objective function, i.e., they compute which direction point downhill, but they ignore curvature information. All of these algorithms require that the user specify a starting point $\bm{\theta}_0$. Then at each iteration $t$, they perform an update of the following form:</p>
+<p>$$\bm{\theta}_{t + 1} = \bm{\theta}_t + \eta_{t}\mathbf{d}_t$$</p>
+<p>where $\eta_{t}$ is known as the step size or learning rate, and $\mathbf{d}_t$ is a descent direction, such as the negative of the gradient, given by $\mathbf{g}_t = \nabla_{\bm{\theta}} \mathcal{L}(\bm{\theta}) | _{\bm{\theta}_t}$</p>
+<h2 id="step-size-learning-rate">Step size (learning rate)</h2>
+<p>In machine learning, the sequence of step sizes $\{ \eta_t \}$ is called the <strong>learning rate schedule</strong>.</p>
+<h3 id="constant-step-size">Constant step size</h3>
+<p>The simplest method is constant step size. However, if it is too large, the method may fail to converge, and if it is too small, the method will converge but very slowly.</p>
+<h3 id="line-search">Line search</h3>
+<p>The optimal step size can be found by finding the value that maximally decreases the objective along the chosen direction by solving the 1d minimization problem</p>
+<p>$$\eta_t = \underset{\eta \gt 0}{\text{argmin}}\ \phi_t(\eta) = \underset{\eta \gt 0}{\text{argmin}}\ \mathcal{L}(\bm{\theta}_t + \eta \mathbf{d}_t)$$</p>
+<p>This is known as line search, since we are searching along the line defined by $\mathbf{d}_t$</p>
+<h3 id="convergence-rates">Convergence rates</h3>
+<p>We want to find optimization algorithms that converge quickly to a local optimum. For certain convex problems with bounded Lipschitz constant, one can show that gradient descent converges at a linear rate.</p>
+<h2 id="momentum-methods">Momentum methods</h2>
+<p>Gradient descent can move very slowly along flat regions of the loss landscape, momentum methods can offer a solution for this.</p>
+<h3 id="momentum">Momentum</h3>
+<p><strong>Heavy ball</strong> or <strong>momentum</strong> method moves faster along directions that were previously good, and slow along directions where gradient has suddenly changed.</p>
+<p>$$
+\begin{aligned}
+\mathbf{m}_t &amp;= \beta \mathbf{m}_{t-1} + \mathbf{g}_{t-1} \\
+\bm{\theta}_t &amp;= \bm{\theta}_{t-1} - \eta_t \mathbf{m}_t
+\end{aligned}
+$$</p>
+<h3 id="nesterov-momentum">Nesterov momentum</h3>
+<p>One problem with the standard momentum method is that it may not slow down enough at the bottom of a valley, caussing oscillation. The <strong>Nesterov accelerated gradient</strong> method includes an extrapolation step, as follows:</p>
+<p>$$
+\begin{aligned}
+\bm{\widetilde{\theta}}_{t+1} &amp; = \bm{\theta}_t + \beta_t (\bm{\theta}_t - \bm{\theta}_{t-1}) \\
+\bm{\theta}_{t+1} &amp; = \bm{\widetilde{\theta}}_{t+1} - \eta_t \nabla\ \mathcal{L}(\bm{\widetilde{\theta}}_{t+1})
+\end{aligned}
+$$</p>
+<h1 id="second-order-methods">Second-order methods</h1>
+<p>Optimization algorithms that only use the gradients are cheap to compute, but they do not model the curvature of the space, and hence they can be slow to converge. <strong>Second-order</strong> optimization methods incorporate curvature in various ways (e.g., via the Hessian), which may yield faster convergence.</p>
+<h1 id="stochastic-gradient-descent">Stochastic gradient descent</h1>
+<p>The goal of <strong>stochastic optimization</strong> is to minimize the average value of:</p>
+<p>$$\mathcal{L}(\bm{\theta}) = \mathbb{E}_{q(\mathbf{z})} [ \mathcal{L}(\bm{\theta}, \mathbf{z}) ]$$</p>
+<p>where $\mathbf{z}$ is a random input to the objective, this could be a &quot;noise&quot; term, coming from the environment, or it could be a training example drawn randomly from the training set.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

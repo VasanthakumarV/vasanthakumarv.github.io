@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Bayesian decision theory
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#introduction">Introduction</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#classification-problems">Classification problems</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#zero-one-loss">Zero-one loss</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#reject-option">Reject option</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#roc-curves">ROC curves</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#class-confusion-matrices">Class confusion matrices</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#class-imbalance">Class imbalance</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#precision-recall-curves">Precision-recall curves</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#f-scores">F-scores</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#regression-problems">Regression problems</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#l2-loss">L2 loss</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#l1-loss">L1 loss</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#huber-loss">Huber loss</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#probabilistic-prediction-problems">Probabilistic prediction problems</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#kl-cross-entropy-and-log-loss">KL, cross-entropy and log-loss</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#brier-score">Brier score</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#a-b-testing">A&#x2F;B testing</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#a-bayesian-approach">A Bayesian approach</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#expected-reward">Expected reward</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#bandit-problems">Bandit problems</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#contextual-bandits">Contextual bandits</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#markov-decision-processes">Markov decision processes</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#exploration-exploitation-tradeoff">Exploration-exploitation tradeoff</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/decision-theory/#bayesian-hypothesis-testing">Bayesian hypothesis testing</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introduction">Introduction</h1>
+<p>Bayesian inference provides the optimal way to update our beliefs about hidden quantities $H$ given observed data $X = x$ by computing the posterior $p(H|x)$. However, at the end of the day, we need to turn our beliefs into actions that we can perform in the world. How can we decide which action is best? This is where <strong>Bayesian decision theory</strong> comes in.</p>
+<p>In decision theory, we assume the decision maker, or agent, has a set of possible actions $\mathcal{A}$, to choose from. Each of these actions have costs and benefits, which will depend on the underlying <strong>state of nature</strong> $H \in \mathcal{H}$. We can encode this information into a loss function $l(h, a)$, that specifies the loss we incur if we take action $a \in \mathcal{A}$ when the state of nature is $h \in \mathcal{H}$.</p>
+<p>For example, suppose the state is defined by the age of the patient (young vs old), and whether they have COVID-19 or not. Note that the age can observed directly, but the disease state must be inferred from noisy observations, thus the state is partially observed.</p>
+<p>Let us assume that the cost of administering the drug is the same, no matter what the state of the patient is. However the benefits will differ. If the patient is young, we expect them to live a long time, so the cost of not giving the drug if they have COVID-19 is high; but if the patient is old, they have fewer years to live, os the cost of not giving the drug is arguably less. In medical circles, a common unit of cost is quality-adjusted life years or QALY. Suppose that the expected QALY for a young person is 60, and for an old person is 10. Let us assume the drug costs the equivalent of 8 QALY, due to induced pain and suffering from side effects.</p>
+<p>Once we have specified the loss function, we can compute the <strong>posterior expected loss</strong> or <strong>risk</strong> for each possible action:</p>
+<p>$$R(a|x) \triangleq \mathbb{E}_{p(h|x)} [l(h, a)] = \sum_{h \in \mathcal{H}} l(h, a) p(h|x)$$</p>
+<p>The <strong>optimal policy</strong> (also called the <strong>Bayes estimator</strong>) specifies what action to take for each possible observation so as to minimize risk:</p>
+<p>$$\pi^* (\mathbf{x}) = \underset{a \in \mathcal{A}}{\text{argmin}}\ \mathbb{E}_{p(h|\mathbf{x})} [l(h, a)]$$</p>
+<h1 id="classification-problems">Classification problems</h1>
+<p>In this section, we use Bayesian decision theory to decide optimal class label to predict given an observed input $x \in \mathcal{X}$.</p>
+<h2 id="zero-one-loss">Zero-one loss</h2>
+<p>Suppose the states of nature correspond to class labels, os $\mathcal{H} = \mathcal{Y} = \{ 1, \ldots, C \}$. Furthermore, suppose the actions also correspond to class labels, os $\mathcal{A} = \mathcal{Y}$. In this setting, a very commonly used loss function is the zero-one loss.</p>
+<p>Hence the action that minimizes the expected loss is to choose the most probable label:</p>
+<p>$$\pi(\mathbf{x}) = \underset{y \in \mathcal{Y}}{\text{argmax}}\ p(y|\mathbf{x})$$</p>
+<p>This corresponds to the mode of the posterior distribution, also known as the maximum a posteriori or MAP estimate.</p>
+<h2 id="reject-option">Reject option</h2>
+<p>In some cases, we may be able to say &quot;I don't know&quot; instead of returning an answer that we don't really trust, this is particulary important in risk averse domains.</p>
+<p>$$
+l(h, a) = 
+\begin{cases}
+0 &amp; if\ h = a\ and\ a \in \{ 1, \ldots, C \} \\
+\lambda_r &amp; if\ a = 0 \\
+\lambda_e &amp; otherwise
+\end{cases}
+$$</p>
+<p>where $\lambda_r$ is the cost of reject action, and $\lambda_e$ is the cost of classification error.</p>
+<h1 id="roc-curves">ROC curves</h1>
+<p>We showed that we can pick the optimal lable in binary classification by thresholding the probability using a value derived from the relative cost of a false positive and false negative. Instead of picking a single threshold, we can instead consider using a set of different thresholds, and comparing the resulting performance.</p>
+<h2 id="class-confusion-matrices">Class confusion matrices</h2>
+<p>For any fixed threshold $\tau$, we can compute the empirical number of false positives (FP), false negatives (FN), true positives (TP), and true negatives (TN). We can store these results in a $2 \times 2$ class confusion matrix $C$, where $C_{ij}$ is the number of times an item with true class label $i$ was (mis)classified as having lable $j$. We can now plot TPR vs FPR as an implicit function of $\tau$. This is called a <strong>receiver operation characteristic</strong> or <strong>ROC</strong> curve.</p>
+<p>The quality of the ROC curve is often summarized as a single number using the <strong>area under the curve</strong> or <strong>AUC</strong> score, higher AUC scores are better. Another summary statistic that is used is the <strong>equal error rate</strong> or <strong>EER</strong> as called the <strong>cross-over rate</strong>, defined as the value which satisfies FPR = FNR. Since FNR = 1-TPR, we can compute EER by drawing a line from top left to the bottom right and seeing where it intersects the ROC curve, lower EER scores are better.</p>
+<h2 id="class-imbalance">Class imbalance</h2>
+<p>In some problems, there is severe class imbalance. For example, the set of negatives is usually much larger than the set of positives. The usefulness of the ROC curve may be reduced in such cases, since a large change in the absolute number of false positives will not change the false positive rate very much, since FPR is divided by FP + TN. Thus all action happens in the extreme left part of the curve. In such cases, we may choose other ways of summarizing the class confusion matrix, such as precision-recall curves.</p>
+<h1 id="precision-recall-curves">Precision-recall curves</h1>
+<p>In some problems, the notion of a &quot;negative&quot; is not well-defined. In these kinds of situations, we may choose to use a <strong>precision-recall curve</strong> to summarize the performance of the system.</p>
+<p>The key idea is to replace FPR with <strong>precision</strong>. <strong>Recall</strong> is same as TPR. If $\widehat{y}_n \in \{ 0, 1 \}$ is the predicted label, and $y_n \in \{ 0, 1 \}$ is the true label, we can estimate precision and recall using</p>
+<p>$$\mathcal{P}(\tau) =  \frac{\sum_n y_n \widehat{y}_n}{\sum_n \widehat{y}_n}$$
+$$\mathcal{R}(\tau) =  \frac{\sum_n y_n \widehat{y}_n}{\sum_n y_n}$$</p>
+<p>We can now plot precision vs recall as we vary the threshold $\tau$. Hugging the top right is the best we can do.</p>
+<h2 id="f-scores">F-scores</h2>
+<p>For a fixed threshold, corresponding to a single point on the PR curve, we can compute a single precision and recall value, which will be denoted by $\mathcal{P}$ and $\mathcal{R}$. These are often combined into a single statistic called the $F_{\beta}$, which weights recall as $\beta &gt; 0$ more important than precision.</p>
+<p>$$\frac{1}{F_\beta} = \frac{1}{1 + \beta^2} \frac{1}{\mathcal{P}} + \frac{\beta^2}{1 + \beta^2} \frac{1}{\mathcal{R}}$$</p>
+<p>or equivalently</p>
+<p>$$F_\beta \triangleq (1 + \beta^2) \frac{\mathcal{P . R}}{\beta^2\mathcal{P + R}}$$</p>
+<p>If we set $\beta = 1$, we get the harmonic mean of precision and recall:</p>
+<p>$$F_1 = 2 \frac{\mathcal{P . R}}{\mathcal{P + R}}$$</p>
+<p>Using $F_1$ score weights precision and recall equally. However, if recall is more important, we may use $\beta = 2$, and if precision is more important, we may use $\beta = 0.5$.</p>
+<h1 id="regression-problems">Regression problems</h1>
+<p>So far, we have considered the case where there are a finite number of actions $A$ and states of nature $H$. In this section, we consider the case where the set of actions and states are both equal to the real line.</p>
+<h2 id="l2-loss">L2 loss</h2>
+<p>Also called <strong>squared error</strong> or <strong>quadratic loss</strong>, which is defined as follows:</p>
+<p>$$l_2 (h, a) = (h - a)^2$$</p>
+<h2 id="l1-loss">L1 loss</h2>
+<p>The $l_2$ loss penalizes deviations from the truth quadratically, and thus is sensitive to outliers. A more robust alternative is the absolute or $l_1$ loss</p>
+<p>$$l_1(h, a) = |h - a|$$</p>
+<h2 id="huber-loss">Huber loss</h2>
+<p>Another robust loss function is the <strong>Huber loss</strong>, defined as follows:</p>
+<p>$$l_{\delta}(h, a) = 
+\begin{cases}
+r^2/2 &amp; if |r| \leq \delta \\
+\delta|r| - \delta^2/2 &amp; if |r| \gt \delta
+\end{cases}
+$$</p>
+<p>where $r = h - a$. This is equivalent to $l_2$ for errors that are smaller than $\delta$, and is equivalent to $l_1$ for larger errors.</p>
+<h1 id="probabilistic-prediction-problems">Probabilistic prediction problems</h1>
+<p>In this section, we assume the set of possible actions is to pick a <strong>probability distribution</strong> over some value of interest. That is, we want to perform <strong>probabilistic prediction</strong> or <strong>probabilistic forecasting</strong> rather than predicting a specific value. More precisely, we assume the true &quot;state of nature&quot; is a distribution, $h = p(Y | x)$, the action is another distribution, $a = q(Y | x)$, and we want to pick $q$ to minimize $\mathbb{E}[l(p, q)]$ for a given $x$.</p>
+<h2 id="kl-cross-entropy-and-log-loss">KL, cross-entropy and log-loss</h2>
+<p>A common form of loss functions for comparing two distributions is the <strong>Kullback Leibler divergence</strong> or <strong>KL divergence</strong>, which is defined as follows:</p>
+<p>$$\mathbb{KL}(p || q) \triangleq \sum_{y \in \mathcal{Y}} p(y) \text{log} \frac{p(y)}{q(y)}$$</p>
+<p>We can expand the KL as folows:</p>
+<p>$$
+\begin{aligned}
+\mathbb{KL}(p || q) &amp; = \sum_{y \in \mathcal{Y}} p(y)\ log\ p(y) - \sum_{y \in \mathcal{Y}} p(y)\ \text{log}\ q(y) \\
+\mathbb{H}(p) &amp; \triangleq - \sum_y p(y)\ \text{log}\ p(y) \\
+\mathbb{H}(p, q) &amp; \triangleq - \sum_y p(y)\ \text{log}\ q(y)
+\end{aligned}
+$$</p>
+<p>$\mathbb{H}(p)$ is known as the <strong>entropy</strong>. This is a measure of uncertainty or variance of $p$, it is maximal if $p$ is uniform, and is 0 if $p$ is a degenerate or deterministic delta function. The $\mathbb{H}(p, q)$ is known as the <strong>cross-entropy</strong>.</p>
+<p>Now consider a special case in which the true state of nature is a degenerate distribution, which puts all its mass on a single outcome, say $c$, i.e., $h = p(Y|x) = \mathbb{I}(Y = c)$.</p>
+<p>$$\mathbb{H}(\delta(Y = c), q) = - \sum_{y \in \mathcal{Y}} \delta(y = c)\ \text{log}\ q(y) = -\text{log}\ q(c)$$</p>
+<p>This is known as the <strong>log loss</strong> of the predictive distribution $q$ when given given target label $c$.</p>
+<h2 id="brier-score">Brier score</h2>
+<p>$$l(p, q) = \triangleq \frac{1}{C} \sum_{c=1}^{C} (q(y = c | x) - p(y =c | x))^2$$</p>
+<p>This is just the squared error of the predictive distribution compared to the true distribution, when viewed as vectors. Since it is based on squared error, the Brier score is less sensitive to extremely rare or extremely common classes.</p>
+<h1 id="a-b-testing">A/B testing</h1>
+<p>Suppose you are trying to decide which version of a product is likely to sell more, or which version of a drug is likely to work better. Let us call the versions you are choosing between A and B, sometimes version A is called the <strong>treatment</strong>, and version B is called the <strong>control</strong>. To simplify the notation, we will refer to picking version A as choosing action 1, and picking version B as choosing action 0. We will call the resulting outcome from each action that you want to maximize the <strong>reward</strong>.</p>
+<p>A very common approach to such problems is to use an <strong>A/B test</strong>, in which you try both actions out for a while, by randomly assigning a different action to different subsets of the publication, and then you measure the results and pick the winner. This is sometimes called a &quot;<strong>test and roll</strong>&quot; problem, since you test which method is best, and then roll it out for the rest of the population.</p>
+<p>A key problem in A/B testing is to come up with a decision rule, or policy, for deciding which action is best, after obtaining potentially noisy results during the test phase. Another problem is to choose how many people to assign to the treat, $n_1$, and how many to the control, $n_0$.</p>
+<h2 id="a-bayesian-approach">A Bayesian approach</h2>
+<p>We assume the $i$'th reward for action $j$ is given by $Y_{ij} \sim \mathcal{N} (\mu_j, \sigma_j^2)$ for $i = 1:n_j$ nad $j = 0:1$, where $j=1$ corresponds to the treatment (action !) and $j = 0$ corresponds to the control (action B). For simplicity we assume $\sigma^2$ are known. For the unknown $\mu_j$ parameters (expected reward), we will use Gausian priors, $\mu_j \sim \mathcal{N}(m_j, \tau_j^2)$. If we assign $n_1$ people to the treatment and $n_0$ to the control, then the expected reward in the testing phase is given by</p>
+<p>$$\mathbb{E}[R_{test}] = n_0m_0 + n_1m_1$$</p>
+<p>The expected reward in the roll phase depends on the decision rule $\pi(\mathbf{y}_1, \mathbf{y}_0)$, which specifies which action to deploy, where $\mathbf{y}_j = (y_{1j}, \dots, y_{n_j, j})$ is the data from action $j$. We derive the opimal policy below, and then discuss some of its properties.</p>
+<h3 id="optimal-policy">Optimal policy</h3>
+<p>The optimal policy is to choose the action with the greater expected posterior mean reward. Applying Bayes' rule for Gaussians, we find that the corresponding posterior is given by</p>
+<p>$$p(\mu_j | \mathbf{y}_j, n_j) = \mathcal{N}(\mu_j | \widehat{m}_j, \widehat{\tau}_j^2)$$</p>
+<p>The optimal policy is given is</p>
+<p>$$\pi^*(\mathbf{y}_1, \mathbf{y}_0) = 
+\begin{cases}
+1 &amp; \text{if\ } \mathbb{E}[\mu_1 | \mathbf{y}_1] \geq \mathbb{E}[\mu_0 | \mathbf{y}_0] \\
+0 &amp; \text{if\ } \mathbb{E}[\mu_1 | \mathbf{y}_1] \lt \mathbb{E}[\mu_0 | \mathbf{y}_0]
+\end{cases}$$</p>
+<h2 id="expected-reward">Expected reward</h2>
+<p>If the total population size is $N$, and we cannot reuse people from the testing phase, the expected reward from the roll stage is</p>
+<p>$$\mathbb{E}[R_{roll}] = (N - n_1 - n_0) \left( m_1 + e\Phi(\frac{e}{v}) + v \phi (\frac{e}{v}) \right)$$</p>
+<p>where $\phi$ is the Gaussian pdf, $\Phi$ is the Gaussian cdf, $e = m_0 - m_1$ and</p>
+<p>$$v = \sqrt{ \frac{\tau_1^4}{\tau_1^2 + \sigma_1^2 / n_1}  + \frac{\tau_0^4}{ \tau_0^2 + \sigma_0^2 / n_0 }}$$</p>
+<h1 id="bandit-problems">Bandit problems</h1>
+<p>In A/B testing the decision maker tries two different actions a fixed number of times and then pciks the best action. We can obviously generalize this beyond two actions. More importantly, we can generalize this beyond a one-stage decision problem. In particular, suppose we allow the decision maker to try an action $a_t$, observe the reward $r_t$, and then decide what to do at time step $t + 1$, rather than waiting until $n_1 + n_0$ experiments are finished. This immediate feedback allows for adaptive policies that can result in much higher expected reward (lower regret). We have converted a one-stage decision problem into a <strong>sequential decision problem</strong>. There are many kinds of sequential decision problems, but here we consider the simplest kind, known as a <strong>bandit problem</strong>.</p>
+<p>In a bandit problem, there is an agent (decision maker) which gets to see some <strong>state of nature</strong>, which it uses to choose an <strong>action</strong> from some <strong>policy</strong>, and then it finally receives a <strong>reward</strong> sampled from the environment. In the finite horizon formulation, the goal is to maximize the expected cumulative reward.</p>
+<h2 id="contextual-bandits">Contextual bandits</h2>
+<p>In the basic bandit problem, the state of nature $s_t$ is fixed, meaning that the world does not change. However, the agent's internal model of the world does change, as it learns about which actions have highest reward. If we allow the state of the environment $s_t$ to vary randomly over time, the model is known as <strong>contextual bandit</strong>, which is more flexible model.</p>
+<h2 id="markov-decision-processes">Markov decision processes</h2>
+<p>We can consider a generalization of the contextual bandit model, in which the next state $s_{t+1}$ depends on $s_t$ and the agent's action $a_t$; this is called a <strong>Markov decision process</strong> or <strong>MDP</strong>. This defines a <strong>controlled Markov chain</strong>.</p>
+<p>$$p(s_{0:T} | a_{0:T-1}) = p(s_0) \prod_{t=1}^{T} p(s_t | s_{t-1}, a_{t-1})$$</p>
+<p>where $p(s_t | s_{t-1}, a_{t-1})$ is known as the <strong>state transition model</strong>.</p>
+<h2 id="exploration-exploitation-tradeoff">Exploration-exploitation tradeoff</h2>
+<p>The fundamental difficulty in solving bandit problems is known as the <strong>exploration--exploitation tradeoff</strong>. This refers to the fact that the agent needs to try new state/action combinations (this is known as exploration) in order to learn the reward function $R(s, a)$ before it can exploit its knowledge by picking the predicted the predicted best action for each state.</p>
+<h1 id="bayesian-hypothesis-testing">Bayesian hypothesis testing</h1>
+<p>Suppose we have two hypotheses or models, commonly called the <strong>null hypothesis</strong>, $M_0$, and the <strong>alternative hypothesis</strong>, $M_1$, and we want to know which one is more likely to be true. This is called <strong>hypothesis testing</strong>.</p>
+<p>If we use 0-1 loss, the optimal decision is to pick the alternate hypothesis iff $p(M_1 | \mathcal{D}) / p(M_0 | \mathcal{D}) \gt 1$. If we use uniform prior, the decision rule becomes: select $M_1$ iff $p(\mathcal{D} | M_1) / p(\mathcal{D} | M_0) \gt 1$. This quantity, which is the ratio of marginal likelihoods of the two models, is known as <strong>Bayes factor</strong>:</p>
+<p>$$B_{1,0} \triangleq \frac{ p(\mathcal{D} | M_1) }{ p(\mathcal{D} | M_0) }$$</p>
+<p>This is the likelihood ratio, except we integrate out the parameters, which allows us to compare models of different complexity, due to the Bayesian Occam's razor effect.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

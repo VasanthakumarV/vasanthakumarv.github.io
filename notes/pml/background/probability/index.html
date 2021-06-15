@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Probability
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#introduction">Introduction</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#fundamental-rules-of-probability">Fundamental rules of probability</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#random-variables">Random variables</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#discrete-random-variables">Discrete random variables</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#continuous-random-variables">Continuous random variables</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#sets-of-related-random-variables">Sets of related random variables</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#joint-marginal-and-conditional-distributions">Joint, marginal and conditional distributions</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#bayes-rule">Bayes&#x27; rule</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#independence-and-conditional-independence">Independence and conditional independence</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#properties-of-a-distribution">Properties of a distribution</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#covariance">Covariance</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#correlation">Correlation</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#simpson-s-paradox">Simpson&#x27;s paradox</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#transformation-of-random-variables">Transformation of random variables</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#moments-of-linear-transformation">Moments of linear transformation</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#convolutional-theorem">Convolutional theorem</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/probability/#central-limit-theorem">Central limit theorem</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introduction">Introduction</h1>
+<p>Using <strong>Bayesian</strong> interpretation of probability, the term probability is used to quantify our <strong>uncertainty</strong> or ignorance about something, hence it is fundamentally related to information.</p>
+<p>The uncertainity in our predictions can arise for two fundamentally different reasons. The first is due to the ignorance of the underlying hidden causes or mechanism generating our data. This is called <strong>epistemic uncertainty</strong>, since epistemology is the philosophical term used to describe the study of knowledge. However, a simpler term for this is <strong>model uncertainty</strong>. The second kind of uncertainty arises from intrinsic variability, which cannot be reduced even if we collect more data. This is sometimes called <strong>aleatoric uncertainty</strong>, derived from the Latin word for &quot;dice&quot;, although a simple term would be <strong>data uncertainty</strong>.</p>
+<h1 id="fundamental-rules-of-probability">Fundamental rules of probability</h1>
+<p>We define an <strong>event</strong>, denoted by the binary variable $A$, as some state of the world that either holds or does not hold. The expression $\text{Pr}(A)$ denotes the probability with which you believe event $A$ is true. We write $\text{Pr}(\overline{A})$ to denote probability of event $A$ not happening.</p>
+<p>We denote the <strong>joint probability</strong> of events $A$ and $B$ both happening as follows:</p>
+<p>$$\text{Pr}(A \cap B) = \text{Pr}(A, B)$$</p>
+<p>If $A$ and $B$ are independent events, we have</p>
+<p>$$\text{Pr}(A, B) = \text{Pr}(A)\text{Pr}(B)$$</p>
+<p>The probability of event $A$ or $B$ happening is given by</p>
+<p>$$\text{Pr}(A \cup B) = \text{Pr}(A) + \text{Pr}(B) - \text{Pr}(A \cap B)$$</p>
+<p>If the event are mutually exclusive, we get</p>
+<p>$$\text{Pr}(A \cup B) = \text{Pr}(A) + \text{Pr}(B)$$</p>
+<p>We define the <strong>conditional probability</strong> of event $B$ happening given that $A$ has occured as follows:</p>
+<p>$$\text{Pr}(B|A) \triangleq \frac{\text{Pr}(A, B)}{\text{Pr}(A)}$$</p>
+<p>We say that event $A$ is <strong>conditionally independent</strong> of event $B$ if</p>
+<p>$$\text{Pr}(A|B) \triangleq \text{Pr}(A)$$</p>
+<p>This is a symmetric relationship. We use the notation $A \perp B$ to denote this property.</p>
+<p>Two events, $A$ and $B$, are conditionally independent given a third event $C$ if $\text{Pr}(A|B,C) = \text{Pr}(A|C)$. Equivalently, we can write this as $\text{Pr}(A,B|C) = \text{Pr}(A|C) \text{Pr}(B|C)$. This is written as $A \perp B|C$</p>
+<h1 id="random-variables">Random variables</h1>
+<p>Suppose $X$ represents some unknown quantity of interest, we can represent our beliefs about its possible values using a <strong>probability distribution</strong>.</p>
+<h2 id="discrete-random-variables">Discrete random variables</h2>
+<p>The set of values an rv $X$ can take on is called the <strong>state space</strong>. If this is finite or countably infinite, $X$ is called a discrete random variable. We define the <strong>probability mass function</strong> or <strong>pmf</strong> as a function which computes the probability of events which correspond to setting the rv to each possible value:</p>
+<p>$$p(x) \triangleq \text{Pr}(X = x)$$</p>
+<p>The pmf satisfies the properties $0 \le p(c) \le 1$ and $\sum_{x \in X}p(x) = 1$.</p>
+<p>$p(x) = \mathbb{I}(x = 1)$ is a defenerate distribution, where $\mathbb{I}()$ is binary indicator function.</p>
+<h2 id="continuous-random-variables">Continuous random variables</h2>
+<p>If $X \in \mathbb{R}$ is real-valued quantity, it is called a <strong>continuous random variable</strong>.</p>
+<p>We define the <strong>cumulative distribution function</strong> or <strong>cdf</strong> of the rv $X$ as follows:</p>
+<p>$$P(x) \triangleq \textbf{Pr}(X \le x)$$</p>
+<p>(Note that we use a capital $P$ to represent the cdf). Using this, we can compute the probability of being in any interval as follows:</p>
+<p>$$\text{Pr}(a &lt; X \leq b) = P(b) - P(a)$$</p>
+<p>Cdfs are monotonically non-decreasing functions.</p>
+<p>We define the <strong>probability density function</strong> or <strong>pdf</strong> as the derivative of the cdf:</p>
+<p>$$p(x) \triangleq \frac{d}{dx} P(x)$$</p>
+<p>Given a pdf, we can compute the probability of a continuous variable being in a finite interval as follows:</p>
+<p>$$\text{Pr}(a &lt; X \le b) = \int_a^b p(x) = P(b) - P(a)$$</p>
+<p>If the cdf is strictly monotonically increasing, it has an inverse, called the <strong>inverse cdf</strong>, or <strong>percent point function (ppf)</strong>, or <strong>quantile function</strong>.</p>
+<p>If $P$ is the cdf of $X$, then $P^{-1}(q)$ is the value $x_q$ such that $\text{Pr}(X \le x_q) = q$; this is called the $q$'th quantile of $P$. The value $P^{-1}(0.5)$ is the median of the distribution, with half of the probability mass on the left, and half on the right.</p>
+<h1 id="sets-of-related-random-variables">Sets of related random variables</h1>
+<p>Here we discuss distributions over sets of related random variables.</p>
+<h2 id="joint-marginal-and-conditional-distributions">Joint, marginal and conditional distributions</h2>
+<p>Suppose we have two random variables, $X$ and $Y$. We can define the <strong>joint distribution</strong> of two random variables using $p(x,y) = p(X=x, Y=y)$ for all possible values of $X$ and $Y$. If the variables have finite cardinality, we can represent the joint distribution as a 2d table, all of whose entries sum to one.</p>
+<p>Given the joint distribution, we define the <strong>marginal distribution</strong> of an rv as follows:</p>
+<p>$$p(X = x) = \sum_y p(X=x, Y=y)$$</p>
+<p>We define the <strong>conditional distribution</strong> of an rv using</p>
+<p>$$p(Y=y|X=x) = \frac{p(X=x, Y=y)}{p(X=x)}$$</p>
+<p>We can rearrange this equation to get</p>
+<p>$$p(x,y) = p(x)p(y|x)$$</p>
+<p>This is called the <strong>product rule</strong>. By extending the product rule to $D$ variables, we get the <strong>chain rule of probability</strong>:</p>
+<p>$$p(\mathbf{x}_{1:D}) = p(x_1) p(x_2|x_1) p(x_3|x_1,x_2) p(x_4|x_1,x_2,x_3) \ldots p(x_D|\mathbf{x}_{1:D-1})$$</p>
+<h2 id="bayes-rule">Bayes' rule</h2>
+<p>Combining the definition of conditional probability with the product and sum rules yields <strong>Bayes' rule</strong>,</p>
+<p>$$p(Y=y|X=x) = \frac{p(X=x,Y=y)}{p(X=x)} = \frac{p(Y=y)p(X=x|Y=y)}{\sum_{y \prime} p(Y=y\prime) p(X=x|Y=y \prime))}$$</p>
+<h2 id="independence-and-conditional-independence">Independence and conditional independence</h2>
+<p>We say $X$ and $Y$ are unconditionally independent or marginally independent, if we can represent the joint as the product of the two marginals, i.e.,</p>
+<p>$$X \perp Y \Longleftrightarrow p(X,Y) = p(X)p(Y)$$</p>
+<p>Unfortunately, unconditional independence is rare, because most variables influence most other variables. However, usually this influence is mediated via other variables rather than being direct. We therefore say $X$ and $Y$ are conditionally independent given $Z$ iff the conditional joint can be written as a product of conditional marginals:</p>
+<p>$$X \perp Y | Z \Longleftrightarrow p(X,Y|Z) = p(X|Z)p(Y|Z)$$</p>
+<p>We can write this assumption as a graph $X - Z - Y$, which captures the intuition that all the dependencies between $X$ and $Y$ are mediated via $Z$. By using larger graphs, we can define complex joint distributions; these are known as <strong>graphical models</strong>.</p>
+<h1 id="properties-of-a-distribution">Properties of a distribution</h1>
+<p>The most familiar property of a distribution is its <strong>mean</strong>, or <strong>expected value</strong>, often denoted by $\mu$. For continuous rv's, the mean is defined as follows:</p>
+<p>$$\mathbb{E}[X] \triangleq \int_{\mathcal{X}} xp(x) dx$$</p>
+<p><strong>Mean</strong></p>
+<p>If the integral is not finite, the mean is not defined.</p>
+<p>For discrete rv's the mean is defined as follows:</p>
+<p>$$\mathbb{E}[X] \triangleq \sum_{x \in \mathcal{X}} x p(x)$$</p>
+<p>However, this is only meaningful if the values of $x$ are ordered in some way (e.g., if they represent integer counts).</p>
+<p><strong>Variance</strong></p>
+<p>The <strong>variance</strong> is a measure of the spread of a distribution, often denoted by $\sigma^2$.</p>
+<p>$$\mathbb{V}[X] \triangleq \mathbb{E}[(X - \mu)^2] = \int (x - \mu)^2 p(x) dx = \mathbb{E}[X^2] - \mu^2$$</p>
+<p><strong>Mode</strong></p>
+<p>The <strong>mode</strong> of a distribution is the value with the highest probability mass or probability density:</p>
+<p>$$\mathbf{x}^* = \underset{x}{\text{argmax}}\ p(\mathbf{x})$$</p>
+<p>If the distribution is multimodal, this may not be unique.</p>
+<p><strong>Conditional moments</strong></p>
+<p>When we have two or more dependent random variables, we can find the moments of one variable given the knowledge of the other.</p>
+<p>$$\mathbb{E}[X] = \mathbb{E}[\mathbb{E}[X|Y]]$$</p>
+<p>$$\mathbb{V}[X] = \mathbb{E}[\mathbb{V}[X|Y]] + \mathbb{V}[\mathbb{E}[X|Y]]$$</p>
+<h1 id="covariance">Covariance</h1>
+<p>The covariance between two random variables $X$ and $Y$ denote the degree to which they are linearly related.</p>
+<p>$$\text{Cov}[X, Y] \triangleq \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = \mathbb{E}[XY] - \mathbb{E}[X][Y]$$</p>
+<p>If $\mathbf{x}$ is a $D$ dimensional vector, its covariance is a symmetric, positive semi definite matrix:</p>
+<p>$$\text{Cov}[\mathbf{x}] \triangleq \boldsymbol{\Sigma} =
+\begin{pmatrix}
+\mathbb{V}[X_1] &amp; \text{Cov}[X_1, X_2] &amp; \ldots &amp; \text{Cov}[X_1, X_D] \\
+\text{Cov}[X_2, X_1] &amp; \mathbb{V}[X_2] &amp; \ldots &amp; \text{Cov}[X_2, X_D] \\
+\vdots &amp; \vdots  &amp; \ddots &amp; \vdots \\
+\text{Cov}[X_D, X_1] &amp; \text{Cov}[X_D, X_2] &amp; \ldots &amp; \mathbb{V}[X_D] \\
+\end{pmatrix}
+$$</p>
+<p>from which we get an important result</p>
+<p>$$\mathbb{E}[\mathbf{xx^\top}] = \boldsymbol{\Sigma} + \boldsymbol{\mu\mu^\top}$$</p>
+<h1 id="correlation">Correlation</h1>
+<p>Covariances can be between negative and positive infinity. Sometimes it is more convenient to work with a normalized measure, with finite lower and upper bound. The (Pearson) correlation coefficient between $X$ and $Y$ is defined as</p>
+<p>$$\text{corr}(X, Y) \triangleq \frac{\text{Cov}[X, Y]}{\sqrt{\mathbb{V}[X] \mathbb{V}[Y]}}$$</p>
+<p>The $\text{corr}[X, Y] = 1$ iff there is a linear relationship between $X$ and $Y$, intuitively one might expect the correlation coefficient to be related to the slope of the regression line.</p>
+<p><strong>Uncorrelated does not imply independent</strong></p>
+<p>Independent implies uncorrelated; however, the converse is not true.</p>
+<p><strong>Correlation does not imply causation</strong></p>
+<p>Spurious correlation can be caused due to hidden factors.</p>
+<h1 id="simpson-s-paradox">Simpson's paradox</h1>
+<p>Simpson's paradox states that a statistical trend or relationship that appears in several different groups of data can disappear or reverse sign when these groups are combined.</p>
+<h1 id="transformation-of-random-variables">Transformation of random variables</h1>
+<p>Suppose $\mathbf{x} = p()$ is some random variable and $\mathbf{y} = f(\mathbf{x})$ is some deterministic transformation of it. In this section, we discuss how to compute $p(\mathbf{y})$.</p>
+<p><strong>Discrete case</strong></p>
+<p>If $X$ is a discrete random variable, we can derive the pmf of $Y$ by simply summing the probability mass of all the $x$'s such that $f(x) = y$.</p>
+<p><strong>Continuous case</strong></p>
+<p>If $X$ is invertible we work with cdf's instead. If $f$ is invertible, we can derive the pdf of $y$. If $f$ is not invertible, we can use numerical integration, or a Monte Carlo approximation.</p>
+<h2 id="moments-of-linear-transformation">Moments of linear transformation</h2>
+<p>Suppose $f$ is an affine function, so $\mathbf{y = Ax + b}$. In this case the mean and covariance of $\mathbf{y}$ is as follows:</p>
+<p>$$\mathbb{E}[\mathbf{y}] = \mathbf{A\boldsymbol{\mu} + b}$$</p>
+<p>$$\text{Cov}[\mathbf{y}] = \mathbf{A \boldsymbol{\Sigma} A^\top}$$</p>
+<h1 id="convolutional-theorem">Convolutional theorem</h1>
+<p>Convolution operation consists of flipping and dragging $y$ over $x$, multiplying elementwise, and adding up the results.</p>
+<p>$$p = p_1 \circledast p_2$$</p>
+<p>where $\circledast$ operator represents convolution operation.</p>
+<h1 id="central-limit-theorem">Central limit theorem</h1>
+<p>Consider $N$ random variables with pdf's (not necessarily Gaussian) $p_n(x)$, each with mean $\mu$ and variance $\sigma^2$. We assume each variable is iid. Let $S_N = \sum_{n=1}^{N} X_n$ be the sum of the rv's. As $N$ increases, the distribution of the sum approaches standard normal, where $\overline{X} = S_N / N$ is the sample mean.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

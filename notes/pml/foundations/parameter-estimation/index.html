@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Parameter estimation
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#introduction">Introduction</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#maximum-likelihood-estimate-mle">Maximum likelihood estimate (MLE)</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#empirical-risk-minimization-erm">Empirical risk minimization (ERM)</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#log-loss">Log loss</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#regularization">Regularization</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#early-stopping">Early stopping</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#using-more-data">Using more data</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/foundations/parameter-estimation/#online-recursive-estimation">Online (recursive) estimation</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introduction">Introduction</h1>
+<p>Till now we assumed all the parameters $\bm{\theta}$ of each building block in our model were known. Now we discuss how to learn these parameters from data, $\mathcal{D} = \{ (\mathbf{x}_n, \mathbf{y}_n) : n = 1 : N \}$. We will focus on computing a point estimate $\hat{\bm{\theta}}(\mathcal{D})$, and ignore any notion of uncertainty in our estimate.</p>
+<p>The process of estimating $\bm{\theta}$ from $\mathcal{D}$ is called model fitting or training, and is at the heart of machine learning. There are many methods of producing such estimates, but most boil down to an optimization problem of the form</p>
+<p>$$\hat{\bm{\theta}} = \text{argmin}\ \mathcal{L}(\bm{\theta})$$</p>
+<p>where $\mathcal{L}(\bm{\theta})$ is some kind of loss function or objective function.</p>
+<h2 id="maximum-likelihood-estimate-mle">Maximum likelihood estimate (MLE)</h2>
+<p>The most common approach to parameter estimation is to pick the parameters that assign the highest probability to the training data, this is called maximum likelihood estimation or MLE.</p>
+<p>$$\hat{\bm{\theta}} \triangleq \underset{\theta}{\text{argmax}}\ p(\mathcal{D}|\bm{\theta})$$</p>
+<p>We usually assume the training examples are independently sampled from the same distribution, so the (conditional) likelihood becomes</p>
+<p>$$p(\mathcal{D}|\bm{\theta}) = \prod_{n=1}^{N} p(\mathbf{y}_n | \mathbf{x}_n, \bm{\theta})$$</p>
+<p>This is known as the &quot;independent and identically distributed&quot; <strong>iid</strong> assumption. We usually work with log likelihood, which is given by</p>
+<p>$$LL(\bm{\theta}) \triangleq \text{log}\ p(\mathcal{D}|\bm{\theta}) = \sum_{n=1}^{N}\text{log}\ p(\mathbf{y}_n | \mathbf{x}_n, \bm{\theta})$$</p>
+<p>This decomposes into sum of terms, one per example, Thus the MLE is given by</p>
+<p>$$\hat{\bm{\theta}}_{mle} = \underset{\theta}{\text{argmax}} \sum_{n=1}^{N} \text{log}\ p(\mathbf{y}_n | \mathbf{x}_n, \bm{\theta})$$</p>
+<p>Since most optimization algorithms are designed to minimize cost functions, we can redefine the objected function to be conditional <strong>negative log likelihood</strong> or <strong>NLL</strong>, minimizing NLL will give the MLE:</p>
+<p>$$\hat{\bm{\theta}} = \underset{\theta}{\text{argmin}} - \sum_{n=1}^{N} \text{log}\ p(\mathbf{y}_n | \bm{\theta})$$</p>
+<h1 id="empirical-risk-minimization-erm">Empirical risk minimization (ERM)</h1>
+<p>We can generalize MLE by replacing the conditional log loss term with any other loss function, to get</p>
+<p>$$\mathcal{L}(\bm{\theta}) = \frac{1}{N} \sum_{n=1}^{N} l (\mathbf{y}_n, \bm{\theta}; \mathbf{x}_n)$$</p>
+<p>This is known as empirical risk minimization or ERM, since it is the expected loss where the expectation is taken wrt the empirical distribution.</p>
+<h2 id="log-loss">Log loss</h2>
+<p>Consider a probabilistic binary classifier, which produces the following distribution over labels:</p>
+<p>$$p(\widetilde{y} | \mathbf{x}, \bm{\theta}) = \sigma(\widetilde{y}\eta) = \frac{1}{1 + e^{-\widetilde{y}\eta}}$$</p>
+<p>where $\eta = f(\mathbf{x}; \bm{\theta})$ is the log odds. Hence the log loss is given by</p>
+<p>$$l_{ll}(\widetilde{y}, \eta) = - \text{log}\ p(\widetilde{y}, \eta) = \text{log}(1 + e^{-\widetilde{y}\eta})$$</p>
+<p>Like log loss, hinge loss is another convex upper bound function:</p>
+<p>$$l_{hinge}(\widetilde{y}, \eta) = \text{max}(0, 1 - \widetilde{y}\eta) \triangleq (1 - \widetilde{y}\eta)_{+}$$</p>
+<h1 id="regularization">Regularization</h1>
+<p>A fundamental problem with MLE and ERM, is that it will try to pick parameters that minimize loss on the training set, but this may not result in a model that has low loss on future data. This is called <strong>overfitting</strong>.</p>
+<p>The main solution to overfitting is to use <strong>regularization</strong>, which means to add penalty term to NLL, thus we optimize an objective of the form</p>
+<p>$$\mathcal{L}(\bm{\theta}; \lambda) = \left[ \frac{1}{N} \sum_{n=1}^{N} l(\mathbf{y}_n, \bm{\theta}_n; \mathbf{x}_n) \right] + \lambda C(\bm{\theta})$$</p>
+<h2 id="early-stopping">Early stopping</h2>
+<p>A very simple form of regularization, which is very effective in practice (especially for complex models), is known as <strong>early stopping</strong>. If we detect signs of overfitting (by monitoring the performance on validation set), we can stop the optimization process, to prevent the model memorizing too much information about the training set.</p>
+<h2 id="using-more-data">Using more data</h2>
+<p>As the amount of data increases, the chance of overfitting (for a model of fixed complexity) decreases (assuming the data contains informative examples). <strong>Learning curve</strong> is a plot made between error and training set size.</p>
+<h1 id="online-recursive-estimation">Online (recursive) estimation</h1>
+<p>If the entire dataset $\mathcal{D}$ is available before training starts, we say that we are doing <strong>batch learning</strong>. However, in some cases, the data arrives sequentially, so $\mathcal{D} = \{ \mathbf{y}_1, \mathbf{y}_2, \ldots \}$ in an unbounded stream. In this case, we want to perform <strong>online learning</strong>.</p>
+<p>Let $\hat{\bm{\theta}}_{t-1}$ be our estimate (e.g., MLE) given $\mathcal{D}_{1:t-1}$. To ensure our learning algorithm takes constant time per update, we need to find a learning rate of the form</p>
+<p>$$\bm{\theta} = f(\hat{\bm{\theta}}_{t-1}, \mathbf{y}_t)$$</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

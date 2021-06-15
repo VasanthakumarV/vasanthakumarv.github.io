@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Sets, functions and relations
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#sets">Sets</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#functions">Functions</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#continuous-functions">Continuous functions</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#lipschitz-constants">Lipschitz constants</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#jacobian">Jacobian</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#hessian">Hessian</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#convexity">Convexity</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#jensen-s-inequality">Jensen&#x27;s inequality</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#taylor-series-approximation">Taylor series approximation</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#bregman-divergence">Bregman divergence</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/sets/#conjugate-duality">Conjugate duality</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="sets">Sets</h1>
+<p>A set is collection of objects, it can be finite, or countably infinite, or uncountably infinite, it can be empty (denoted by $\phi$). The size of a set is denoted by $|\mathcal{X}|$</p>
+<h1 id="functions">Functions</h1>
+<p>A function $f : \mathcal{X} \longrightarrow \mathcal{Y}$ is a mapping from a set of points known <em>domain</em> to another set of points known as <em>codomain</em>. For example, $y = x^2$ is a function mapping $X = \mathbb{R}$ to $\mathcal{Y} = \mathbb{R}_+$. </p>
+<h1 id="continuous-functions">Continuous functions</h1>
+<p>$$\forall\epsilon &gt; 0.\ \exists\ \delta &gt; 0.\ \text{s.t.}\ ||\bold{x} - \bold{a}|| &lt; \delta \Longrightarrow ||f(\bold{x}) - f(\bold{a})|| &lt; \epsilon$$</p>
+<p>If we move small distance in the input space, then the function's response should only change a little bit.</p>
+<h1 id="lipschitz-constants">Lipschitz constants</h1>
+<p>Lipschitz constant of a function measures how much the function changes as we vary its input. In 1d case, this is defined as a constant $C \ge 0$, we have</p>
+<p>$$|f(x_1) - f(x_2)| \le C|x_1 - x_2|$$</p>
+<p>For a given constant $C$, the function output cannot change by more than $C$ if we change the input by 1 unit.</p>
+<h1 id="jacobian">Jacobian</h1>
+<p>Consider a function that maps a vector to another vector, $\bold{f} : \mathbb{R}^n \rightarrow \mathbb{R}^m$, the jacobian matrix of this function is $m \times n$ matrix of partial derivatives (we lay out the results in numerator layout):</p>
+<p>$$\bold{J} \triangleq
+\begin{pmatrix}
+\frac{\partial f_1}{\partial x_1} &amp; \ldots &amp; \frac{\partial f_1}{\partial x_n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial f_m}{\partial x_1} &amp; \ldots &amp; \frac{\partial f_m}{\partial x_n}
+\end{pmatrix}
+$$</p>
+<p><strong>Jacobian vector product</strong> is multiplying the Jacobian matrix $\bold{J} \in \mathbb{R}^{m \times n}$ by a vector $\bold{v} \in \mathbb{R}^n$. <strong>Vector Jacobian product</strong> is left-multiplying the Jacobian matrix by a vector. JVP is efficient if $m \ge n$, and VJP is efficient when $m \le n$.</p>
+<h1 id="hessian">Hessian</h1>
+<p>For a function $f : \mathbb{R}^n \rightarrow \mathbb{R}$ that is twice differentiable, we define Hessian matrix as $n \times n$ matrix of second partial derivativess:</p>
+<p>$$\bold{H} = \frac{\partial^2 f}{\partial \bold{x}^2} = \nabla^2 f =
+\begin{pmatrix}
+\frac{\partial^2 f}{\partial x_1^2} &amp; \ldots &amp; \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+&amp; \vdots &amp; \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} &amp; \ldots &amp; \frac{\partial^2}{\partial x_n^2}
+\end{pmatrix}
+$$</p>
+<h1 id="convexity">Convexity</h1>
+<p><strong>Convex set</strong></p>
+<p>We say $\mathcal{s}$ is a <strong>convex set</strong> if, for any $\bold{x}, \bold{x}\prime \in \mathcal{S}$, we have,</p>
+<p>$$\lambda \bold{x} + (1 - \lambda)\bold{x}\prime, \forall \lambda \in [0, 1]$$</p>
+<p>That is, if we draw a line from $\bold{x}$ to $\bold{x}\prime$, all points on the line lie inside the set.</p>
+<p><strong>Convex function</strong></p>
+<p>We say a function $f$ is convex if its <strong>epigraph</strong> (the set of points above the function) defines a convex set.</p>
+<p>A function $f$ is convex iff $\bold{H} = \nabla^2f(\bold{x})$ is <em>positive semi definite</em> for all $\bold{x} \in \text{dom}(f)$, $f$ is strictly convex if $\bold{H}$ is <em>positive definite</em>.</p>
+<h1 id="jensen-s-inequality">Jensen's inequality</h1>
+<p>Jensen's inequality states that for any convex function $f$, we have that</p>
+<p>$$f(\sum_{i=1}^{n} \lambda_i \bold{x}_i) \le \sum_{i=1}^n \lambda_i f(\bold{x}_i)$$</p>
+<p>where $\lambda_i \ge 0$ and $\sum_{i=1}^n \lambda_i = 1$</p>
+<h1 id="taylor-series-approximation">Taylor series approximation</h1>
+<p>Linear approximation around a point $a \in \mathbb{R}^n$</p>
+<p>$$\widehat{f}(\bold{x}) = f(\bold{a}) + \nabla f(\bold{a})^{\mathsf{T}}(\bold{x} - \bold{a})$$</p>
+<p>Quadratic approximation,</p>
+<p>$$\widehat{f}(\bold{x}) = f(\bold{a}) + \nabla f(\mathbf{a})^{\top}(\mathbf{x - a}) + (\bold{x} - \bold{a})^{\mathsf{T}}\nabla^2f(\bold{a})(\bold{x} - \bold{a})$$</p>
+<h1 id="bregman-divergence">Bregman divergence</h1>
+<p>Let $f : \Omega \rightarrow \mathbb{R}$ be a continuously differentiable, strictly convex function defined on a closed convex set $\Omega$. Bregman divergence is defined as follows:</p>
+<p>$$D_f(\bold{w}, \bold{v}) = f(\bold{w}) - f(\bold{v}) - (\bold{w} - \bold{v})^{\mathsf{T}}\nabla f(\bold{v})$$</p>
+<h1 id="conjugate-duality">Conjugate duality</h1>
+<p>Conjugate duality is a useful way to construct linear lower bounds to non-convex functions, which we can then easily maximize.</p>
+<p>Consider an arbitrary continuous function $f(\bold{x})$, suppose we create a linear lower bound on it of the form,</p>
+<p>$$\mathcal{L}(\bold{x}, \boldsymbol{\lambda}) \triangleq \lambda^{\mathsf{T}}\bold{x} - f^*(\boldsymbol{\lambda}) \le f(\bold{x})$$</p>
+<p>where $\boldsymbol{\lambda}$ is the slope, $f^*(\boldsymbol{\lambda})$ is the intercept, which we solve for.</p>
+<p>It is interesting to see what happens if we take the conjugate of the conjugate. If $f$ is convex, then $f^{**} = f$, so $f$ and $f^*$ are called <strong>conjugate duals</strong>.</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

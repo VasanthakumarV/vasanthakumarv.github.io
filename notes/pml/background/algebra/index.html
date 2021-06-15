@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Linear algebra
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#introduction">Introduction</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#vector-spaces">Vector spaces</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#range-and-nullspace-of-a-matrix">Range and nullspace of a matrix</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#linear-projection">Linear projection</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#norms-of-vector-and-matrix">Norms of vector and matrix</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#properties-of-a-matrix">Properties of a matrix</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#special-types-of-matrices">Special types of matrices</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#matrix-multiplication">Matrix multiplication</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#kronecker-products">Kronecker products</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#einstein-summation">Einstein summation</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#matrix-inversion">Matrix inversion</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#eigenvalue-decomposition-evd">Eigenvalue decomposition (EVD)</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#standardizing-and-whitening-data">Standardizing and whitening data</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#power-method">Power method</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#deflation">Deflation</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#singular-value-decomposition-svd">Singular value decomposition (SVD)</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#pseudo-inverse">Pseudo inverse</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#other-matrix-decompositions">Other matrix decompositions</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#solving-systems-of-linear-equations">Solving systems of linear equations</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#solving-square-systems">Solving square systems</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#solving-underconstrained-systems">Solving underconstrained systems</a>
+                  </li>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/pml/background/algebra/#solving-overconstrained-systems">Solving overconstrained systems</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="introduction">Introduction</h1>
+<h2 id="vector-spaces">Vector spaces</h2>
+<p>The span of set of vectors ${\textbf{x}_1,\textbf{x}_2,...,\textbf{x}_n}$ is the set of all the vectors that can be expressed as a linear combination of the vectors,</p>
+<p>$$\text{span}(\textbf{x}_1,\ldots,\textbf{x}_n) \triangleq \Bigg\{ \textbf{v} : \textbf{v} =\sum_{i=1}^{n}  \alpha_i \textbf{x}_i, \alpha_i \in \mathbb{R} \Bigg\}$$</p>
+<p>If $\{\textbf{x}_1, ..., \textbf{x}_2\}$ is a set of linearly independent vectors, where $\textbf{x}_i \in \mathbb{R}^n$, then the span of that set is $\mathbb{R}^n$.</p>
+<p>A <strong>basis</strong> $\mathcal{B}$ is a set of linearly independent vectors that span the whole space. There are often multiple basis to choose from. The <em>standard basis</em> uses the coordinate vectors $\textbf{e}_1 = (1,0,\ldots,0)$, up to $\textbf{e}_n = (0,0,\ldots,1)$.</p>
+<h2 id="range-and-nullspace-of-a-matrix">Range and nullspace of a matrix</h2>
+<p>The <strong>range</strong> or the <strong>column space</strong> of a matrix $\textbf{A} \in \mathbb{R}^{m \times n}$ is the span of the columns of $\textbf{A}$,</p>
+<p>$$\text{range}(\textbf{A}) \triangleq \{ \textbf{v} \in \mathbb{R}^m : \textbf{v} = \textbf{Ax}, \textbf{x} \in \mathbb{R}^n \}$$</p>
+<p>The <strong>nullspace</strong> of a matrix is the set of all vectors that get mapped to the null vector when multiplied,</p>
+<p>$$\text{nullspace}(\textbf{A}) \triangleq \{ \textbf{x} \in \mathbb{R}^n : \textbf{Ax} = 0 \}$$</p>
+<h2 id="linear-projection">Linear projection</h2>
+<p>The projection of a vector $\textbf{y} \in \mathbb{R}^m$ onto the span of $\{ \textbf{x}_1, \ldots, \textbf{x}_n \}$ (here we assume $\textbf{x}_i \in \mathbb{R}^m$) is the vector $\textbf{v} \in \text{span}(\{ \textbf{x}_1, \ldots, \textbf{x}_n \})$, such that $\textbf{v}$ is as close as possible to $\textbf{y}$, as measured by the Euclidean norm $||\textbf{v} - \textbf{y}||_2$.</p>
+<p>$$\text{Proj}(\textbf{y}; \textbf{A}) = \textbf{A}(\textbf{A}^\mathsf{T}\textbf{A})^{-1}\textbf{A}^\mathsf{T}\textbf{y}$$</p>
+<h2 id="norms-of-vector-and-matrix">Norms of vector and matrix</h2>
+<p>The norm of a vector $||\textbf{x}||$ is informally, a measure of the length of the vector.</p>
+<p><strong>p-norm</strong> $||\textbf{x}||_p = (\sum_{i=1}^{n} |x_i|^p)^{1/p}$, for $p \ge 1$.</p>
+<p><strong>Max-norm</strong> $||\textbf{x}||_{\infty} = \text{max}_i|x_i|$.</p>
+<p>The induced norm of matrix $\textbf{A}$ as the maximum amount by which a linear function $f(\textbf{x}) = \textbf{Ax}$ can lengthen any unit-norm input.</p>
+<h2 id="properties-of-a-matrix">Properties of a matrix</h2>
+<p><strong>Trace</strong></p>
+<p>The <strong>trace</strong> of a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$, denoted by $\text{tr}(\textbf{A})$, is the sum of the diagonal elements in the matrix:</p>
+<p>$$\text{tr}(\textbf{A}) \triangleq \sum_{i=1}^n A_{ii}$$</p>
+<p>Some properties of trace of a matrix,</p>
+<p>$$\text{tr}(\textbf{A}) = \sum_{i=1}^{n} \lambda_i\ \text{where}\ \lambda_i\ \text{are\ the\ eigenvalues}$$</p>
+<p><strong>Determinant</strong></p>
+<p>The <strong>determinant</strong> of a matrix, denoted by $\text{det}(\textbf{A})$ or $|\textbf{A}|$, is a measure of how much it changes a unit volume when viewed as a linear transformation.</p>
+<p>Some properties of determinants,</p>
+<p>$$|\textbf{A}| = 0\ \text{iff}\ \textbf{A}\ \text{is\ singular}$$
+$$\textbf{A}| = \prod_{i=1}^{n} \lambda_i\ \text{where}\ \lambda_i\ \text{are\ the\ eigen\ values\ of}\ \textbf{A}$$</p>
+<p><strong>Rank</strong></p>
+<p>The <strong>column rank</strong> of a matrix $\textbf{A}$ is the dimension of the space spanned by its column, and the <strong>row rank</strong> is the dimension of the space spanned by its rows. For any matrix $\textbf{A}$ $\text{columnrank}(\textbf{A}) = \text{rowrank}(\textbf{A})$, and so this quantity is simply referred to as the <strong>rank</strong> of $\textbf{A}$.</p>
+<p><strong>Condition numbers</strong></p>
+<p>The <strong>condition number</strong> of a matrix $\textbf{A}$ is a measure of how numerically stable any computation involving $\textbf{A}$ will be, it is defined as follows:</p>
+<p>$$\kappa(\textbf{A}) \triangleq ||\textbf{A}||.||\textbf{A}^{-1}||$$</p>
+<p>We say $\textbf{A}$ is well-conditioned if $\kappa(\textbf{A})$ is close to 1, and ill-conditioned if it is large.</p>
+<h2 id="special-types-of-matrices">Special types of matrices</h2>
+<p><strong>Diagonal matrix</strong></p>
+<p>A <strong>diagonal matrix</strong> is a matrix where all non-diagonal elements are 0.</p>
+<p>The <strong>identity matrix</strong> is a square matrix, denoted $\textbf{I} \in \mathbb{R}^{n \times n}$, with ones on the diagonal and zeros everywhere else.</p>
+<p>A <strong>block diagonal</strong> matrix is one which contains matrices on the main diagonal, and is 0 everywhere else.</p>
+<p>A <strong>band diagonal</strong> matrix only has non-zero entries along the diagonal, and on $k$ sides of the diagonal, where $k$ is the bandwidth.</p>
+<p><strong>Triangular matrix</strong></p>
+<p>An <strong>uppper triangular matrix</strong> only has non-zero entries on and above the diagnonal. A <strong>lower triangular matrix</strong> only has non-zero entries on and below the diagonal. Triangular matrices have the useful property that the diagonal entries of $\textbf{A}$ are the eigenvalues.</p>
+<p><strong>Positive definite matrix</strong></p>
+<p>A symmetric matrix $\textbf{A} \in \mathbb{S}^n$ is <strong>positive definite</strong> iff for all non-zero vectors $\textbf{x} \in \mathbb{R}^n$, $\textbf{x}^\mathsf{T}\textbf{A}\textbf{x} &gt; 0$. If it is possible that $\textbf{x}^\mathsf{T}\textbf{A}\textbf{x} = 0$, we say the matrix is <strong>positive semidefinite</strong>. We denote the set of all positive definite matrices by $\mathbb{S}_{++}^n$.</p>
+<p>There is one type of positive definite matrix that deserves special mention. Given any matrix $\textbf{A} \in \mathbb{R}^{m \times n}$, the <strong>Gram matrix</strong> $\textbf{G} = \textbf{A}^\mathsf{T}\textbf{A}$ is always positive semidefinite. Further, if $m \ge n$ (and we assume for convenience that $\textbf{A}$ is full rank), then $\textbf{G} = \textbf{A}^\mathsf{T}\textbf{A}$ is positive definite.</p>
+<p><strong>Orthogonal matrix</strong></p>
+<p>A set of vectors that is pairwise orthogonal and normalized is called <strong>orthonormal</strong>. A square matrix $\textbf{U} \in \mathbb{R}^{n \times n}$ is orthogonal if all of its columns are orthonormal.</p>
+<p>$$\textbf{U}^{\mathsf{T}}\textbf{U} = \textbf{I} = \textbf{U}\textbf{U}^\mathsf{T}$$</p>
+<p><strong>Gram Schmidt orthogonalization</strong> is a way to make any square matrix orthogonal.</p>
+<h1 id="matrix-multiplication">Matrix multiplication</h1>
+<h2 id="kronecker-products">Kronecker products</h2>
+<p>If $\textbf{B}$ is an $m \times n$ matrix and $\textbf{B}$ is a $p \times q$ matrix, then the <strong>Kronecker product</strong> $\textbf{A} \otimes \textbf{B}$ is the $mp \times nq$ block matrix</p>
+<p>$$\textbf{A} \otimes \textbf{B} =
+\begin{bmatrix}
+a_{11}\textbf{B} \ldots a_{1n}\textbf{B} \\
+\vdots \ddots \vdots \\
+a_{m1}\textbf{B} \ldots a_{mn}\textbf{B}
+\end{bmatrix}
+$$</p>
+<h2 id="einstein-summation">Einstein summation</h2>
+<p>Einsum summation is a notational shortcut for working with tensors. In einsum notation, we write $L_{nc} = S_{ntk}W_{kd}V_{dc}$. We sum over $k$ and $d$ because those indices occur twice on the RHS. We sum over $t$ because the index does not occur on the LHS.</p>
+<h1 id="matrix-inversion">Matrix inversion</h1>
+<p>The inverse of a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$ is denoted $\textbf{A}^{-1}$, the inverse exists if and only if $\text{det}(\textbf{A})$ is not $0$. If the $\text{det}(\textbf{A}) = 0$ it is called a singular matrix.</p>
+<h1 id="eigenvalue-decomposition-evd">Eigenvalue decomposition (EVD)</h1>
+<p>Give a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$, we say that $\lambda \in \mathbb{R}$ of $\textbf{A}$ and $\textbf{u} \in \mathbb{R}^n$ is the corresponding eigenvector if,</p>
+<p>$$\textbf{A}\textbf{u} = \lambda\textbf{u},\ \textbf{u}\text{\ not\ equal\ }0$$</p>
+<p>This definition means that multiplying $\textbf{A}$ by the vector $\textbf{u}$ results in a new vector that points in the same direction as $\textbf{u}$, but scaled by a factor $\lambda$. We assume that the eigenvector is normalized to have length 1.</p>
+<p>$$(\lambda \textbf{I} - \textbf{A})\textbf{u} = \textbf{0}$$</p>
+<p>Now the equation has a non-zero solution to $\textbf{u}$ if and only if $(\lambda \textbf{I} - \textbf{A})$ has a non-empty nullspace. The $n$ solutions to this equation are the $n$ (possibly complex-valued) eigenvalues $\lambda_i$, and $\textbf{u}_i$ are the corresponding eigenvectors. It is standard to sort the eigenvectors in order of their eigenvalues, with the largest magnitude ones first.</p>
+<p>We can write all of the eigenvector equations simultaneously as</p>
+<p>$$\textbf{A}\textbf{U} = \textbf{U} \boldsymbol{\Lambda}$$</p>
+<p>Where the columns of $\textbf{U} \in \mathbb{R}^{n \times n}$ are the eigenvectors of $\textbf{A}$ and $\boldsymbol{\Lambda}$ is a diagonal matrix whose entries are the eigenvalues of $\textbf{A}$.</p>
+<p>If the eigenvectors of $\textbf{A}$ are linearly independent, then the matrix $\textbf{U}$ will be invertible, so</p>
+<p>$$\textbf{A} = \textbf{U}\boldsymbol{\Lambda}\textbf{U}^{-1}$$</p>
+<p>A matrix that can be written in this form is called diagonalizable.</p>
+<h2 id="standardizing-and-whitening-data">Standardizing and whitening data</h2>
+<p>Suppose we have a dataset $\textbf{X} \in \mathbb{R}^{N \times D}$. It is common to preprocess the data so that each column has zero mean and unit variance. This is called standardizing the data. Although standardizing forces the variance to be 1, it does not remove the correlation between the columns. To do that, we must whiten the data.</p>
+<h2 id="power-method">Power method</h2>
+<p>We now describe a simple iterative method for computing the eigenvector corresponding to the largest eigenvalue of a real symmetric matrix; this is called the power method.</p>
+<p>Let $\textbf{A}$ be a matrix with orthonormal eigenvectors, so $\textbf{A} = \textbf{U}\boldsymbol{\Lambda}\textbf{U}^{\mathsf{T}}$. Let $\textbf{v}_{(0)}$ be an arbitrary vector in the range of $\textbf{A}$, so $\textbf{A}\textbf{x} = \textbf{v}_{(0)}$ for some $\textbf{x}$. Hence we can write $\textbf{v}_{(0)}$ as</p>
+<p>$$\textbf{v}_0 = \textbf{U}(\boldsymbol{\Lambda}\textbf{U}^{\mathsf{T}}\textbf{x}) = a_1 \textbf{v}_1 + \ldots + a_m\textbf{u}_m$$</p>
+<p>for some constants $a_i$. We can now repeatedly multiply $\textbf{v}$ by $\textbf{A}$ and renormalize:</p>
+<p>$$\textbf{v}_{t} \propto \textbf{A} \textbf{v}_{t - 1}$$</p>
+<p>Since $\textbf{v}_t$ is a multiple of $\textbf{A}^t \textbf{v}_0$, we have</p>
+<p>$$\textbf{v}_t \propto a_1\lambda_1^t\textbf{u}_1 + \ldots + a_m\lambda_m^t\textbf{u}_m \rightarrow \lambda_1^ta_1\textbf{U}_1$$</p>
+<p>since $\frac{|\lambda_k|}{|\lambda_1|} &lt; 1$ for $k &gt; 1$ (assuming the eigenvalues are sorted in descending order). So we can see that this converges to $\textbf{u}_1$. </p>
+<p>We can now discuss how to compute the corresponding eigenvalue $\lambda_1$. Define the Rayleigh quotient to be,</p>
+<p>$$R(\textbf{A}, \textbf{x}) \triangleq \frac{\textbf{x}^{\mathsf{T}} \textbf{A} \textbf{x}}{\textbf{x}^\mathsf{T} \textbf{x}}$$</p>
+<p>Hence,</p>
+<p>$$R(\textbf{A}, \textbf{u}_i) = \frac{\textbf{u}_i^{\mathsf{T}}\textbf{A}\textbf{u}_i}{\textbf{u}_i^{\mathsf{T}}} = \lambda_i$$</p>
+<p>Thus we can easily compute $\lambda_i$ from $\textbf{u}_i$ and $\textbf{A}$.</p>
+<h2 id="deflation">Deflation</h2>
+<p>We now describe how to compute subsequent eignevectors and values. Since the eigenvectors are orthonormal, and the eigenvalues are real, we can project out the $\textbf{u}_1$ component from the matrix as follows,</p>
+<p>$$\textbf{A}^{(2)} = \textbf{A}^{(1)} - \lambda_1 \textbf{u}_1 \textbf{u}_1^{\mathsf{T}}$$</p>
+<p>This is called deflation. We can then apply the power method to find the largest eigenvector and value in the subspace orthogonal to $\textbf{u}_1$.</p>
+<h1 id="singular-value-decomposition-svd">Singular value decomposition (SVD)</h1>
+<p>SVD generalizes EVD to rectangular matrices.</p>
+<p>$$\textbf{A} = \textbf{U}\textbf{S}\textbf{V}^\mathsf{T} = \sigma_1
+\begin{pmatrix}
+| \\
+\textbf{u}_1 \\
+|
+\end{pmatrix}
+\begin{pmatrix}
+- &amp; \textbf{v}_1^{\mathsf{T}} &amp; -
+\end{pmatrix}
++
+\ldots
++
+\sigma_r
+\begin{pmatrix}
+| \\
+\textbf{u}_r \\
+|
+\end{pmatrix}
+\begin{pmatrix}
+- &amp; \textbf{v}_r^{\mathsf{T}} &amp; -
+\end{pmatrix}
+$$</p>
+<p>Where $\textbf{U}$ is an $m \times m$ whose columns are orthonormal (so $\textbf{U} \textbf{U}^\mathsf{T} = \textbf{I}_m$), $\textbf{V}$ is $n \times n$ matrix whose rows and columns are orthonormal (so $\textbf{V}^\mathsf{T} \textbf{V} = \textbf{V} \textbf{V}^\mathsf{T} = \textbf{I}_n$), and $\textbf{S}$ is a $m \times n$ matrix containing the $r = min(m, n)$ <strong>singular values</strong> $\sigma_i \ge 0$ on the main diagonal, with 0s filling the rest of the matrix. The columns of $\textbf{U}$ are left singular vectors, and the columns of $\textbf{V}$ are right singular vectors.</p>
+<h2 id="pseudo-inverse">Pseudo inverse</h2>
+<p>The <strong>Moore-Penrose pseudo-inverse</strong> of $\textbf{A}$, pseudo inverse denoted $\textbf{A}^{\dagger}$, is defined as the unique matrix that satisfies the following four properties:</p>
+<p>$$\mathbf{A} \mathbf{A}^\dagger \mathbf{A} = \mathbf{A}, \mathbf{A}^\dagger \mathbf{A} \mathbf{A}^\dagger = \mathbf{A}^\dagger, (\mathbf{A}^\dagger \mathbf{A})^\top = \mathbf{A}^\dagger \mathbf{A}, (\mathbf{A} \mathbf{A}^\dagger)^\top = \mathbf{A} \mathbf{A}^\dagger$$</p>
+<p>If $\mathbf{A}$ is square and non-singular, then $\mathbf{A}^\dagger = \mathbf{A}^{-1}$.</p>
+<p>If $m &gt; n$ (tall, skinny) and the columns of $\mathbf{A}$ are linearly independent (so $\mathbf{A}$ is full rank), then</p>
+<p>$$\mathbf{A}^{\dagger} = (\mathbf{A}^{\top}\mathbf{A})^{-1} \mathbf{A}^{\top}$$</p>
+<p>We can compute pseudo inverse using SVD decomposition,</p>
+<p>$$\mathbf{A}^\dagger = \mathbf{A}^{-1} = \mathbf{V} \mathbf{S}^{-1} \mathbf{U}^\top$$</p>
+<h1 id="other-matrix-decompositions">Other matrix decompositions</h1>
+<p><strong>LU factorization</strong></p>
+<p>We can factorize any square matrix $\mathbf{A}$ into a product of lower triangular matrix $\mathbf{L}$ and an upper triangular matrix $\mathbf{U}$.</p>
+<p><strong>QR decomposition</strong></p>
+<p>Suppose we have $\mathbf{A} \in \mathbb{R}^{m \times n}$ representing a set of linearly independent basis vectors (so $m \ge n$), and we want to find a series of orthonormal vectors $\mathbf{q}_1, \mathbf{q}_2, \ldots$ that span the successive subspaces of $\text{span}(\mathbf{a_1}), \text{span}(\mathbf{a}_1, \mathbf{a}_2), \text{etc}$. QR decomposition is commonly used to solve systems of linear equations.</p>
+<p><strong>Cholesky decomposition</strong></p>
+<p>Any symmetric positive definite matrix can be factorized as $\mathbf{A} = \mathbf{R}^\top \mathbf{R}$, where $\mathbf{R}$ is upper triangular with real, positive diagonal elements.</p>
+<h1 id="solving-systems-of-linear-equations">Solving systems of linear equations</h1>
+<p>If we have $m$ equations and $n$ unknowns then $\mathbf{A}$ will be a $m \times n$ matrix, $\mathbf{b}$ will be a $m \times 1$ vector. If $m = n$ (and $\mathbf{A}$ is full rank), there is a single unique solution. If $m &lt; n$ the system is underdetermined, so there is no unique solution. If $m &gt; n$, the system is overdetermined, since there are more constraints than unknowns, and not all lines intersect at the same point.</p>
+<h2 id="solving-square-systems">Solving square systems</h2>
+<p>In the case where $m = n$, we can solve for $\mathbf{x}$ by computing an LU decomposition, $\mathbf{A} = \mathbf{L}\mathbf{U}$, and then proceeding as follows:</p>
+<p>$$\begin{aligned}
+\mathbf{Ax} &amp;= \mathbf{b} \\
+\mathbf{LUx} &amp;= \mathbf{b} \\
+\mathbf{Ux} &amp;= \mathbf{L}^{-1} \mathbf{b} \triangleq \mathbf{y} \\
+\mathbf{x} &amp;= \mathbf{U}^{-1} \mathbf{y}
+\end{aligned}
+$$
+The crucial point is that $\mathbf{L}$ and $\mathbf{U}$ are both triangular matrices, so we can avoid taking matrix inverses, and use a method known as <strong>backsubstituion</strong> instead.</p>
+<h2 id="solving-underconstrained-systems">Solving underconstrained systems</h2>
+<p>Here we consider underconstrained setting, where $m &lt; n$. We assume the rows are linearly independent, so $\mathbf{A}$ is full rank. When $m &lt; n$, there are multiple possible solutions, which have the form</p>
+<p>$$\{ \mathbf{x} : \mathbf{Ax} = \mathbf{b} \} = \{ \mathbf{x}_p + \mathbf{z : z} \in \text{nullspace}(\mathbf{A}) \}$$</p>
+<p>Where $\mathbf{x}_p$ is any particular solution. It is standard to pick the particular solution with minimal $l_2$ norm.</p>
+<h2 id="solving-overconstrained-systems">Solving overconstrained systems</h2>
+<p>If $m &gt; n$, we have an overdetermined solution, which typically does not have an exact solution, but we will try to fidn the solution that gets as close as possible to satisfying all of the constraints specified by $\mathbf{Ax = b}$. We can do this by minimizing the following cost function, known as the <strong>least squares objective</strong>:</p>
+<p>$$f(\mathbf{x}) = \frac{1}{2} || \mathbf{Ax - b} ||_2^2$$</p>
+<p>Using matrix calculus, we can find its gradient,</p>
+<p>$$g(\mathbf{x}) = \frac{\partial(f(\mathbf{x}))}{\partial \mathbf{x}} = \mathbf{A^\top A x} - \mathbf{A^\top b}$$</p>
+<p>The optimum can be found by setting the gradient to 0, the corresponding $\mathbf{\hat{x}}$ is the <strong>ordinary least squares (OLS)</strong> solution, which is given by,</p>
+<p>$$\mathbf{\hat{x}} = \mathbf{(A^\top A)}^{-1} \mathbf{A^\top b}$$</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Bayesian reasoning and Probability
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/reasoning/#bayesian-reasoning">Bayesian reasoning</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/reasoning/#probability">Probability</a>
+            
+              <ul>
+                
+                  <li>
+                    <a href="https://vasanthakumarv.github.io/notes/stats/intro/reasoning/#combining-probabilities">Combining probabilities</a>
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="bayesian-reasoning">Bayesian reasoning</h1>
+<p>Beliefs start with our existing experience of the world, $X$. When we observe data, $D$, it either aligns with our experience, $P(D | X)$ = very high, or it surprises us, $P(D | X)$ = very low. To understand the world, we rely on beliefs we have about what we observe, or hypotheses, $H$. Oftentimes a new hypothesis can help explain the data that surprises us, $P(D | H, X) \gg P(D | X)$. When we gather new data or come up with new ideas, we can create more hypotheses, $H_1, H_2, H_3, \ldots$. We update our beliefs when a new hypothesis explains our data much better than our old hypothesis:</p>
+<p>$$\frac{P( D | H_2, X )}{P( D | H_1, X )} = \text{large\ number}$$</p>
+<p>Finally we should be far more concerned with data changing our beliefs than with ensuring that the data supports our beliefs, $P(H | D)$.</p>
+<p>A full Bayesian analysis involves the following,</p>
+<ul>
+<li>Observing data</li>
+<li>Forming hypotheses</li>
+<li>Updating beliefs based on new data and ideas</li>
+</ul>
+<h1 id="probability">Probability</h1>
+<p>We have two different types of probabilities; those of events and those of beliefs. We define probability as the ratio of the outcome(s) we care about to the number of all possible. While this is the most common definition of probability is difficult to apply to beliefs, because most practical, everyday probability problems do not have clear-cut outcomes and so aren't intuitively assigned discrete numbers.</p>
+<p>$$P(H) = \frac{Number\ of\ favorable\ outcomes}{Total\ number\ of\ possible\ outcomes}$$</p>
+<p>To calculate the probability of beliefs, we need to establish how many times more we believe in one hypothesis over another. One good test of this is how much you would be willing to bet on your belief.</p>
+<p>$$P(H) = \frac{ O(H) }{ 1 + O(H) }$$</p>
+<p>Where $O(H)$ is the odds.</p>
+<h2 id="combining-probabilities">Combining probabilities</h2>
+<p>Calculating the probability of two events occuring together using product rule</p>
+<p>$$P(A, B) = P(A) \times P(B)$$</p>
+<p>Sum rule for combining probabilities, to solve for overcounting in non-mutually exclusive events, sum rule uses the product rule</p>
+<p>$$P(A\ OR\ B) = P(A) + P(B) - P(A, B)$$</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

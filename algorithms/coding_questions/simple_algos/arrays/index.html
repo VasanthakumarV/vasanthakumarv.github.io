@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+        >
+        Notes
+      </a>
+      <a href="/algorithms"
+         class="navbar-selected" >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Arrays
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#sorted-squared-array">Sorted squared array</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#tournament-winner">Tournament winner</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#non-constructible-change">Non-constructible change</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#minimum-waiting-time">Minimum waiting time</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#array-of-products">Array of products</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#first-duplicate-value">First duplicate value</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/arrays/#merge-overlapping-intervals">Merge overlapping intervals</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="sorted-squared-array">Sorted squared array</h1>
+<p>Write a function that takes in a non-empty array of integers that are sorted in ascending order and returns a new array of the same length with the squares of the original integers also sorted in ascending order.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">sort_squared_slice</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#f29718;">slice</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">isize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#bfbab0;">[</span><span style="color:#ff7733;">isize</span><span style="color:#bfbab0cc;">;</span><span style="color:#bfbab0;"> N] {
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> output </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;</span><span style="color:#bfbab0;"> N]</span><span style="color:#bfbab0cc;">;
+    
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> small_idx </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> large_idx </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> slice</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span style="color:#bfbab0;">() </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+    
+    </span><span style="color:#ff7733;">for</span><span style="color:#bfbab0;"> i </span><span style="color:#f29668;">in </span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#bfbab0;">slice</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span style="color:#bfbab0;">())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">rev</span><span style="color:#bfbab0;">() {
+        </span><span style="color:#ff7733;">if</span><span style="color:#bfbab0;"> slice[small_idx]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">abs</span><span style="color:#bfbab0;">() </span><span style="color:#f29668;">&gt;</span><span style="color:#bfbab0;"> slice[large_idx]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">abs</span><span style="color:#bfbab0;">() {
+            output[i] </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> slice[small_idx]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">pow</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">2</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            small_idx </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+        </span><span style="color:#bfbab0;">} </span><span style="color:#ff7733;">else </span><span style="color:#bfbab0;">{
+            output[i] </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> slice[large_idx]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">pow</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">2</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            large_idx </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> large_idx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">saturating_sub</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+        </span><span style="color:#bfbab0;">}
+    }
+    
+    output
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> answer </span><span style="color:#f29668;">= </span><span style="color:#f07178;">sort_squared_slice</span><span style="color:#bfbab0;">([</span><span style="color:#f29668;">-</span><span style="color:#f29718;">11</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">9</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">answer)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="tournament-winner">Tournament winner</h1>
+<p>There's an algorithms tournament taking place in which teams of programmers compete against each other to solve algorithmic problems as fast as possible. Teams compete in a round robin, where each team faces off against all other teams. Only two teams compete against each other at a time, and for each competition, one team is designated the home team, while the other team is the away team. In each competition there's always one winner and one loser; there are no ties. A team receives 3 points if it wins and 0 points if it loses. The winner of the tournament is the team that receives the most amount of points.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span style="color:#bfbab0;">std</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">collections</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">HashMap</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">POINTS</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">WIN_FLAG</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">tournament_winner</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">&#39;a</span><span style="color:#bfbab0;">, </span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(
+    </span><span style="color:#f29718;">competitions</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [(&amp;&#39;</span><span style="color:#f29718;">a str</span><span style="color:#bfbab0cc;">,</span><span style="color:#bfbab0;"> &amp;&#39;</span><span style="color:#f29718;">a str</span><span style="color:#bfbab0;">); N],
+    </span><span style="color:#f29718;">results</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; N],
+) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str </span><span style="color:#bfbab0;">{
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> best_team </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">(</span><span style="color:#c2d94c;">&quot;&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> tracker </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">HashMap</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">new()</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    competitions
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span style="color:#bfbab0;">(|(</span><span style="color:#f29718;">i</span><span style="color:#bfbab0cc;">,</span><span style="color:#bfbab0;"> (</span><span style="color:#f29718;">home_team</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">away_team</span><span style="color:#bfbab0;">))</span><span style="color:#f29668;">| </span><span style="color:#bfbab0;">{
+            </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> winning_team </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span style="color:#bfbab0;"> results[i] {
+                </span><span style="color:#f29718;">WIN_FLAG </span><span style="color:#f29668;">=&gt;</span><span style="color:#bfbab0;"> home_team</span><span style="color:#bfbab0cc;">,
+                </span><span style="color:#f29668;">_ =&gt;</span><span style="color:#bfbab0;"> away_team</span><span style="color:#bfbab0cc;">,
+            </span><span style="color:#bfbab0;">}</span><span style="color:#bfbab0cc;">;
+
+            </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span style="color:#bfbab0;">(value) </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> tracker</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_mut</span><span style="color:#bfbab0;">(winning_team) {
+                </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;">value </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">POINTS</span><span style="color:#bfbab0cc;">;
+
+                </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;">value </span><span style="color:#f29668;">&gt;</span><span style="color:#bfbab0;"> best_team</span><span style="color:#f29668;">.</span><span style="color:#f29718;">1 </span><span style="color:#bfbab0;">{
+                    best_team </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">(winning_team</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;">value)</span><span style="color:#bfbab0cc;">;
+                </span><span style="color:#bfbab0;">}
+            } </span><span style="color:#ff7733;">else </span><span style="color:#bfbab0;">{
+                tracker</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span style="color:#bfbab0;">(winning_team</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">POINTS</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+            </span><span style="color:#bfbab0;">}
+        })</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    best_team</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0
+</span><span style="color:#bfbab0;">}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> winner </span><span style="color:#f29668;">= </span><span style="color:#f07178;">tournament_winner</span><span style="color:#bfbab0;">(
+        [(</span><span style="color:#c2d94c;">&quot;html&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;c#&quot;</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">(</span><span style="color:#c2d94c;">&quot;c#&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;python&quot;</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">(</span><span style="color:#c2d94c;">&quot;python&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;html&quot;</span><span style="color:#bfbab0;">)]</span><span style="color:#bfbab0cc;">,
+        </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">,
+    </span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">winner)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="non-constructible-change">Non-constructible change</h1>
+<p>Given an array of positive integers representing the values of coins in your possession, write a function that returns the minimum amount of change (the minimum sum of money) that you cannot  create. The given coins can have any positive integer value and aren't necessarily unique (i.e., you can have multiple coins of the same value).</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">non_constructible_change</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">coins</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span style="color:#bfbab0;">{
+    coins</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sort_unstable</span><span style="color:#bfbab0;">()</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    coins</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">|</span><span style="color:#f29718;">change_created</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">coin</span><span style="color:#bfbab0;">| {
+        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;">coin </span><span style="color:#f29668;">&gt;</span><span style="color:#bfbab0;"> change_created </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span style="color:#bfbab0;">{
+            </span><span style="color:#ff7733;">return</span><span style="color:#bfbab0;"> change_created </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+        </span><span style="color:#bfbab0;">}
+
+        change_created </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1
+    </span><span style="color:#bfbab0;">})
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> answer </span><span style="color:#f29668;">= </span><span style="color:#f07178;">non_constructible_change</span><span style="color:#bfbab0;">([</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">answer)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="minimum-waiting-time">Minimum waiting time</h1>
+<p>You're given a non-empty array of positive integers representing the amounts of time that specific queries take to execute. Only one query can be executed at a time, but the queries can be executed in any order.</p>
+<p>A query's waiting time is defined as the amount of time that it must wait before its execution starts. In other words, if a query is executed second, then its waiting time is the duration of the first query; if a query is executed third, then its waiting time is the sum of the durations of the first two queries.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">min_wait_time</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">queries</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span style="color:#bfbab0;">{
+    queries</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sort_unstable</span><span style="color:#bfbab0;">()</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    queries
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">|</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">wait_time</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">i</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">duration</span><span style="color:#bfbab0;">)| {
+            </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> queries_left </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> queries</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span style="color:#bfbab0;">() </span><span style="color:#f29668;">- </span><span style="color:#bfbab0;">(i </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            wait_time </span><span style="color:#f29668;">+=</span><span style="color:#bfbab0;"> duration </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;"> queries_left</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            wait_time
+        })
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> input </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">6</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> answer </span><span style="color:#f29668;">= </span><span style="color:#f07178;">min_wait_time</span><span style="color:#bfbab0;">(input)</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">answer)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="array-of-products">Array of products</h1>
+<p>Write a function that takes in a non-empty array of integers and returns an array of the same length, where each element in the output array is equal to the product of every other number in the input array.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">array_of_prods</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#f29718;">array</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">isize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#bfbab0;">[</span><span style="color:#ff7733;">isize</span><span style="color:#bfbab0cc;">;</span><span style="color:#bfbab0;"> N] {
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> prods </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;</span><span style="color:#bfbab0;"> N]</span><span style="color:#bfbab0cc;">;
+
+    </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">_ =</span><span style="color:#bfbab0;"> array
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">|</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">left_running</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">i</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0;">)| {
+            prods[i] </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> left_running</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            left_running </span><span style="color:#f29668;">*=</span><span style="color:#bfbab0;"> value</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            left_running
+        })</span><span style="color:#bfbab0cc;">;
+
+    </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">_ =</span><span style="color:#bfbab0;"> array
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">rev</span><span style="color:#bfbab0;">()
+        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">|</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">right_running</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">i</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0;">)| {
+            prods[i] </span><span style="color:#f29668;">*=</span><span style="color:#bfbab0;"> right_running</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            right_running </span><span style="color:#f29668;">*=</span><span style="color:#bfbab0;"> value</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">            right_running
+        })</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    prods
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> answer </span><span style="color:#f29668;">= </span><span style="color:#f07178;">array_of_prods</span><span style="color:#bfbab0;">([</span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">answer)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="first-duplicate-value">First duplicate value</h1>
+<p>Given an array of integers between 1 and n, inclusive, where n is the length of the array, write a function that returns the first integer that appears more than once (when the array is read from left to right).</p>
+<p>In other words, out of all the integers that might occur more than once in the input array, your function should return the one whose first duplicate value has the minimum index.</p>
+<p>If no integer appears more than once, your function should return -1.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">first_dup_value</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">array</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">isize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">isize </span><span style="color:#bfbab0;">{
+    </span><span style="color:#ff7733;">for</span><span style="color:#bfbab0;"> value </span><span style="color:#f29668;">in </span><span style="color:#bfbab0;">std</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">array</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">IntoIter</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">new(array) {
+        </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> abs_value </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">abs</span><span style="color:#bfbab0;">()</span><span style="color:#bfbab0cc;">;
+
+        </span><span style="color:#ff7733;">if</span><span style="color:#bfbab0;"> array[abs_value </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">] </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">0 </span><span style="color:#bfbab0;">{
+            </span><span style="color:#ff7733;">return</span><span style="color:#bfbab0;"> abs_value</span><span style="color:#bfbab0cc;">;
+        </span><span style="color:#bfbab0;">}
+
+        array[abs_value </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">] </span><span style="color:#f29668;">*= -</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">}
+
+    </span><span style="color:#f29668;">-</span><span style="color:#f29718;">1
+</span><span style="color:#bfbab0;">}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> answer </span><span style="color:#f29668;">= </span><span style="color:#f07178;">first_dup_value</span><span style="color:#bfbab0;">([</span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">answer)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="merge-overlapping-intervals">Merge overlapping intervals</h1>
+<p>Write a function that takes in a non-empty array of arbitrary intervals, merges any overlapping intervals, and returns the new intervals in no particular order.</p>
+<p>Each interval interval is an array of two integers, with interval[0] as the start of the interval and interval[1] as the end of the interval.</p>
+<p>Note that back-to-back intervals aren't considered to be overlapping. For example, [1, 5] and [6, 7] aren't overlapping; however, [1, 6] and [6, 7] are indeed overlapping.</p>
+<p>Also note that the start of any particular interval will always be less than or equal to the end of that interval. </p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">merge_overlapping</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">, </span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> M</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(
+    </span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">intervals</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [[</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; M]; N],
+) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#bfbab0;">&lt;[</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">; </span><span style="color:#bfbab0;">M]&gt; {
+    intervals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sort_by_key</span><span style="color:#bfbab0;">(|</span><span style="color:#f29718;">k</span><span style="color:#bfbab0;">| k[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> current </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> intervals[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> output </span><span style="color:#f29668;">=
+</span><span style="color:#bfbab0;">        intervals
+            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()
+            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">skip</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">)
+            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span style="color:#bfbab0;">(</span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">with_capacity(intervals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span style="color:#bfbab0;">())</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">|</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">output</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">next</span><span style="color:#bfbab0;">| {
+                </span><span style="color:#ff7733;">if</span><span style="color:#bfbab0;"> current[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">] </span><span style="color:#f29668;">&gt;=</span><span style="color:#bfbab0;"> next[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">] {
+                    current[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">] </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">std</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">cmp</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">max(current[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">,</span><span style="color:#bfbab0;"> next[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+                </span><span style="color:#bfbab0;">} </span><span style="color:#ff7733;">else </span><span style="color:#bfbab0;">{
+                    output</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span style="color:#bfbab0;">(current)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">                    current </span><span style="color:#f29668;">= *</span><span style="color:#bfbab0;">next</span><span style="color:#bfbab0cc;">;
+                </span><span style="color:#bfbab0;">}
+
+                output
+            })</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">    output</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span style="color:#bfbab0;">(current)</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    output
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> input </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">[[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">7</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">6</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">9</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span style="color:#bfbab0;">]]</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> output </span><span style="color:#f29668;">= </span><span style="color:#f07178;">merge_overlapping</span><span style="color:#bfbab0;">(input)</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">output)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre>
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

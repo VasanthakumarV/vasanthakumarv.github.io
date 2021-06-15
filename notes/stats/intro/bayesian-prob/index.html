@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+         class="navbar-selected" >
+        Notes
+      </a>
+      <a href="/algorithms"
+        >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Bayesian probability and prior probabilities
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/bayesian-prob/#conditional-probabilities">Conditional probabilities</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/notes/stats/intro/bayesian-prob/#bayes-theorem">Bayes&#x27; theorem</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="conditional-probabilities">Conditional probabilities</h1>
+<p>Conditional probabilities are essential part of statistics because they allow us to demonstrate how information changes our beliefs.</p>
+<p>$$P(A, B) = P(A) \times P(B | A)$$</p>
+<h1 id="bayes-theorem">Bayes' theorem</h1>
+<p>One of the most amazing things we can do with conditional probabilities is reversing the condition to calculate the probability of the event we are conditioning on, we can use $P(A|B)$ to arrive at $P(B|A)$.</p>
+<p>$$P(A|B) = \frac{ P(A)P(B|A) }{ P(B) }$$</p>
+<p>Our beliefs describe the world we know, so when we observe something, its conditional probability represents <em>the likelihood of what we have seen given what we believe</em>:</p>
+<p>$$P(\text{observed} | \text{belief})$$</p>
+<p>Bayes' theorem allows us to reverse $P(\text{observed} | \text{belief})$, this is fundamental to understanding how we can use data to update what we believe about the world.</p>
+<ul>
+<li>$P(\text{belief | data})$ is the <strong>posterior probability</strong></li>
+<li>$P(\text{data | belief})$ is the <strong>likelihood</strong></li>
+<li>$P(\text{belief})$ is the <strong>prior probability</strong></li>
+</ul>
+<p>If both the likelihood and prior are represented using beta distribution, it is really easy to calculate normalized posterior,</p>
+<p>$$\text{Beta}(\alpha_{\text{posterior}}, \beta_{\text{posterior}}) = \text{Beta}( \alpha_{\text{likelihood}} + \alpha_{\text{prior}}, \beta_{\text{likelihood}} + \beta_{\text{prior}} )$$</p>
+
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>

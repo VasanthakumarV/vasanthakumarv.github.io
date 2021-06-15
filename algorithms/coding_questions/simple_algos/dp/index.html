@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vasanth</title>
+
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+      integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+      crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);">
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+              ]
+          });
+      });
+    </script>
+    <script>
+      function snackbar() {
+        var x = document.getElementById("topnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+
+      window.addEventListener("load", setupAccordian);
+      function setupAccordian() {
+        document.querySelectorAll(".accordion").forEach(function(acc, i) {
+          if (i == 0) {
+            acc.nextElementSibling.style.display = "block";
+            acc.classList.toggle("active");
+          }
+
+          acc.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        });
+      }
+    </script>
+
+    <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  </head>
+
+  <body>
+    <nav id="topnav" class="topnav">
+      <a href="/"
+        >
+        Home
+      </a>
+      <a href="/notes"
+        >
+        Notes
+      </a>
+      <a href="/algorithms"
+         class="navbar-selected" >
+        Algorithms
+      </a>
+      <a href="/projects"
+        >
+        Projects
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="snackbar()">
+        ☰
+      </a>
+    </nav>
+    <section class="section">
+      <div class="container">
+        
+  <h1 class="title">
+    Dynamic programming
+  </h1>
+
+  <div class="flex-container">
+    <div class="flex-toc">
+      <h1>Contents</h1>
+      
+        <ul>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/dp/#maximum-non-adjacent-sum">Maximum non-adjacent sum</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/dp/#number-of-ways-to-make-change">Number of ways to make change</a>
+            
+          </li>
+        
+          <li>
+            <a href="https://vasanthakumarv.github.io/algorithms/coding_questions/simple_algos/dp/#minimum-number-of-coins-for-change">Minimum number of coins for change</a>
+            
+          </li>
+        
+        </ul>
+      
+    </div>
+
+    <div class="flex-body">
+      <h1 id="maximum-non-adjacent-sum">Maximum non-adjacent sum</h1>
+<p>Write a function that takes in an array of positive integers and returns the maximum sum of non-adjacent elements in the array.</p>
+<p>If the input array is empty, the function should return 0.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span style="color:#bfbab0;">[</span><span style="color:#ffb454;">feature</span><span style="color:#bfbab0;">(destructuring_assignment)]
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">max_sum_no_adj</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#f29718;">array</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span style="color:#bfbab0;">{
+    </span><span style="color:#ff7733;">if</span><span style="color:#bfbab0;"> array</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_empty</span><span style="color:#bfbab0;">() {
+        </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">} </span><span style="color:#ff7733;">else if</span><span style="color:#bfbab0;"> array</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span style="color:#bfbab0;">() </span><span style="color:#f29668;">== </span><span style="color:#f29718;">1 </span><span style="color:#bfbab0;">{
+        </span><span style="color:#ff7733;">return</span><span style="color:#bfbab0;"> array[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">}
+
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> second </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> array[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> first </span><span style="color:#f29668;">=</span><span style="color:#bfbab0;"> array[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">max</span><span style="color:#bfbab0;">(array[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+
+    </span><span style="color:#ff7733;">for</span><span style="color:#bfbab0;"> item </span><span style="color:#f29668;">in</span><span style="color:#bfbab0;"> array</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">skip</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">2</span><span style="color:#bfbab0;">) {
+        (first</span><span style="color:#bfbab0cc;">,</span><span style="color:#bfbab0;"> second) </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">(first</span><span style="color:#f29668;">.</span><span style="color:#f07178;">max</span><span style="color:#bfbab0;">(second </span><span style="color:#f29668;">+</span><span style="color:#bfbab0;"> item)</span><span style="color:#bfbab0cc;">,</span><span style="color:#bfbab0;"> first)</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">}
+
+    first
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> input </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">75</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">105</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">120</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">75</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">90</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">135</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> output </span><span style="color:#f29668;">= </span><span style="color:#f07178;">max_sum_no_adj</span><span style="color:#bfbab0;">(input)</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">output)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="number-of-ways-to-make-change">Number of ways to make change</h1>
+<p>Given an array of distinct positive integers representing coin denominations and a single non-negative integer n representing a target amount of money, write a function that returns the number of ways to make change for that target amount using the given coin denominations.</p>
+<p>Note that an unlimited amount of coins is at your disposal.</p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">ways_to_make_change</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">, </span><span style="color:#f29718;">denoms</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span style="color:#bfbab0;">{
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> ways </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;</span><span style="color:#bfbab0;"> n </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    ways[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">] </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    denoms</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span style="color:#bfbab0;">(|</span><span style="color:#f29718;">denom</span><span style="color:#bfbab0;">| {
+        (</span><span style="color:#f29718;">1</span><span style="color:#f29668;">..=</span><span style="color:#bfbab0;">n)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span style="color:#bfbab0;">(|</span><span style="color:#f29718;">amount</span><span style="color:#bfbab0;">| {
+            </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;">denom </span><span style="color:#f29668;">&lt;=</span><span style="color:#bfbab0;"> amount {
+                ways[amount] </span><span style="color:#f29668;">+=</span><span style="color:#bfbab0;"> ways[amount </span><span style="color:#f29668;">-</span><span style="color:#bfbab0;"> denom]</span><span style="color:#bfbab0cc;">;
+            </span><span style="color:#bfbab0;">}
+        })</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">})</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    ways[n]
+}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> output </span><span style="color:#f29668;">= </span><span style="color:#f07178;">ways_to_make_change</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">6</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">output)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre><h1 id="minimum-number-of-coins-for-change">Minimum number of coins for change</h1>
+<p>Given an array of positive integers representing coin denominations and a single non-negative integer n representing a target amount of money, write a function that returns the smallest number of coins needed to make change for (to sum up to) that target amount using the given coin denominations.</p>
+<p>Note that you have access to an unlimited amount of coins. In other words, if the denominations are [1, 5, 10], you have access to an unlimited amount of 1s, 5s, and 10s.</p>
+<p>If it's impossible to make change for the target amount, return -1. </p>
+<pre style="background-color:#0f1419;">
+<code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">min_num_of_coins</span><span style="color:#bfbab0;">&lt;</span><span style="color:#ff7733;">const</span><span style="color:#bfbab0;"> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">&gt;(</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">, </span><span style="color:#f29718;">denoms</span><span style="color:#bfbab0cc;">:</span><span style="color:#bfbab0;"> [</span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0;">; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">isize </span><span style="color:#bfbab0;">{
+    </span><span style="color:#ff7733;">let mut</span><span style="color:#bfbab0;"> num_coins </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span style="color:#bfbab0;">[</span><span style="color:#ff7733;">isize</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX</span><span style="color:#bfbab0cc;">;</span><span style="color:#bfbab0;"> n </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">    num_coins[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0;">] </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+
+</span><span style="color:#bfbab0;">    denoms</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span style="color:#bfbab0;">()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span style="color:#bfbab0;">(|</span><span style="color:#f29718;">denom</span><span style="color:#bfbab0;">| {
+        (</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..=</span><span style="color:#bfbab0;">n)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span style="color:#bfbab0;">(|</span><span style="color:#f29718;">amount</span><span style="color:#bfbab0;">| {
+            </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">*</span><span style="color:#bfbab0;">denom </span><span style="color:#f29668;">&lt;=</span><span style="color:#bfbab0;"> amount {
+                num_coins[amount] </span><span style="color:#f29668;">= </span><span style="color:#bfbab0;">std</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">cmp</span><span style="color:#f29668;">::</span><span style="color:#bfbab0;">min(num_coins[amount]</span><span style="color:#bfbab0cc;">,</span><span style="color:#bfbab0;"> num_coins[amount </span><span style="color:#f29668;">-</span><span style="color:#bfbab0;"> denom] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0;">)</span><span style="color:#bfbab0cc;">;
+            </span><span style="color:#bfbab0;">}
+        })</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">})</span><span style="color:#bfbab0cc;">;
+
+    </span><span style="color:#ff7733;">if</span><span style="color:#bfbab0;"> num_coins[n] </span><span style="color:#f29668;">!= </span><span style="color:#ff7733;">isize</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX </span><span style="color:#bfbab0;">{
+        </span><span style="color:#ff7733;">return</span><span style="color:#bfbab0;"> num_coins[n]</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#bfbab0;">}
+    </span><span style="color:#f29668;">-</span><span style="color:#f29718;">1
+</span><span style="color:#bfbab0;">}
+
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span style="color:#bfbab0;">() {
+    </span><span style="color:#ff7733;">let</span><span style="color:#bfbab0;"> output </span><span style="color:#f29668;">= </span><span style="color:#f07178;">min_num_of_coins</span><span style="color:#bfbab0;">(</span><span style="color:#f29718;">7</span><span style="color:#bfbab0cc;">, </span><span style="color:#bfbab0;">[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span style="color:#bfbab0;">])</span><span style="color:#bfbab0cc;">;
+    </span><span style="color:#f07178;">dbg!</span><span style="color:#bfbab0;">(</span><span style="color:#f29668;">&amp;</span><span style="color:#bfbab0;">output)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0;">}
+</span></code></pre>
+    </div>
+  </div>
+
+      </div>
+    </section>
+  </body>
+</html>
